@@ -24,7 +24,7 @@ wss.on('connection', socket => {
             case 'iniTiateRoom': {
                 console.log(parsedMessage)
                 const { roomId, memberId } = parsedMessage.data;
-                rooms[roomId] = { memberSockets: [memberId, socket], };
+                rooms[roomId] = { memberSockets: [{memberId, socket}] };
                 users[memberId] = socket;
                 socket.send(JSON.stringify({ type: 'roomCreated', data: { roomId } }));
                 break;
@@ -57,6 +57,36 @@ wss.on('connection', socket => {
                     users[receverId].send(JSON.stringify({
                         type: 'receveOffer',
                         data: { offer, receverId, senderId, roomId }
+                    }));
+                }
+                break;
+            }
+            case 'ReceverIceCandidate': {
+                const { roomId, receverId, senderId, candidate } = parsedMessage.data;
+                if (rooms[roomId]) {
+                    users[senderId].send(JSON.stringify({
+                        type: 'ReceverIceCandidate',
+                        data: { roomId, receverId, senderId, candidate }
+                    }));
+                }
+                break;
+            }
+            case 'SendericeCandidate': {
+                const { roomId, receverId, candidate } = parsedMessage.data;
+                if (rooms[roomId]) {
+                    users[receverId].send(JSON.stringify({
+                        type: 'SendericeCandidate',
+                        data: { roomId, receverId: receverId, candidate }
+                    }));
+                }
+                break;
+            }
+            case 'sendAnswer': {
+                const { roomId, answer, receverId, senderId } = parsedMessage.data;
+                if (rooms[roomId]) {
+                    users[senderId].send(JSON.stringify({
+                        type: 'sendAnswer',
+                        data: { roomId, answer, receverId, senderId }
                     }));
                 }
                 break;

@@ -1,4 +1,5 @@
 'use client';
+import { create } from "domain";
 import { useEffect, useRef, useState } from "react";
 
 export default function CallPage() {
@@ -30,28 +31,58 @@ export default function CallPage() {
                         createOffer(message.data.roomId, message.data.memberId);
                         break;
                     }
-                    case "ReceveOffer": {
+                    case "receveOffer": {
                         const { offer, receverId, senderId, roomId } = message.data;
+                        console.log(offer)
+                        peerConnectionRef.current = new RTCPeerConnection({ iceServers: ICE_SERVERS });
                         if (peerConnectionRef.current) {
                             peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(offer));
                         }
-                        peerConnectionRef.current = new RTCPeerConnection({ iceServers: ICE_SERVERS });
-                        peerConnectionRef.current.onicecandidate = (event) => {
-                            if (event.candidate) {
-                                signalingSocket.current?.send(JSON.stringify({
-                                    message: {
-                                        type: 'iceCandidate',
-                                        data: { roomId, memberId: receverId, candidate: event.candidate }
-                                    }
-                                }));
-                            }
-                        };
+                        console.log("Offer received, creating answer...");
+                        createAnser(message.data.roomId, receverId, senderId);
+                            console.log("Adding local stream to peer connection");
+                            peerConnectionRef.current.onicecandidate = (event) => {
+                                if (event.candidate) {
+                                    signalingSocket.current?.send(JSON.stringify({
+                                        message: {
+                                            type: 'ReceverIceCandidate',
+                                            //here receverId is of this user who receved this offer
+                                            //senderId is the user who sent the offer
+                                            data: { roomId, receverId, senderId, candidate: event.candidate }
+                                        }
+                                    }));
+                                }
+                            };
                         peerConnectionRef.current.ontrack = (event) => {
-                            setUserStreams(prevStreams => ({
-                                ...prevStreams,
-                                [senderId]: event.streams[0]
-                            }));
+                            setTimeout(() => {
+                                setUserStreams(prevStreams => ({
+                                    ...prevStreams,
+                                    [senderId]: event.streams[0]
+                                }));
+                            }, 1000)
+
                         };
+                        break;
+                    }
+                    case "ReceverIceCandidate": {
+                        const { candidate } = message.data;
+                        if (peerConnectionRef.current) {
+                            peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate))
+                        }
+                        break;
+                    }
+                    case "SendericeCandidate": {
+                        const { candidate } = message.data;
+                        if (peerConnectionRef.current) {
+                            peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate))
+                        }
+                        break;
+                    }
+                    case "sendAnswer": {
+                        const { answer } = message.data;
+                        if (peerConnectionRef.current) {
+                            peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(answer));
+                        }
                         break;
                     }
                 }
@@ -66,45 +97,63 @@ export default function CallPage() {
         setup();
     }, []);
 
-    const createOffer = async (roomId: string, memberId: string) => {
-        if (!localStream) return;
-
-        peerConnectionRef.current = new RTCPeerConnection({ iceServers: ICE_SERVERS });
-        localStream.getTracks().forEach(track => {
-            peerConnectionRef.current?.addTrack(track, localStream);
-        });
-
-        peerConnectionRef.current.onicecandidate = (event) => {
-            if (event.candidate) {
-                signalingSocket.current?.send(JSON.stringify({
-                    message: {
-                        type: 'iceCandidate',
-                        //memberId is of recever
-                        data: { roomId, memberId, candidate: event.candidate }
-                    }
-                }));
-            }
-        };
-
-        peerConnectionRef.current.ontrack = (event: any) => {
-            setUserStreams(prevStreams => ({
-                ...prevStreams,
-                [memberId]: event.streams[0]
-            }));
-        };
-
-        const offer = await peerConnectionRef.current.createOffer();
-        await peerConnectionRef.current.setLocalDescription(offer);
-
+    const createAnser = async (roomId: string, receverId: string, senderId: string) => {
+        console.log("Creating answer for room:", roomId);
+        const answer = await peerConnectionRef.current.createAnswer();
+        await peerConnectionRef.current.setLocalDescription(answer);
         signalingSocket.current?.send(JSON.stringify({
             message: {
-                type: 'sendOffer',
-                //memberId is of recever
-                data: { roomId, offer, receverId: memberId, senderId: userIdRef.current?.value}
+                type: 'sendAnswer',
+                data: { roomId, answer, receverId, senderId }
             }
         }));
-    };
+    }
 
+
+    const createOffer = async (roomId: string, memberId: string) => {
+        if (
+            localVideoRef.current &&
+            localVideoRef.current.srcObject &&
+            localVideoRef.current.srcObject instanceof MediaStream
+        ) {
+            peerConnectionRef.current = new RTCPeerConnection({ iceServers: ICE_SERVERS });
+            const stream = localVideoRef.current.srcObject as MediaStream;
+            stream.getTracks().forEach(track => {
+                peerConnectionRef.current?.addTrack(track, stream);
+            });
+
+            peerConnectionRef.current.onicecandidate = (event) => {
+                console.log("Ice generated");
+                if (event.candidate) {
+                    signalingSocket.current?.send(JSON.stringify({
+                        message: {
+                            type: 'SendericeCandidate',
+                            data: { roomId, receverId: memberId, candidate: event.candidate }
+                        }
+                    }));
+                }
+            };
+
+            peerConnectionRef.current.ontrack = (event: any) => {
+                console.log("Received Track");
+                setUserStreams(prevStreams => ({
+                    ...prevStreams,
+                    [memberId]: event.streams[0]
+                }));
+            };
+
+            const offer = await peerConnectionRef.current.createOffer();
+            console.log("Offer created:");
+            await peerConnectionRef.current.setLocalDescription(offer);
+
+            signalingSocket.current?.send(JSON.stringify({
+                message: {
+                    type: 'sendOffer',
+                    data: { roomId, offer, receverId: memberId, senderId: userIdRef.current?.value }
+                }
+            }));
+        }
+    };
     const sendMessage = (data: any) => {
         if (signalingSocket.current)
             signalingSocket.current.send(JSON.stringify({ message: data }));
@@ -140,6 +189,7 @@ export default function CallPage() {
         const ref = useRef<HTMLVideoElement>(null);
         useEffect(() => {
             if (ref.current) ref.current.srcObject = stream;
+            console.log(ref.current.srcObject)
         }, [stream]);
         return (
             <video
