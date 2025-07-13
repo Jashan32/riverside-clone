@@ -12,35 +12,52 @@ type RoomData = {
     memberSockets: { memberId: String, socket: WebSocket }[];
 };
 const rooms: Record<string, RoomData> = {};
+const users: Record<string, WebSocket> = {};
 
 wss.on('connection', socket => {
     console.log('Client connected');
-    socket.send('Hello Secure Client!');
+    socket.send(JSON.stringify({ type: 'connection', data: { status: "success" } }));
     socket.on('message', (message: any) => {
-        switch (message.data.type) {
+        const parsedMessage = JSON.parse(message.toString()).message;
+        console.log('Received message:', parsedMessage);
+        switch (parsedMessage.type) {
             case 'iniTiateRoom': {
-                const { roomId, memberId } = message.data.content;
+                console.log(parsedMessage)
+                const { roomId, memberId } = parsedMessage.data;
                 rooms[roomId] = { memberSockets: [memberId, socket], };
-                socket.send(JSON.stringify({ type: 'roomCreated', roomId }));
+                users[memberId] = socket;
+                socket.send(JSON.stringify({ type: 'roomCreated', data: { roomId } }));
                 break;
             }
             case 'joinRoom': {
-                const { roomId } = message.data.content;
+                const { roomId, memberId } = parsedMessage.data;
                 if (rooms[roomId]) {
+                    rooms[roomId].memberSockets.push({ memberId: memberId, socket });
+                    users[memberId] = socket;
                     const joindMembersLength = rooms[roomId].memberSockets.length;
-                    rooms[roomId].memberSockets.push({ memberId: message.data.content.memberId, socket });
-                    if (joindMembersLength > 0) {
+                    if (joindMembersLength > 1) {
                         rooms[roomId].memberSockets.forEach(memberSocket => {
                             if (memberSocket.socket !== socket) {
+                                console.log(memberSocket)
                                 memberSocket.socket.send(JSON.stringify({
                                     type: 'newMemberJoined',
-                                    content: { roomId, memberCount: rooms[roomId].memberSockets.length }
+                                    data: { roomId, memberCount: rooms[roomId].memberSockets.length, memberId }
                                 }));
                             }
                         });
                     }
                 } else {
 
+                }
+                break;
+            }
+            case 'sendOffer': {
+                const { roomId, offer, receverId, senderId } = parsedMessage.data;
+                if (rooms[roomId]) {
+                    users[receverId].send(JSON.stringify({
+                        type: 'receveOffer',
+                        data: { offer, receverId, senderId, roomId }
+                    }));
                 }
                 break;
             }
