@@ -10,8 +10,6 @@ export default function CallPage() {
     const userIdRef = useRef<HTMLInputElement>(null);
     const [userStreams, setUserStreams] = useState<Record<string, MediaStream>>({});
     const [isClient, setIsClient] = useState(false);
-    const [file, setFile] = useState<File | null>(null);
-
 
     useEffect(() => {
         setIsClient(true)
@@ -110,8 +108,8 @@ export default function CallPage() {
             };
             const stream = await navigator.mediaDevices.getUserMedia(constraints);
             const videoTrack = stream.getVideoTracks()[0];
-            const settings = videoTrack.getSettings();
-            console.log(`Resolution: ${settings.width}x${settings.height}`);
+            const settings = videoTrack?.getSettings();
+            console.log(`Resolution: ${settings?.width}x${settings?.height}`);
             if (localVideoRef.current) {
                 localVideoRef.current.srcObject = stream;
             }
@@ -220,9 +218,9 @@ export default function CallPage() {
             />
         );
     }
-    async function startRecording(userId: string) {
-        console.log("trying to start recording");
 
+    async function startRecording(userId: string) {
+        
         let mediaRecorder: MediaRecorder;
         let chunkCounter = 0;
         const constraints = {
@@ -236,20 +234,17 @@ export default function CallPage() {
         const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
         mediaRecorder = new MediaRecorder(stream, {
-            mimeType: 'video/webm; codecs=vp8,opus' // or "video/webm"
+            mimeType: 'video/webm; codecs=vp8, opus' // or "video/webm"
         });
 
         mediaRecorder.ondataavailable = (e) => {
-            console.log("Data available:", e.data);
             if (e.data.size > 0) {
                 const chunkId = `${userId}_chunk${chunkCounter++}`;
                 saveChunkToIndexedDB(e.data, chunkId);
             }
         };
 
-        mediaRecorder.start(3000); // ✅ Emits ondataavailable every 3 seconds
-
-        console.log("Recording started");
+        mediaRecorder.start(3000); // Emits ondataavailable every 3 seconds
 
         function saveChunkToIndexedDB(blob: Blob, id: string) {
             const request = indexedDB.open("recordingDB", 1);
@@ -264,27 +259,12 @@ export default function CallPage() {
             request.onsuccess = () => {
                 const db = request.result;
                 const tx = db.transaction("chunks", "readwrite");
-                const store = tx.objectStore("chunks");
+                const store = tx.objectStore("meeting 1");
                 store.put({ id, data: blob, uploaded: false });
             };
         }
     }
 
-    // const uploadFile = async (file: File) => {
-    //     const res2 = fetch('');
-    //     const res = await fetch(`https://localhost:3000/api/upload-url?fileName=${file.name}&fileType=${file.type}`);
-    //     const { url } = await res.json();
-
-    //     await fetch(url, {
-    //         method: "PUT",
-    //         headers: {
-    //             "Content-Type": file.type,
-    //         },
-    //         body: file,
-    //     });
-
-    //     alert("Upload complete!");
-    // };
     async function uploadUnsentChunks(userId: string) {
         const db = await openDB();
         const tx = db.transaction("chunks", "readonly");
@@ -349,22 +329,6 @@ export default function CallPage() {
 
     return (
         <div className="bg-black h-[100vh] flex flex-col items-center justify-center">
-            {/* <input
-                type="file"
-                onChange={(e) => {
-                    if (e.target.files?.[0]) {
-                        setFile(e.target.files[0]);
-                    }
-                }}
-            />
-            <button
-                onClick={() => {
-                    if (file) uploadFile(file);
-                }}
-                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-            >
-                Upload to S3
-            </button> */}
             <div className="flex gap-4">
                 <span
                     onClick={startCall}
