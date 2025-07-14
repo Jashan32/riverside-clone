@@ -10,12 +10,13 @@ export default function CallPage() {
     const userIdRef = useRef<HTMLInputElement>(null);
     const [userStreams, setUserStreams] = useState<Record<string, MediaStream>>({});
     const [isClient, setIsClient] = useState(false);
+    const [file, setFile] = useState<File | null>(null);
 
 
     useEffect(() => {
         setIsClient(true)
         const setup = async () => {
-            signalingSocket.current = new WebSocket('wss://192.168.1.3:3001');
+            signalingSocket.current = new WebSocket('wss://192.168.1.8:3001');
             signalingSocket.current.onmessage = (event) => {
                 const message = JSON.parse(event.data);
                 console.log("Received message:", message);
@@ -28,6 +29,7 @@ export default function CallPage() {
                         break;
                     }
                     case "newMemberJoined": {
+                        startRecording(message.data.memberId);
                         console.log("New member joined:", message.data);
                         createOffer(message.data.roomId, message.data.memberId);
                         break;
@@ -98,8 +100,18 @@ export default function CallPage() {
                     }
                 }
             };
-
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            const constraints = {
+                video: {
+                    width: { ideal: 1920 },
+                    height: { ideal: 1080 }
+                },
+                // video: true,
+                audio: false
+            };
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            const videoTrack = stream.getVideoTracks()[0];
+            const settings = videoTrack.getSettings();
+            console.log(`Resolution: ${settings.width}x${settings.height}`);
             if (localVideoRef.current) {
                 localVideoRef.current.srcObject = stream;
             }
@@ -208,9 +220,151 @@ export default function CallPage() {
             />
         );
     }
+    async function startRecording(userId: string) {
+        console.log("trying to start recording");
+
+        let mediaRecorder: MediaRecorder;
+        let chunkCounter = 0;
+        const constraints = {
+            video: {
+                width: { ideal: 1920 },
+                height: { ideal: 1080 }
+            },
+            audio: true
+        };
+
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+        mediaRecorder = new MediaRecorder(stream, {
+            mimeType: 'video/webm; codecs=vp8,opus' // or "video/webm"
+        });
+
+        mediaRecorder.ondataavailable = (e) => {
+            console.log("Data available:", e.data);
+            if (e.data.size > 0) {
+                const chunkId = `${userId}_chunk${chunkCounter++}`;
+                saveChunkToIndexedDB(e.data, chunkId);
+            }
+        };
+
+        mediaRecorder.start(3000); // ✅ Emits ondataavailable every 3 seconds
+
+        console.log("Recording started");
+
+        function saveChunkToIndexedDB(blob: Blob, id: string) {
+            const request = indexedDB.open("recordingDB", 1);
+
+            request.onupgradeneeded = () => {
+                const db = request.result;
+                if (!db.objectStoreNames.contains("chunks")) {
+                    db.createObjectStore("chunks", { keyPath: "id" });
+                }
+            };
+
+            request.onsuccess = () => {
+                const db = request.result;
+                const tx = db.transaction("chunks", "readwrite");
+                const store = tx.objectStore("chunks");
+                store.put({ id, data: blob, uploaded: false });
+            };
+        }
+    }
+
+    // const uploadFile = async (file: File) => {
+    //     const res2 = fetch('');
+    //     const res = await fetch(`https://localhost:3000/api/upload-url?fileName=${file.name}&fileType=${file.type}`);
+    //     const { url } = await res.json();
+
+    //     await fetch(url, {
+    //         method: "PUT",
+    //         headers: {
+    //             "Content-Type": file.type,
+    //         },
+    //         body: file,
+    //     });
+
+    //     alert("Upload complete!");
+    // };
+    async function uploadUnsentChunks(userId: string) {
+        const db = await openDB();
+        const tx = db.transaction("chunks", "readonly");
+        const store = tx.objectStore("chunks");
+        const chunks: any[] = [];
+
+        // 1. Collect all unuploaded chunks synchronously
+        await new Promise<void>((resolve, reject) => {
+            const cursorReq = store.openCursor();
+            cursorReq.onsuccess = (event) => {
+                const cursor = (event.target as IDBRequest<IDBCursorWithValue | null>).result;
+                if (cursor) {
+                    if (!cursor.value.uploaded) {
+                        chunks.push(cursor.value);
+                    }
+                    cursor.continue();
+                } else {
+                    resolve();
+                }
+            };
+            cursorReq.onerror = reject;
+        });
+
+        // 2. Asynchronously upload and mark as uploaded
+        for (const chunk of chunks) {
+            try {
+                const file = new File([chunk.data], `${chunk.id}.webm`, { type: chunk.data.type });
+                const res = await fetch(`https://localhost:3000/api/upload-url?fileName=${file.name}&fileType=${file.type}`);
+                const { url } = await res.json();
+                const putRes = await fetch(url, {
+                    method: "PUT",
+                    headers: { "Content-Type": file.type },
+                    body: file,
+                });
+                if (!putRes.ok) throw new Error("Upload failed");
+
+                // Mark as uploaded in a new transaction
+                const tx2 = db.transaction("chunks", "readwrite");
+                const store2 = tx2.objectStore("chunks");
+                await new Promise<void>((resolve, reject) => {
+                    const req = store2.put({ ...chunk, uploaded: true });
+                    req.onsuccess = () => resolve();
+                    req.onerror = reject;
+                });
+
+                console.log(`✅ Uploaded and marked: ${chunk.id}`);
+            } catch (err) {
+                console.error(`❌ Failed to upload ${chunk.id}:`, err);
+            }
+        }
+    }
+
+    function openDB(): Promise<IDBDatabase> {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("recordingDB", 1);
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject("Failed to open IndexedDB");
+        });
+    }
+
 
     return (
         <div className="bg-black h-[100vh] flex flex-col items-center justify-center">
+            {/* <input
+                type="file"
+                onChange={(e) => {
+                    if (e.target.files?.[0]) {
+                        setFile(e.target.files[0]);
+                    }
+                }}
+            />
+            <button
+                onClick={() => {
+                    if (file) uploadFile(file);
+                }}
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+            >
+                Upload to S3
+            </button> */}
             <div className="flex gap-4">
                 <span
                     onClick={startCall}
@@ -221,6 +375,11 @@ export default function CallPage() {
                     onClick={joinCall}
                     className="bg-orange-600 py-[20px] rounded-2xl flex flex-col items-center justify-center w-[150px] cursor-pointer">
                     Join Call
+                </span>
+                <span
+                    onClick={() => uploadUnsentChunks(userIdRef.current?.value || '')}
+                    className="bg-orange-600 py-[20px] rounded-2xl flex flex-col items-center justify-center w-[150px] cursor-pointer">
+                    upload unsent chunks
                 </span>
             </div>
             <div className="mt-4 flex gap-4">
