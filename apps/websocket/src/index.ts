@@ -95,6 +95,6 @@ wss.on('connection', socket => {
     });
 });
 
-server.listen(3001, () => {
+server.listen({ port: 3001, host: '0.0.0.0' }, () => {
     console.log('WebSocket server running on wss://localhost:3001');
 });

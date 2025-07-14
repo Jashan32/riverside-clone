@@ -14,7 +14,7 @@ export default function CallPage() {
 
     useEffect(() => {
         const setup = async () => {
-            signalingSocket.current = new WebSocket('wss://localhost:3001');
+            signalingSocket.current = new WebSocket('wss://192.168.1.3:3001');
             signalingSocket.current.onmessage = (event) => {
                 const message = JSON.parse(event.data);
                 console.log("Received message:", message);
@@ -38,21 +38,31 @@ export default function CallPage() {
                         if (peerConnectionRef.current) {
                             peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(offer));
                         }
+                        if (
+                            localVideoRef.current &&
+                            localVideoRef.current.srcObject &&
+                            localVideoRef.current.srcObject instanceof MediaStream
+                        ) {
+                            const stream = localVideoRef.current.srcObject as MediaStream;
+                            stream.getTracks().forEach(track => {
+                                peerConnectionRef.current?.addTrack(track, stream);
+                            });
+                        }
                         console.log("Offer received, creating answer...");
                         createAnser(message.data.roomId, receverId, senderId);
-                            console.log("Adding local stream to peer connection");
-                            peerConnectionRef.current.onicecandidate = (event) => {
-                                if (event.candidate) {
-                                    signalingSocket.current?.send(JSON.stringify({
-                                        message: {
-                                            type: 'ReceverIceCandidate',
-                                            //here receverId is of this user who receved this offer
-                                            //senderId is the user who sent the offer
-                                            data: { roomId, receverId, senderId, candidate: event.candidate }
-                                        }
-                                    }));
-                                }
-                            };
+                        console.log("Adding local stream to peer connection");
+                        peerConnectionRef.current.onicecandidate = (event) => {
+                            if (event.candidate) {
+                                signalingSocket.current?.send(JSON.stringify({
+                                    message: {
+                                        type: 'ReceverIceCandidate',
+                                        //here receverId is of this user who receved this offer
+                                        //senderId is the user who sent the offer
+                                        data: { roomId, receverId, senderId, candidate: event.candidate }
+                                    }
+                                }));
+                            }
+                        };
                         peerConnectionRef.current.ontrack = (event) => {
                             setTimeout(() => {
                                 setUserStreams(prevStreams => ({
