@@ -1,18 +1,19 @@
 'use client';
-import { create } from "domain";
 import { useEffect, useRef, useState } from "react";
 
 export default function CallPage() {
     const localVideoRef = useRef<HTMLVideoElement>(null);
-    const [localStream, setLocalStream] = useState<MediaStream | null>(null);
     const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
     const ICE_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }];
     const signalingSocket = useRef<WebSocket | null>(null);
     const randomRef = useRef<HTMLInputElement>(null);
     const userIdRef = useRef<HTMLInputElement>(null);
     const [userStreams, setUserStreams] = useState<Record<string, MediaStream>>({});
+    const [isClient, setIsClient] = useState(false);
+
 
     useEffect(() => {
+        setIsClient(true)
         const setup = async () => {
             signalingSocket.current = new WebSocket('wss://192.168.1.3:3001');
             signalingSocket.current.onmessage = (event) => {
@@ -99,7 +100,6 @@ export default function CallPage() {
             };
 
             const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-            setLocalStream(stream);
             if (localVideoRef.current) {
                 localVideoRef.current.srcObject = stream;
             }
@@ -109,8 +109,8 @@ export default function CallPage() {
 
     const createAnser = async (roomId: string, receverId: string, senderId: string) => {
         console.log("Creating answer for room:", roomId);
-        const answer = await peerConnectionRef.current.createAnswer();
-        await peerConnectionRef.current.setLocalDescription(answer);
+        const answer = await peerConnectionRef.current?.createAnswer();
+        await peerConnectionRef.current?.setLocalDescription(answer);
         signalingSocket.current?.send(JSON.stringify({
             message: {
                 type: 'sendAnswer',
@@ -199,7 +199,6 @@ export default function CallPage() {
         const ref = useRef<HTMLVideoElement>(null);
         useEffect(() => {
             if (ref.current) ref.current.srcObject = stream;
-            console.log(ref.current.srcObject)
         }, [stream]);
         return (
             <video
@@ -229,11 +228,12 @@ export default function CallPage() {
                 <input ref={userIdRef} className="text-black, bg-white" placeholder="UserId"></input>
             </div>
             <div className="mt-8">
-                <video
-                    ref={localVideoRef}
-                    autoPlay
-                    className="w-[400px] h-[400px] bg-gray-200 rounded-full"
-                />
+                {isClient &&
+                    <video
+                        ref={localVideoRef}
+                        autoPlay
+                        className="w-[400px] h-[400px] bg-gray-200 rounded-full"
+                    />}
             </div>
             {
                 Object.entries(userStreams).map(([memberId, stream]) => (
