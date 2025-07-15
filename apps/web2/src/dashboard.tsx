@@ -1,8 +1,9 @@
 
-import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./sidebar";
+import Navbar from "./navbar";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout() {
   
   return (
     <div className="bg-[#151515] flex h-[100vh] overflow-hidden">
@@ -11,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <div className="flex-1 p-2 pt-0 text-white w-full">
           <div className="bg-[#0d0d0d] rounded-[12px] border border-b-0 border-white/10 h-full">
-            {children}
+            <Outlet />
           </div>
         </div>
       </div>
