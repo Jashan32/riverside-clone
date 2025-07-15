@@ -20,5 +20,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "prisma": "^6.11.1",
+    "swr": "^2.3.4"
+  }
 }

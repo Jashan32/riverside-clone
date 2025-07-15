@@ -2,11 +2,11 @@
 import { useState } from "react";
 
 export default function Sidebar() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(localStorage.getItem('isOpen') == 'true');
     console.log("Sidebar isOpen:", isOpen);
     return (
-        <div className={` text-white  ${isOpen ? " w-[232px]" : "w-[68px]"} h-[100vh] m-[8px] mr-0`}>
-            <h2 className="text-lg font-bold" onClick={() => { setIsOpen(!isOpen) }} >Sidebar</h2>
+        <div className={` text-white transition-[width] duration-300 ${isOpen ? " w-[232px]" : "w-[68px]"} h-[100vh] m-[8px] mr-0`}>
+            <h2 className="text-lg font-bold" onClick={() => { setIsOpen(!isOpen); localStorage.setItem('isOpen', `${!isOpen}`) }} >Sidebar</h2>
             <ul className="mt-4 space-y-2">
                 <li><a href="/dashboard/home" className="hover:underline">Home</a></li>
                 <li><a href="/dashboard/project" className="hover:underline">Projects</a></li>
