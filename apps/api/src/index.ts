@@ -1,12 +1,13 @@
 import https from 'https';
 import fs from 'fs';
 import express from 'express';
-import {loginRouter} from './routes/auth/login';
+import {loginRouter, registerRouter} from './routes/auth/userAuth';
 
 const app = express();
 app.use(express.json());
 
-app.use("/login", loginRouter)
+app.use("/auth/login", loginRouter)
+app.use("/auth/register", registerRouter)
 
 // HTTPS server wraps the express app
 const httpsServer = https.createServer(
