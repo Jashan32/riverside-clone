@@ -18,21 +18,45 @@ interface data {
 }
 
 loginRouter.post("/", async (req, res) => {
-    console.log(req.body);
     const { email, password, username } = req.body;
+    if (!password) {
+        return res.status(400).json({ error: "Password is required" });
+    }
+    let whereClause: any = {};
+    if (email) {
+        whereClause.email = email;
+    } else if (username) {
+        whereClause.username = username;
+    } else {
+        return res.status(400).json({ error: "Email or username is required" });
+    }
+
     const response = await prisma.user.findFirst({
-        where: {
-            OR: [
-                { email },
-                { username }
-            ],
-            password
-        }
+        where: whereClause
     });
-    res.json(response || { error: "User not found" });
+    bcrypt.compare(password, response?.password || "", async (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: "Internal server error" });
+        }
+        if (!result) {
+            return res.status(401).json({ error: "Invalid credentials" });
+        }
+        const token = jwt.sign({ email: response?.email }, JWT_SECRET as string);
+        res.json({
+            message: "success",
+            data: {
+                token: token,
+                user: {
+                    email: response?.email,
+                    username: response?.username,
+                    id: response?.id
+                }
+            }
+        });
+    });
 })
 
-registerRouter.post("/", async (req, res)=> {
+registerRouter.post("/", async (req, res) => {
     const { email, password, username } = req.body;
 
     const userSchema = z.object({
@@ -61,7 +85,7 @@ registerRouter.post("/", async (req, res)=> {
         res.status(500).json({ error: error });
     }
 
-    const token = jwt.sign({email}, JWT_SECRET as string)
+    const token = jwt.sign({ email }, JWT_SECRET as string)
     res.json({
         message: "success",
         data: {
