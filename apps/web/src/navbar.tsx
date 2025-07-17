@@ -1,8 +1,14 @@
-export default function Navbar(){
-    return (
-        <div className=" text-white min-h-[56px] w-[100%] flex">
-            <h1 className="text-lg font-bold">Navbar</h1>
+import { Search } from 'lucide-react';
 
+export default function Navbar() {
+    return (
+        <div className=" flex justify-around h-[56px] items-center">
+            <div className="w-[480px] h-[32px] bg-[#222222] rounded-[8px] flex items-center justify-center">
+                <div className='flex items-center gap-[8px]'>
+                    <Search className='size-[16px] text-[#888888]'/>
+                    <div className='text-white text-[16px]'>Search</div>
+                </div>
+            </div>
         </div>
     );
 }

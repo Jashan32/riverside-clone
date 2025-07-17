@@ -2,8 +2,8 @@ import https from 'https';
 import fs from 'fs';
 import express from 'express';
 import {loginRouter, registerRouter} from './routes/auth/userAuth';
-import { sessionRouter } from './routes/sessions';
-import { getSessionRouter } from './routes/sessions/user';
+import { sessionRouter } from './routes/sessions/manageSession';
+import { getSessionRouter } from './routes/sessions/sessionFetch';
 
 const app = express();
 app.use(express.json());

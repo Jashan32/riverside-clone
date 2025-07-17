@@ -6,12 +6,12 @@ import Navbar from "./navbar";
 export default function DashboardLayout() {
   
   return (
-    <div className="bg-[#151515] flex h-[100vh] overflow-hidden">
+    <div className="bg-[#0d0d0d] flex h-[100vh] overflow-hidden p-2 pl-[0] pt-0">
       <Sidebar />
-      <div className="flex-1 flex flex-col h-full">
+      <div className="pl-2 flex-1 flex flex-col h-full">
         <Navbar />
-        <div className="flex-1 p-2 pt-0 text-white w-full">
-          <div className="bg-[#0d0d0d] rounded-[12px] border border-b-0 border-white/10 h-full">
+        <div className="flex-1  text-white w-full">
+          <div className="bg-[#151515] rounded-[12px] border border-b-0 border-white/10 h-full px-[60px] pt-[45px]">
             <Outlet />
           </div>
         </div>
