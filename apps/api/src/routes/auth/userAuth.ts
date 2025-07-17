@@ -11,12 +11,6 @@ const JWT_SECRET: String = process.env.JWT_SECRET || "JWT_SECRET"
 const loginRouter = Router();
 const registerRouter = Router();
 
-interface data {
-    email: String,
-    password: String,
-    username: String
-}
-
 loginRouter.post("/", async (req, res) => {
     const { email, password, username } = req.body;
     if (!password) {
@@ -74,24 +68,24 @@ registerRouter.post("/", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        await prisma.user.create({
+        const user = await prisma.user.create({
             data: {
                 email,
                 password: hashedPassword,
                 username
             }
         });
+        const token = jwt.sign({ id: user.id }, JWT_SECRET as string)
+        res.json({
+            message: "success",
+            data: {
+                token: token
+            }
+        })
     } catch (error) {
         res.status(500).json({ error: error });
     }
 
-    const token = jwt.sign({ email }, JWT_SECRET as string)
-    res.json({
-        message: "success",
-        data: {
-            token: token
-        }
-    })
 })
 
 export { loginRouter, registerRouter };

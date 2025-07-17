@@ -9,10 +9,20 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  username  String   @unique
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  username  String    @unique
   name      String?
   password  String
+  createdAt DateTime  @default(now())
+  memberOf  Session[] @relation("CreatedSessions")
+  member    Session[] @relation("SessionMembers")
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
+  creatorId Int
+  creator   User     @relation("CreatedSessions", fields: [creatorId], references: [id])
+  members   User[]   @relation("SessionMembers")
 }
