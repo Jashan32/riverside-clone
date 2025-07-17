@@ -9,20 +9,33 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  username  String    @unique
+  id        Int             @id @default(autoincrement())
+  email     String          @unique
+  username  String          @unique
   name      String?
   password  String
-  createdAt DateTime  @default(now())
-  memberOf  Session[] @relation("CreatedSessions")
-  member    Session[] @relation("SessionMembers")
+  createdAt DateTime        @default(now())
+  creatorOf Session[]       @relation("CreatedSessions")
+  invites   SessionInvite[]
 }
 
 model Session {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  creatorId Int
-  creator   User     @relation("CreatedSessions", fields: [creatorId], references: [id])
-  members   User[]   @relation("SessionMembers")
+  id          Int             @id @default(autoincrement())
+  sessionName String
+  createdAt   DateTime        @default(now())
+  creatorId   Int
+  scheduled   DateTime
+  creator     User            @relation("CreatedSessions", fields: [creatorId], references: [id])
+  invites     SessionInvite[]
+}
+
+model SessionInvite {
+  id            Int      @id @default(autoincrement())
+  email         String?
+  session       Session  @relation(fields: [sessionId], references: [id])
+  sessionId     Int
+  user          User?    @relation(fields: [invitedUserId], references: [id])
+  invitedUserId Int?
+  invitedAt     DateTime @default(now())
+  accepted      Boolean  @default(false)
 }

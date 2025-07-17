@@ -35,7 +35,7 @@ loginRouter.post("/", async (req, res) => {
         if (!result) {
             return res.status(401).json({ error: "Invalid credentials" });
         }
-        const token = jwt.sign({ email: response?.email }, JWT_SECRET as string);
+        const token = jwt.sign({ id: response?.id }, JWT_SECRET as string);
         res.json({
             message: "success",
             data: {
