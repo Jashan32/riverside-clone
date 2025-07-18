@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import ProjectCard from './components/projectCard.tsx';
+import ProjectCard from './components/cards/projectCard.tsx';
 import ProjectHeader from './components/projectHeader.tsx';
 import projectPageImg from './assets/projectsPage.png';
 import AddButton from './components/buttons/addButton.tsx';
+import RemoveCard from './components/cards/removeCard.tsx';
 
 type ProjectType = {
     title: string;
@@ -10,13 +11,13 @@ type ProjectType = {
 };
 
 const data: ProjectType[] = [
-    // { title: "Project 1", timeCreated: "1 min" },
-    // { title: "Project 2", timeCreated: "5 mins" },
-    // { title: "Project 3", timeCreated: "10 mins" },
-    // { title: "Project 4", timeCreated: "20 mins" },
-    // { title: "Project 5", timeCreated: "1 hour" },
-    // { title: "Project 6", timeCreated: "2 hours" },
-    // { title: "Project 7", timeCreated: "3 hours" },
+    { title: "Project 1", timeCreated: "1 min" },
+    { title: "Project 2", timeCreated: "5 mins" },
+    { title: "Project 3", timeCreated: "10 mins" },
+    { title: "Project 4", timeCreated: "20 mins" },
+    { title: "Project 5", timeCreated: "1 hour" },
+    { title: "Project 6", timeCreated: "2 hours" },
+    { title: "Project 7", timeCreated: "3 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
@@ -25,17 +26,21 @@ const data: ProjectType[] = [
 
 export default function Project() {
     const [projectsData, setProjectsData] = useState(data);
+    const [removeCardState, setRemoveCardState] = useState(false);
     return (
         <div>
+            {removeCardState && <div className='fixed flex justify-center items-center inset-0 z-[10] bg-black/55'>
+                <RemoveCard title={"Project A"} setRemoveCardState={setRemoveCardState} />
+            </div>}
             {
                 projectsData.length > 0 ? <div className="flex flex-col gap-[40px] custom-scrollbar" >
                     <div>
                         <ProjectHeader />
                     </div>
-                    <div className='grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[24px]'>
+                    <div className='grid relative 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[24px]'>
                         {
                             projectsData.map((project, index) => (
-                                <ProjectCard key={index} title={project.title} timeCreated={project.timeCreated} />
+                                <ProjectCard setRemoveCardState={setRemoveCardState} key={index} title={project.title} timeCreated={project.timeCreated} />
                             ))
                         }
                     </div>
@@ -49,7 +54,6 @@ export default function Project() {
                         </div>
                     </div>
             }
-
         </div>
 
     );

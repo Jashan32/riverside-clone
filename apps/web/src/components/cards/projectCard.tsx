@@ -1,8 +1,8 @@
 import { FolderOpen, Ellipsis } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import ProjectsDropdown from './dropdownMenu/projects';
+import ProjectsDropdown from '../dropdownMenu/projects';
 
-export default function ProjectCard({ title, timeCreated }: { title: string, timeCreated: string }) {
+export default function ProjectCard({ title, timeCreated, setRemoveCardState }: { title: string, timeCreated: string, setRemoveCardState: (state: boolean) => void }) {
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -32,8 +32,8 @@ export default function ProjectCard({ title, timeCreated }: { title: string, tim
                     >
                         <Ellipsis className='cursor-pointer size-[20px]' />
                     </div>
-                    <div ref={dropdownRef} className={`absolute right-0 top-full z-10 mt-2 ${dropDownState ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
-                        <ProjectsDropdown />
+                    <div ref={dropdownRef} className={`absolute right-0 top-full z-1 mt-2 ${dropDownState ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
+                        <ProjectsDropdown setRemoveCardState={setRemoveCardState} setDropDownState={setDropDownState} />
                     </div>
                 </div>
             </div>

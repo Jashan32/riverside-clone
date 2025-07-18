@@ -6,3 +6,7 @@
   scrollbar-color: #8888 transparent;/* For Firefox: thumb and track color */
 
 }
+.white-disc-color li::marker {
+  color: white; /* Your custom bullet color */
+  font-size: 15px;
+}
