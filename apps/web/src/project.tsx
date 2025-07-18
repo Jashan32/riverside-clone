@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import ProjectCard from './components/cards/projectCard.tsx';
+import ProjectCardGrid from './components/cards/projectCardGrid.tsx';
+import ProjectCardList from './components/cards/projectCardList.tsx';
 import ProjectHeader from './components/projectHeader.tsx';
 import projectPageImg from './assets/projectsPage.png';
 import AddButton from './components/buttons/addButton.tsx';
@@ -27,6 +28,7 @@ const data: ProjectType[] = [
 export default function Project() {
     const [projectsData, setProjectsData] = useState(data);
     const [removeCardState, setRemoveCardState] = useState(false);
+    const [listView, setListView] = useState(localStorage.getItem('listView') === 'true');
     return (
         <div>
             {removeCardState && <div className='fixed flex justify-center items-center inset-0 z-[10] bg-black/55'>
@@ -35,15 +37,21 @@ export default function Project() {
             {
                 projectsData.length > 0 ? <div className="flex flex-col gap-[40px] custom-scrollbar" >
                     <div>
-                        <ProjectHeader />
+                        <ProjectHeader setListView={setListView} listView={listView} />
                     </div>
-                    <div className='grid relative 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[24px]'>
+                    {listView ? <div className='flex flex-col gap-[8px]'>
                         {
                             projectsData.map((project, index) => (
-                                <ProjectCard setRemoveCardState={setRemoveCardState} key={index} title={project.title} timeCreated={project.timeCreated} />
+                                <ProjectCardList setRemoveCardState={setRemoveCardState} key={index} title={project.title} timeCreated={project.timeCreated} />
                             ))
                         }
-                    </div>
+                    </div> : <div className='grid relative 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[24px]'>
+                        {
+                            projectsData.map((project, index) => (
+                                <ProjectCardGrid setRemoveCardState={setRemoveCardState} key={index} title={project.title} timeCreated={project.timeCreated} />
+                            ))
+                        }
+                    </div>}
                 </div > :
                     <div className='pt-[96px]'>
                         <div className='flex flex-col items-center'>
