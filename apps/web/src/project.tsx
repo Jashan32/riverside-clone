@@ -1,3 +1,4 @@
+import ProjectsDropdown from './components/dropdownMenu/projects.tsx';
 import ProjectCard from './components/projectCard.tsx';
 import ProjectHeader from './components/projectHeader.tsx';
 
@@ -28,6 +29,7 @@ export default function Project() {
                     ))
                 }
             </div>
+            <ProjectsDropdown />
         </div>
     );
 }
