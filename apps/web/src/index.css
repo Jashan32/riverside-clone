@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+/* Mimic MacOS (thin, overlay, rounded) scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;             /* For Firefox, makes thumb thin */
+  scrollbar-color: #8888 transparent;/* For Firefox: thumb and track color */
+
+}

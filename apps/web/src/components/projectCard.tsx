@@ -2,7 +2,7 @@ import { FolderOpen, Ellipsis } from 'lucide-react';
 
 export default function ProjectCard({ title, timeCreated }: { title: string, timeCreated: string }) {
     return (
-        <div className="w-[356px] h-[267px] flex flex-col">
+        <div className="w-[100%] aspect-[4/3] flex flex-col group">
             <div className="rounded-[8px] w-[100%] bg-[#1d1d1d] hover:bg-[#383838] cursor-pointer flex-1 bg-gradient-to-b from-transparent to-black/50 flex items-center justify-center">
                 <FolderOpen className='size-[28px] text-[#555555]' />
             </div>
@@ -15,7 +15,7 @@ export default function ProjectCard({ title, timeCreated }: { title: string, tim
                         {timeCreated} ago
                     </div>
                 </div>
-                <div className='h-[32px] w-[32px] hover:bg-[#383838] flex items-center justify-center rounded-[8px]'>
+                <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-400  h-[32px] w-[32px] hover:bg-[#383838] flex items-center justify-center rounded-[8px]'>
                     <Ellipsis className='cursor-pointer size-[20px] ' />
                 </div>
             </div>

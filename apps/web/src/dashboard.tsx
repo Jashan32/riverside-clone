@@ -10,8 +10,8 @@ export default function DashboardLayout() {
       <Sidebar />
       <div className="pl-2 flex-1 flex flex-col h-full">
         <Navbar />
-        <div className="flex-1  text-white w-full">
-          <div className="bg-[#151515] rounded-[12px] border border-b-0 border-white/10 h-full px-[60px] pt-[45px]">
+        <div className="flex-1  text-white w-full overflow-auto ">
+          <div className="bg-[#151515] overflow-auto custom-scrollbar rounded-[12px] border border-b-0 border-white/10 h-full px-[60px] pt-[45px]">
             <Outlet />
           </div>
         </div>
