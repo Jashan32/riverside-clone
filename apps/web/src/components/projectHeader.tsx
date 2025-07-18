@@ -1,23 +1,29 @@
-import { Plus, List, ArrowDownWideNarrow, Search } from 'lucide-react';
+import { List, ArrowDownWideNarrow, Search } from 'lucide-react';
+import GenericDropdown from './dropdownMenu/generic';
+import AddButton from './buttons/addButton';
 
 export default function ProjectHeader() {
     return (
         <div className="h-[36px] flex items-end justify-between">
             <div className="text-[20px] font-extrabold">Projects</div>
             <div className='flex gap-[8px]'>
-                <div className='flex flex-col justify-center p-[8px] rounded-[10px] cursor-pointer hover:bg-[#383838]'>
-                    <Search className='size-[20px]' />
+                <div className='relative flex flex-col justify-center p-[8px] rounded-[10px] cursor-pointer hover:bg-[#383838] group'>
+                    <div>
+                        <Search className='size-[20px]' />
+                    </div>
+                    <GenericDropdown title={"Search projects"} />
                 </div>
-                <div className='flex flex-col justify-center p-[8px] rounded-[10px] cursor-pointer hover:bg-[#383838]'>
-                    <ArrowDownWideNarrow className='size-[20px]' />
+                <div className='relative flex flex-col justify-center p-[8px] rounded-[10px] cursor-pointer hover:bg-[#383838] group'>
+                    <div>
+                        <ArrowDownWideNarrow className='size-[20px]' />
+                    </div>
+                    <GenericDropdown title={"Sort"} />
                 </div>
-                <div className='flex flex-col justify-center p-[8px] rounded-[10px] cursor-pointer hover:bg-[#383838]'>
+                <div className='relative flex flex-col justify-center p-[8px] rounded-[10px] cursor-pointer hover:bg-[#383838] group'>
                     <List className='size-[20px]' />
+                    <GenericDropdown title={"List view"} />
                 </div>
-                <div className='flex gap-[8px] h-[36px] w-[81px] bg-[#7848ff] hover:bg-[#5f3fc8] rounded-[10px] px-[12px] py-[8px] cursor-pointer'>
-                    <Plus className='size-[20px]' />
-                    <div className='text-[14px]'>New</div>
-                </div>
+                <AddButton text={"New"} type='small' />
             </div>
         </div>
     )
