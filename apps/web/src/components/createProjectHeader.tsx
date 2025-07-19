@@ -1,10 +1,12 @@
-import { ChevronRight, Link } from "lucide-react";
+import { ChevronRight, Link, Share } from "lucide-react";
 import { useRef, useState } from "react";
 import AddButton from "./buttons/addButton";
+import ShareLinkDropDown from "./dropdownMenu/shareLink";
 
 export default function CreateProjectHeader() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [focused, setFocused] = useState(false);
+    const [shareLinkDropDownState, setShareLinkDropDownState] = useState(false);
     return (
         <div className="h-[60px] pl-[28px] flex items-center justify-between">
             <div className="flex items-center">
@@ -28,8 +30,12 @@ export default function CreateProjectHeader() {
                 </div>
             </div>
             <div className="flex items-center gap-[8px] pr-[12px]">
-                <div className="h-[36px] w-[52px] py-[10px] px-[16px] flex items-center cursor-pointer hover:bg-[#383838] rounded-[8px]">
-                    <Link className="size-[20px]"/>
+                <div className={`${shareLinkDropDownState ? "pointer-events-none" : ""} relative `}
+                    onClick={() => setShareLinkDropDownState(!shareLinkDropDownState)}>
+                    <div className="h-[36px] w-[52px] py-[10px] px-[16px] flex items-center cursor-pointer hover:bg-[#383838] rounded-[8px]">
+                        <Link className="size-[20px] " />
+                    </div>
+                    <ShareLinkDropDown setShareLinkDropDownState={setShareLinkDropDownState} shareLinkDropDownState={shareLinkDropDownState} />
                 </div>
                 <AddButton type="small" text={"Create"} />
             </div>

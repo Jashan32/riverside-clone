@@ -37,12 +37,12 @@ export default function ProjectHeader({ setListView, listView, setSortState, sor
             <div className='flex gap-[8px]'>
                 <div
                     ref={searchBarRef}
-                    className={` relative flex gap-[10px] items-center h-[35px] rounded-[12px] hover:bg-[#383838] transition-all delay-100 duration-500 ${searchInputStatus ? "w-[220px] bg-[#222222]" : "w-[35px] cursor-pointer group"}`}
+                    className={`-mr-[10px] relative flex gap-[10px] items-center justify-center h-[35px] rounded-[12px] transition-all delay-100 duration-500 ${searchInputStatus ? "w-[220px] bg-[#222222]" : "w-[35px] cursor-pointer group"}`}
                     onClick={() => {
                         if (!searchInputStatus) setSearchInputStatus(true);
                     }}
                 >
-                    <Search className={`${searchInputStatus ? "size-[18px] text-[#888888] ml-[12px]" : "size-[20px]"} transition-all delay-300 duration-300`} />
+                    <Search className={`${searchInputStatus ? " size-[18px] text-[#888888] ml-[12px]" : "size-[20px]"} transition-all delay-300 duration-300`} />
                     <input
                         placeholder='Find a project'
                         className={`${searchInputStatus ? "opacity-100 w-[100%]" : "w-[0px]"} placeholder:text-[14px] flex items-center text-[14px] transition-all delay-200 outline-none caret-[#9170fe] bg-transparent`}
