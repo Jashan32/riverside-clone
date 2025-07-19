@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProjectCardGrid from './components/cards/projectCardGrid.tsx';
 import ProjectCardList from './components/cards/projectCardList.tsx';
 import ProjectHeader from './components/projectHeader.tsx';
@@ -12,13 +12,13 @@ type ProjectType = {
 };
 
 const data: ProjectType[] = [
-    { title: "Project 1", timeCreated: "1 min" },
-    { title: "Project 2", timeCreated: "5 mins" },
-    { title: "Project 3", timeCreated: "10 mins" },
-    { title: "Project 4", timeCreated: "20 mins" },
-    { title: "Project 5", timeCreated: "1 hour" },
-    { title: "Project 6", timeCreated: "2 hours" },
-    { title: "Project 7", timeCreated: "3 hours" },
+    { title: "Project 1", timeCreated: "1" },
+    { title: "Project 2", timeCreated: "5" },
+    { title: "Project 3", timeCreated: "10" },
+    { title: "Project 4", timeCreated: "20" },
+    { title: "Project 5", timeCreated: "1" },
+    { title: "Project 6", timeCreated: "2" },
+    { title: "Project 7", timeCreated: "3" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
@@ -29,6 +29,33 @@ export default function Project() {
     const [projectsData, setProjectsData] = useState(data);
     const [removeCardState, setRemoveCardState] = useState(false);
     const [listView, setListView] = useState(localStorage.getItem('listView') === 'true');
+    const [sortState, setSortState] = useState(localStorage.getItem('sortState') || 'newest');
+
+
+    useEffect(() => {
+        const getSortedData = () => {
+            if (sortState === "a-z") {
+                return [...projectsData].sort((a, b) => a.title.localeCompare(b.title));
+            }
+            if (sortState === "z-a") {
+                return [...projectsData].sort((a, b) => b.title.localeCompare(a.title));
+            }
+            if (sortState === "newest") {
+                // Assuming higher number means newer
+                return [...projectsData].sort((a, b) => Number(a.timeCreated) - Number(b.timeCreated));
+            }
+            if (sortState === "oldest") {
+                // Lower number means older
+                return [...projectsData].sort((a, b) => Number(b.timeCreated) - Number(a.timeCreated));
+            }
+            return projectsData;
+        };
+
+        const sortedProjects = getSortedData();
+        setProjectsData(sortedProjects);
+    }, [sortState])
+
+
     return (
         <div>
             {removeCardState && <div className='fixed flex justify-center items-center inset-0 z-[10] bg-black/55'>
@@ -37,7 +64,7 @@ export default function Project() {
             {
                 projectsData.length > 0 ? <div className="flex flex-col gap-[40px] custom-scrollbar" >
                     <div>
-                        <ProjectHeader setListView={setListView} listView={listView} />
+                        <ProjectHeader setSortState={setSortState} sortState={sortState} setListView={setListView} listView={listView} />
                     </div>
                     {listView ? <div className='flex flex-col gap-[8px]'>
                         {

@@ -6,7 +6,6 @@ import scheduleSVG from "./assets/schedule.svg";
 import { PanelLeftClose, PanelRightOpen } from 'lucide-react';
 import { useLocation } from "react-router-dom";
 
-
 export default function Sidebar() {
     const navigate = useNavigate();
     const [isSidebarClosed, setIsSidebarClosed] = useState(localStorage.getItem('isSidebarClosed') == 'true');
