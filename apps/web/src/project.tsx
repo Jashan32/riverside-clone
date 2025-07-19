@@ -62,7 +62,7 @@ export default function Project() {
                 <RemoveCard title={"Project A"} setRemoveCardState={setRemoveCardState} />
             </div>}
             {
-                projectsData.length > 0 ? <div className="flex flex-col gap-[40px] custom-scrollbar" >
+                projectsData.length > 0 ? <div className="px-[60px] pt-[45px] flex flex-col gap-[40px] custom-scrollbar" >
                     <div>
                         <ProjectHeader setSortState={setSortState} sortState={sortState} setListView={setListView} listView={listView} />
                     </div>
@@ -80,7 +80,7 @@ export default function Project() {
                         }
                     </div>}
                 </div > :
-                    <div className='pt-[96px]'>
+                    <div className='px-[60px] pt-[45px] pt-[96px]'>
                         <div className='flex flex-col items-center'>
                             <img src={projectPageImg} className='h-[120px] mb-[24px]' />
                             <div className='text-[20px] font-extrabold mb-[16px]'>Your masterpiece from A to Z</div>
