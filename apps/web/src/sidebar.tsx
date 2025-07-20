@@ -15,7 +15,7 @@ export default function Sidebar() {
     // }
     const currentTab = useLocation().pathname.split('/').filter(Boolean).pop();
     return (
-        <div className={` text-white flex flex-col gap-[12px] transition-[width] duration-300 ${isSidebarClosed ? " w-[68px]" : "w-[232px]"} h-[100vh] m-[8px] mr-0`}>
+        <div className={` text-white flex flex-col gap-[12px] transition-[width] duration-300 ${isSidebarClosed ? " w-[68px]" : "min-w-[232px] w-[232px]"} h-[100vh] m-[8px] mr-0`}>
             <div className={`text-lg font-bold h-[40px] flex items-center ${isSidebarClosed ? "justify-center ml-[0px]" : "justify-between ml-[12px]"}`}>
                 {!isSidebarClosed && <div>Sidebar</div>}
                 <div className="flex hover:bg-[#1d1d1d] rounded-[8px] " onClick={() => { setIsSidebarClosed(!isSidebarClosed); localStorage.setItem('isSidebarClosed', `${!isSidebarClosed}`) }}>

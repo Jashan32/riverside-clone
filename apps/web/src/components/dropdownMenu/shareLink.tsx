@@ -20,7 +20,7 @@ export default function ShareLinkDropDown({ shareLinkDropDownState, setShareLink
             <div className="text-[14px] text-[#888888]">Share access to this project including all its items. Anyone with the link can view and download all project files.</div>
             <div className="p-[8px] pl-[12px] bg-[#2b2b2b] rounded-[8px] flex gap-[12px] items-center">
                 <div className="text-[14px] font-extralight truncate overflow-none">{window.location.href.replace("/create/", "/")}</div>
-                <PurpleButton text="Copy Link" onClickFunction={() => { navigator.clipboard.writeText(window.location.href.replace("/create/", "/")) }} />
+                <PurpleButton text="Copy Link" onClickFunction={() => { navigator.clipboard.writeText(window.location.href.replace("/create/", "/")) ; alert("coppied")}} />
             </div>
         </div>
     )

@@ -62,7 +62,7 @@ export default function Project() {
                 <RemoveCard title={"Project A"} setRemoveCardState={setRemoveCardState} />
             </div>}
             {
-                projectsData.length > 0 ? <div className="px-[60px] pt-[45px] flex flex-col gap-[40px] custom-scrollbar" >
+                projectsData.length > 0 ? <div className="px-[60px] pt-[45px] flex flex-col gap-[40px] " >
                     <div>
                         <ProjectHeader setSortState={setSortState} sortState={sortState} setListView={setListView} listView={listView} />
                     </div>
