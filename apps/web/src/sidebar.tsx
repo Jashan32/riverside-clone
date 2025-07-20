@@ -13,7 +13,7 @@ export default function Sidebar() {
     // if (!isLoggedIn) {
     //     navigate("/login")
     // }
-    const currentTab = useLocation().pathname.split('/').filter(Boolean).pop();
+    const currentTab = location.pathname.split('/dashboard/')[1]?.split('/')[0] ;
     return (
         <div className={` text-white flex flex-col gap-[12px] transition-[width] duration-300 ${isSidebarClosed ? " w-[68px]" : "min-w-[232px] w-[232px]"} h-[100vh] m-[8px] mr-0`}>
             <div className={`text-lg font-bold h-[40px] flex items-center ${isSidebarClosed ? "justify-center ml-[0px]" : "justify-between ml-[12px]"}`}>
