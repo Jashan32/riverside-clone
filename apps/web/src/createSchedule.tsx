@@ -7,6 +7,7 @@ import twitchSvg from "./assets/twitch.svg";
 import xSvg from "./assets/x.svg";
 import TimezoneCard from "./components/cards/timezoneCard";
 import TimePickerCard from "./components/cards/timePickerCard";
+import CalendarCard from "./components/cards/calendar";
 
 // Mock toggle switch component
 const ToggleSwitch = ({ enabled, onChange }: { enabled: any, onChange: any }) => (
@@ -55,7 +56,7 @@ export default function CreateSchedule() {
         currentTime: string;
     }
     const today = new Date();
-    const formattedDate = today.toLocaleDateString("en-GB");
+    // const formattedDate = today.toLocaleDateString("en-GB");
     const [audienceEnabled, setAudienceEnabled] = useState(false);
     const [liveStreamEnabled, setLiveStreamEnabled] = useState(false);
     const titleRef = useRef<HTMLInputElement | null>(null);
@@ -68,6 +69,8 @@ export default function CreateSchedule() {
     const [ifToTimePickerOpen, setIfToTimePickerOpen] = useState(false);
     const [selectedFromTime, setSelectedFromTime] = useState(getRoundedTime(0));
     const [selectedToTime, setSelectedToTime] = useState(getRoundedTime(1));
+    const [isCalandarCardOpen, setIsCalendarCardOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(today.toLocaleDateString("en-GB"));
 
     useEffect(() => {
         if (displayTimeZoneRef.current) {
@@ -128,9 +131,13 @@ export default function CreateSchedule() {
                                         <Clock className="size-[20px]" />
                                     </div>
                                     <div className="flex justify-between items-center flex-1 gap-[8px]">
-                                        <div className="flex-1 h-[48px] flex items-center py-[14px] px-[12px] bg-[#222222] rounded-[8px] flex-shrink-0">
-                                            <Calendar className="size-[20px]" />
-                                            <div className="ml-[8px] text-[14px]">{formattedDate}</div>
+                                        <div className="w-full relative">
+                                            <div className={`${isCalandarCardOpen ? "pointer-events-none" : ""} flex-1 h-[48px] cursor-pointer relative flex items-center py-[14px] px-[12px] bg-[#222222] rounded-[8px] flex-shrink-0`}
+                                                onClick={() => setIsCalendarCardOpen(!isCalandarCardOpen)}>
+                                                <Calendar className="size-[20px]" />
+                                                <div className="ml-[8px] text-[14px]">{selectedDate}</div>
+                                            </div>
+                                            {isCalandarCardOpen && <CalendarCard setIsCalendarCardOpen={setIsCalendarCardOpen} setSelectedDate={setSelectedDate} />}
                                         </div>
                                         <div className="flex items-center gap-[8px]">
                                             <div className="relative">

@@ -42,8 +42,14 @@ export default function TimePickerCard({
 
     // Auto-scroll to selected time
     useEffect(() => {
-        if (isOpen && selectedRef.current) {
-            selectedRef.current.scrollIntoView({ block: "nearest" });
+        if (isOpen && selectedRef.current && cardRef.current) {
+            const timeElement = selectedRef.current;
+            const cardElement = cardRef.current;
+            const timeOffset = timeElement.offsetTop;
+            const cardHeight = cardElement.clientHeight;
+            const timeHeight = timeElement.clientHeight;
+            const scrollTop = timeOffset - (cardHeight / 2) + (timeHeight /2);
+            cardElement.scrollTop = Math.max(0, scrollTop);
         }
     }, [isOpen, selectedTime]);
 

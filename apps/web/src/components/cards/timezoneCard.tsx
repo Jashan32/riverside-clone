@@ -7,6 +7,7 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
     // const [selectedTimeZone, setSelectedTimeZone] = useState({});
     const timeZoneCardRef = useRef<HTMLDivElement>(null);
     const selectedRef = useRef<HTMLDivElement>(null);
+    const displayTimeZonesRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!isTimezoneCardOpen) return;
@@ -20,8 +21,14 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
     }, [isTimezoneCardOpen]);
 
     useEffect(() => {
-        if (isTimezoneCardOpen && selectedRef.current) {
-            selectedRef.current.scrollIntoView({ block: "nearest" });
+        if (isTimezoneCardOpen && selectedRef.current && displayTimeZonesRef.current) {
+            const timeElement = selectedRef.current;
+            const displayElement = displayTimeZonesRef.current;
+            const timeOffset = timeElement.offsetTop;
+            const displayHeight = displayElement.clientHeight;
+            const timeHeight = timeElement.clientHeight;
+            const scrollTop = timeOffset - (displayHeight / 2) + (timeHeight / 2);
+            displayElement.scrollTop = Math.max(0, scrollTop);
         }
     }, [isTimezoneCardOpen, selectedTimeZone, displayTimeZones]);
 
@@ -42,7 +49,8 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
                     }}
                 />
             </div>
-            <div className="overflow-auto max-h-[240px]">
+            <div className="overflow-auto max-h-[240px]"
+                ref={displayTimeZonesRef}>
                 {
                     displayTimeZones.length > 0 ? <div>
                         {displayTimeZones.map((tz: any) => (
