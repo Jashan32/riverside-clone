@@ -6,6 +6,7 @@ import linkdenSvg from "./assets/linkden.svg";
 import twitchSvg from "./assets/twitch.svg";
 import xSvg from "./assets/x.svg";
 import TimezoneCard from "./components/cards/timezoneCard";
+import TimePickerCard from "./components/cards/timePickerCard";
 
 // Mock toggle switch component
 const ToggleSwitch = ({ enabled, onChange }: { enabled: any, onChange: any }) => (
@@ -43,7 +44,7 @@ function getRoundedTime(offset = 0) {
     const displayHours = (hours % 12 === 0) ? 12 : (hours % 12);
     const displayMinutes = minutes.toString().padStart(2, "0");
 
-    return `${displayHours}:${displayMinutes} ${period}`;
+    return `${displayHours <= 9 ? "0" + displayHours : displayHours}:${displayMinutes} ${period}`;
 }
 
 export default function CreateSchedule() {
@@ -63,6 +64,10 @@ export default function CreateSchedule() {
     const [selectedTimeZone, setSelectedTimeZone] = useState<TimeZone>({ label: "", offset: "", value: "", currentTime: "" });
     const displayTimeZoneRef = useRef<HTMLDivElement>(null);
     const [timeZones, setTimeZones] = useState<TimeZone[]>([]);
+    const [ifFromTimePickerOpen, setIfFromTimePickerOpen] = useState(false);
+    const [ifToTimePickerOpen, setIfToTimePickerOpen] = useState(false);
+    const [selectedFromTime, setSelectedFromTime] = useState(getRoundedTime(0));
+    const [selectedToTime, setSelectedToTime] = useState(getRoundedTime(1));
 
     useEffect(() => {
         if (displayTimeZoneRef.current) {
@@ -128,12 +133,20 @@ export default function CreateSchedule() {
                                             <div className="ml-[8px] text-[14px]">{formattedDate}</div>
                                         </div>
                                         <div className="flex items-center gap-[8px]">
-                                            <div className="h-[48px] w-[99px] bg-[#222222] rounded-[8px] flex items-center justify-center text-[14px]">
-                                                {getRoundedTime(0)}
+                                            <div className="relative">
+                                                <div className={`${ifFromTimePickerOpen ? "pointer-events-none" : ""} cursor-pointer h-[48px] w-[99px] bg-[#222222] rounded-[8px] flex items-center justify-center text-[14px]`}
+                                                    onClick={() => setIfFromTimePickerOpen(!ifFromTimePickerOpen)}>
+                                                    {selectedFromTime}
+                                                </div>
+                                                <TimePickerCard isOpen={ifFromTimePickerOpen} setIsOpen={setIfFromTimePickerOpen} selectedTime={selectedFromTime} setSelectedTime={setSelectedFromTime} />
                                             </div>
                                             <div className="flex items-center">-</div>
-                                            <div className="h-[48px] w-[99px] bg-[#222222] rounded-[8px] flex items-center justify-center text-[14px]">
-                                                {getRoundedTime(1)}
+                                            <div className="relative">
+                                                <div className={`${ifToTimePickerOpen ? "pointer-events-none" : ""} cursor-pointer h-[48px] w-[99px] bg-[#222222] rounded-[8px] flex items-center justify-center text-[14px]`}
+                                                    onClick={() => setIfToTimePickerOpen(!ifToTimePickerOpen)}>
+                                                    {selectedToTime}
+                                                </div>
+                                                <TimePickerCard isOpen={ifToTimePickerOpen} setIsOpen={setIfToTimePickerOpen} selectedTime={selectedToTime} setSelectedTime={setSelectedToTime} />
                                             </div>
                                         </div>
                                     </div>

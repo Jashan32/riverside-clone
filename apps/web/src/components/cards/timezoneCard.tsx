@@ -6,38 +6,7 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
     const [displayTimeZones, setDisplayTimeZones] = useState(timeZones);
     // const [selectedTimeZone, setSelectedTimeZone] = useState({});
     const timeZoneCardRef = useRef<HTMLDivElement>(null);
-
-    // useEffect(() => {
-    //     const fetchTimeZones = async () => {
-    //         const response = await fetch('/timeZone.json');
-    //         const timeZones = await response.json();
-
-    //         const timeZonesWithCurrentTime = timeZones.map((tz: any) => {
-    //             // Parse offset, e.g. "-11:00" or "+05:30"
-    //             const match = /^([+-])(\d{2}):(\d{2})$/.exec(tz.offset);
-    //             let offsetMinutes = 0;
-    //             if (match) {
-    //                 const sign = match[1] === '+' ? 1 : -1;
-    //                 const hours = parseInt(match[2], 10);
-    //                 const minutes = parseInt(match[3], 10);
-    //                 offsetMinutes = sign * (hours * 60 + minutes);
-    //             }
-    //             // Get current UTC time and apply offset
-    //             const now = new Date();
-    //             const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-    //             const tzDate = new Date(utc + offsetMinutes * 60000);
-    //             // Format as hh:mm AM/PM
-    //             const currentTime = tzDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
-
-    //             return { ...tz, currentTime };
-    //         });
-
-    //         setTimeZones(timeZonesWithCurrentTime);
-    //         setDisplayTimeZones(timeZonesWithCurrentTime);
-    //         console.log(timeZonesWithCurrentTime);
-    //     };
-    //     fetchTimeZones();
-    // }, []);
+    const selectedRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!isTimezoneCardOpen) return;
@@ -50,8 +19,15 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isTimezoneCardOpen]);
 
+    useEffect(() => {
+        if (isTimezoneCardOpen && selectedRef.current) {
+            selectedRef.current.scrollIntoView({ block: "nearest" });
+        }
+    }, [isTimezoneCardOpen, selectedTimeZone, displayTimeZones]);
+
+
     return (
-        <div ref={timeZoneCardRef} className="absolute top-[60px] w-[568px] max-h-[292px] min-h-[90px] bg-[#2b2b2b] rounded-[12px]">
+        <div ref={timeZoneCardRef} className="px-[12px] absolute top-[60px] w-[568px] max-h-[292px] min-h-[90px] bg-[#2b2b2b] rounded-[12px]">
             <div className="flex items-center h-[53px] px-[16px] pt-[8px] pb-[4px] border-b-[1px] border-[#444444]">
                 <div className="flex items-center">
                     <Search className="size-[16px]" />
@@ -71,6 +47,7 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
                     displayTimeZones.length > 0 ? <div>
                         {displayTimeZones.map((tz: any) => (
                             <div key={tz.value} className={`${selectedTimeZone == tz ? "bg-[#3b364c]" : ""} rounded-[10px] flex items-center gap-[12px] px-[16px] py-[10px] h-[40px] hover:bg-[#383838] cursor-pointer`}
+                                ref={selectedTimeZone == tz ? selectedRef : null}
                                 onClick={() => {
                                     setSelectedTimeZone(tz);
                                     setIsTimezoneCardOpen(false);
