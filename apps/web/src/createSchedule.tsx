@@ -1,10 +1,11 @@
 import { Calendar, ChevronDown, Clock, Podcast, Text, UserPlus, Users } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import facebookSvg from "./assets/facebook.svg";
 import youtubeSvg from "./assets/youtube.svg";
 import linkdenSvg from "./assets/linkden.svg";
 import twitchSvg from "./assets/twitch.svg";
 import xSvg from "./assets/x.svg";
+import TimezoneCard from "./components/cards/timezoneCard";
 
 // Mock toggle switch component
 const ToggleSwitch = ({ enabled, onChange }: { enabled: any, onChange: any }) => (
@@ -46,17 +47,74 @@ function getRoundedTime(offset = 0) {
 }
 
 export default function CreateSchedule() {
+    interface TimeZone {
+        label: string;
+        offset: string;
+        value: string;
+        currentTime: string;
+    }
     const today = new Date();
     const formattedDate = today.toLocaleDateString("en-GB");
     const [audienceEnabled, setAudienceEnabled] = useState(false);
     const [liveStreamEnabled, setLiveStreamEnabled] = useState(false);
+    const titleRef = useRef<HTMLInputElement | null>(null);
+    const [filledTitle, setFilledTitle] = useState(false);
+    const [isTimezoneCardOpen, setIsTimezoneCardOpen] = useState(false);
+    const [selectedTimeZone, setSelectedTimeZone] = useState<TimeZone>({ label: "", offset: "", value: "", currentTime: "" });
+    const displayTimeZoneRef = useRef<HTMLDivElement>(null);
+    const [timeZones, setTimeZones] = useState<TimeZone[]>([]);
+
+    useEffect(() => {
+        if (displayTimeZoneRef.current) {
+            displayTimeZoneRef.current.innerHTML = `(GMT${selectedTimeZone.offset}) ${selectedTimeZone.label}`;
+        }
+    }, [selectedTimeZone, displayTimeZoneRef]);
+
+    useEffect(() => {
+        const fetchTimeZones = async () => {
+            const response = await fetch('/timeZone.json');
+            const timeZones = await response.json();
+
+            const timeZonesWithCurrentTime = timeZones.map((tz: any) => {
+                // Parse offset, e.g. "-11:00" or "+05:30"
+                const match = /^([+-])(\d{2}):(\d{2})$/.exec(tz.offset);
+                let offsetMinutes = 0;
+                if (match) {
+                    const sign = match[1] === '+' ? 1 : -1;
+                    const hours = parseInt(match[2], 10);
+                    const minutes = parseInt(match[3], 10);
+                    offsetMinutes = sign * (hours * 60 + minutes);
+                }
+                // Get current UTC time and apply offset
+                const now = new Date();
+                const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+                const tzDate = new Date(utc + offsetMinutes * 60000);
+                // Format as hh:mm AM/PM
+                const currentTime = tzDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
+
+                return { ...tz, currentTime };
+            });
+
+            setTimeZones(timeZonesWithCurrentTime);
+            const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const foundTz = timeZonesWithCurrentTime.find((tz: any) =>
+                tz.value === localTz || tz.label.includes(localTz)
+            );
+            if (foundTz) {
+                setSelectedTimeZone(foundTz);
+            }
+        };
+        fetchTimeZones();
+    }, []);
 
     return (
         <div className="h-full flex flex-col text-white relative">
             <div className="flex-1 overflow-y-auto">
                 <div className="p-[60px] pb-[100px]">
                     <div className="flex flex-col items-center justify-center min-h-full">
-                        <input className="w-full max-w-[536px] h-[52px] px-[12px] py-[8px] outline-none text-[28px] font-extrabold placeholder-[#4e4e4e] border-b-[1px] border-[#383838] bg-transparent" placeholder="Session name*" />
+                        <input ref={titleRef}
+                            onChange={(value) => { if (value.target.value.length > 0) setFilledTitle(true); else setFilledTitle(false) }}
+                            className="w-full max-w-[536px] h-[52px] px-[12px] py-[8px] outline-none text-[28px] font-extrabold placeholder-[#4e4e4e] border-b-[1px] border-[#383838] bg-transparent" placeholder="Session name*" />
                         <div className="pt-[40px] w-full max-w-[536px]">
                             <div className="flex flex-col gap-[8px]">
                                 {/* Date and time picker */}
@@ -81,12 +139,16 @@ export default function CreateSchedule() {
                                     </div>
                                 </div>
                                 {/* Timezone selector */}
-                                <div className="flex gap-[8px]">
+                                <div className="flex gap-[8px] relative">
                                     <div className="w-[28px] flex-shrink-0"></div>
-                                    <div className="flex-1 bg-[#222222] rounded-[8px] h-[48px] py-[14px] px-[12px] flex items-center justify-between cursor-pointer">
-                                        <div className="text-[14px] truncate pr-[8px]">(GMT+05:30) India Standard Time - Calcutta</div>
+                                    <div className={`${isTimezoneCardOpen ? "pointer-events-none" : ""} flex-1 bg-[#222222] rounded-[8px] h-[48px] py-[14px] px-[12px] flex items-center justify-between cursor-pointer`}
+                                        onClick={() => setIsTimezoneCardOpen(!isTimezoneCardOpen)}>
+                                        <div ref={displayTimeZoneRef} className="text-[14px] truncate pr-[8px]">Select Time Zone</div>
                                         <div className="flex-shrink-0"><ChevronDown className="size-[20px]" /></div>
                                     </div>
+                                    {
+                                        isTimezoneCardOpen && <TimezoneCard isTimezoneCardOpen={isTimezoneCardOpen} setIsTimezoneCardOpen={setIsTimezoneCardOpen} selectedTimeZone={selectedTimeZone} setSelectedTimeZone={setSelectedTimeZone} timeZones={timeZones} />
+                                    }
                                 </div>
                             </div>
                             {/* Invite section */}
@@ -139,19 +201,19 @@ export default function CreateSchedule() {
                                             <div className="flex flex-col gap-[16px]">
                                                 <div className="text-[14px] text-[#888888]">Schedule and stream this event directly on your social platforms.</div>
                                                 <div className="flex gap-[8px]">
-                                                    <div className="w-[38px] h-[38px] p-[8px] bg-[#2477ff] rounded-full flex items-center justify-center">
+                                                    <div className="cursor-pointer w-[38px] h-[38px] p-[8px] bg-[#2477ff] rounded-full flex items-center justify-center">
                                                         <img src={facebookSvg} className="h-[16px]" />
                                                     </div>
-                                                    <div className="w-[38px] h-[38px] p-[8px] bg-[#FF3333] rounded-full flex items-center justify-center">
+                                                    <div className="cursor-pointer w-[38px] h-[38px] p-[8px] bg-[#FF3333] rounded-full flex items-center justify-center">
                                                         <img src={youtubeSvg} className="h-[16px]" />
                                                     </div>
-                                                    <div className="w-[38px] h-[38px] p-[8px] bg-[#0090D6] rounded-full flex items-center justify-center">
+                                                    <div className="cursor-pointer w-[38px] h-[38px] p-[8px] bg-[#0090D6] rounded-full flex items-center justify-center">
                                                         <img src={linkdenSvg} className="h-[16px]" />
                                                     </div>
-                                                    <div className="w-[38px] h-[38px] p-[8px] bg-[#A161FF] rounded-full flex items-center justify-center">
+                                                    <div className="cursor-pointer w-[38px] h-[38px] p-[8px] bg-[#A161FF] rounded-full flex items-center justify-center">
                                                         <img src={twitchSvg} className="h-[16px]" />
                                                     </div>
-                                                    <div className="w-[38px] h-[38px] p-[8px] bg-[#131313] rounded-full flex items-center justify-center">
+                                                    <div className="cursor-pointer w-[38px] h-[38px] p-[8px] bg-[#131313] rounded-full flex items-center justify-center">
                                                         <img src={xSvg} className="h-[16px]" />
                                                     </div>
                                                 </div>
@@ -169,7 +231,7 @@ export default function CreateSchedule() {
             <div className="w-full max-w-[100%] flex items-center justify-center absolute bottom-0 h-[100px] py-[24px] px-[48px] bg-[linear-gradient(rgba(14,14,14,0)_0%,rgb(14,14,14)_49.5%)]">
                 <div className="h-[44px] mt-[8px] w-full max-w-[536px]  flex items-center justify-end gap-[16px]">
                     <div className="w-[93px] h-[44px] cursor-pointer bg-[#222222] py-[12px] px-[18px] flex items-center justify-center rounded-[10px] text-[14px]">Cancel</div>
-                    <div className="text-[#6b6b6b] cursor-pointer w-[133px] h-[44px] bg-[#2b2b2b] py-[10px] px-[16px] flex items-center justify-center rounded-[10px] text-[14px]">Create session</div>
+                    <div className={`${filledTitle ? "test-white bg-[#7848FF] cursor-pointer" : "bg-[#2b2b2b] text-[#6b6b6b] cursor-default"} w-[133px] h-[44px]  py-[10px] px-[16px] flex items-center justify-center rounded-[10px] text-[14px]`}>Create session</div>
                 </div>
             </div>
         </div>

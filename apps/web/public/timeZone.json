@@ -1,0 +1,2092 @@
+[
+  {
+    "value": "Pacific/Midway",
+    "label": "Samoa Standard Time - Midway",
+    "offset": "-11:00"
+  },
+  {
+    "value": "Pacific/Niue",
+    "label": "Niue Time - Niue",
+    "offset": "-11:00"
+  },
+  {
+    "value": "Pacific/Pago_Pago",
+    "label": "Samoa Standard Time - Pago Pago",
+    "offset": "-11:00"
+  },
+  {
+    "value": "Pacific/Marquesas",
+    "label": "Marquesas Time - Marquesas",
+    "offset": "-10:30"
+  },
+  {
+    "value": "Pacific/Honolulu",
+    "label": "Hawaii-Aleutian Standard Time - Honolulu",
+    "offset": "-10:00"
+  },
+  {
+    "value": "Pacific/Rarotonga",
+    "label": "Cook Islands Standard Time - Rarotonga",
+    "offset": "-10:00"
+  },
+  {
+    "value": "Pacific/Tahiti",
+    "label": "Tahiti Time - Tahiti",
+    "offset": "-10:00"
+  },
+  {
+    "value": "America/Adak",
+    "label": "Hawaii-Aleutian Daylight Time - Adak",
+    "offset": "-09:00"
+  },
+  {
+    "value": "Pacific/Gambier",
+    "label": "Gambier Time - Gambier",
+    "offset": "-09:00"
+  },
+  {
+    "value": "America/Anchorage",
+    "label": "Alaska Daylight Time - Anchorage",
+    "offset": "-08:00"
+  },
+  {
+    "value": "America/Juneau",
+    "label": "Alaska Daylight Time - Juneau",
+    "offset": "-08:00"
+  },
+  {
+    "value": "America/Metlakatla",
+    "label": "Alaska Daylight Time - Metlakatla",
+    "offset": "-08:00"
+  },
+  {
+    "value": "America/Nome",
+    "label": "Alaska Daylight Time - Nome",
+    "offset": "-08:00"
+  },
+  {
+    "value": "America/Sitka",
+    "label": "Alaska Daylight Time - Sitka",
+    "offset": "-08:00"
+  },
+  {
+    "value": "America/Yakutat",
+    "label": "Alaska Daylight Time - Yakutat",
+    "offset": "-08:00"
+  },
+  {
+    "value": "Pacific/Pitcairn",
+    "label": "Pitcairn Time - Pitcairn",
+    "offset": "-08:00"
+  },
+  {
+    "value": "America/Creston",
+    "label": "Mountain Standard Time - Creston",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Dawson",
+    "label": "Yukon Time - Dawson",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Dawson_Creek",
+    "label": "Mountain Standard Time - Dawson Creek",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Fort_Nelson",
+    "label": "Mountain Standard Time - Fort Nelson",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Hermosillo",
+    "label": "Mexican Pacific Standard Time - Hermosillo",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Los_Angeles",
+    "label": "Pacific Daylight Time - Los Angeles",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Mazatlan",
+    "label": "Mexican Pacific Standard Time - Mazatlan",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Phoenix",
+    "label": "Mountain Standard Time - Phoenix",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Tijuana",
+    "label": "Pacific Daylight Time - Tijuana",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Vancouver",
+    "label": "Pacific Daylight Time - Vancouver",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Whitehorse",
+    "label": "Yukon Time - Whitehorse",
+    "offset": "-07:00"
+  },
+  {
+    "value": "America/Bahia_Banderas",
+    "label": "Central Standard Time - Bahia Banderas",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Belize",
+    "label": "Central Standard Time - Belize",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Boise",
+    "label": "Mountain Daylight Time - Boise",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Cambridge_Bay",
+    "label": "Mountain Daylight Time - Cambridge Bay",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Chihuahua",
+    "label": "Central Standard Time - Chihuahua",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Ciudad_Juarez",
+    "label": "Mountain Daylight Time - Ciudad Juarez",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Costa_Rica",
+    "label": "Central Standard Time - Costa Rica",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Denver",
+    "label": "Mountain Daylight Time - Denver",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Edmonton",
+    "label": "Mountain Daylight Time - Edmonton",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/El_Salvador",
+    "label": "Central Standard Time - El Salvador",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Guatemala",
+    "label": "Central Standard Time - Guatemala",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Inuvik",
+    "label": "Mountain Daylight Time - Inuvik",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Managua",
+    "label": "Central Standard Time - Managua",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Merida",
+    "label": "Central Standard Time - Merida",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Mexico_City",
+    "label": "Central Standard Time - Mexico City",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Monterrey",
+    "label": "Central Standard Time - Monterrey",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Regina",
+    "label": "Central Standard Time - Regina",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Swift_Current",
+    "label": "Central Standard Time - Swift Current",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Tegucigalpa",
+    "label": "Central Standard Time - Tegucigalpa",
+    "offset": "-06:00"
+  },
+  {
+    "value": "Pacific/Easter",
+    "label": "Easter Island Standard Time - Easter",
+    "offset": "-06:00"
+  },
+  {
+    "value": "Pacific/Galapagos",
+    "label": "Galapagos Time - Galapagos",
+    "offset": "-06:00"
+  },
+  {
+    "value": "America/Bogota",
+    "label": "Colombia Standard Time - Bogota",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Cancun",
+    "label": "Eastern Standard Time - Cancun",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Cayman",
+    "label": "Eastern Standard Time - Cayman",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Chicago",
+    "label": "Central Daylight Time - Chicago",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Coral_Harbour",
+    "label": "Eastern Standard Time - Coral Harbour",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Eirunepe",
+    "label": "Acre Standard Time - Eirunepe",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Guayaquil",
+    "label": "Ecuador Time - Guayaquil",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Indiana/Knox",
+    "label": "Central Daylight Time - Indiana",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Indiana/Tell_City",
+    "label": "Central Daylight Time - Indiana",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Jamaica",
+    "label": "Eastern Standard Time - Jamaica",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Lima",
+    "label": "Peru Standard Time - Lima",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Matamoros",
+    "label": "Central Daylight Time - Matamoros",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Menominee",
+    "label": "Central Daylight Time - Menominee",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/North_Dakota/Beulah",
+    "label": "Central Daylight Time - North Dakota",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/North_Dakota/Center",
+    "label": "Central Daylight Time - North Dakota",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/North_Dakota/New_Salem",
+    "label": "Central Daylight Time - North Dakota",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Ojinaga",
+    "label": "Central Daylight Time - Ojinaga",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Panama",
+    "label": "Eastern Standard Time - Panama",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Rankin_Inlet",
+    "label": "Central Daylight Time - Rankin Inlet",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Resolute",
+    "label": "Central Daylight Time - Resolute",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Rio_Branco",
+    "label": "Acre Standard Time - Rio Branco",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Winnipeg",
+    "label": "Central Daylight Time - Winnipeg",
+    "offset": "-05:00"
+  },
+  {
+    "value": "America/Anguilla",
+    "label": "Atlantic Standard Time - Anguilla",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Antigua",
+    "label": "Atlantic Standard Time - Antigua",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Aruba",
+    "label": "Atlantic Standard Time - Aruba",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Barbados",
+    "label": "Atlantic Standard Time - Barbados",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Blanc-Sablon",
+    "label": "Atlantic Standard Time - Blanc-Sablon",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Boa_Vista",
+    "label": "Amazon Standard Time - Boa Vista",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Campo_Grande",
+    "label": "Amazon Standard Time - Campo Grande",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Caracas",
+    "label": "Venezuela Time - Caracas",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Cuiaba",
+    "label": "Amazon Standard Time - Cuiaba",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Curacao",
+    "label": "Atlantic Standard Time - Curacao",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Detroit",
+    "label": "Eastern Daylight Time - Detroit",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Dominica",
+    "label": "Atlantic Standard Time - Dominica",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Grand_Turk",
+    "label": "Eastern Daylight Time - Grand Turk",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Grenada",
+    "label": "Atlantic Standard Time - Grenada",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Guadeloupe",
+    "label": "Atlantic Standard Time - Guadeloupe",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Guyana",
+    "label": "Guyana Time - Guyana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Havana",
+    "label": "Cuba Daylight Time - Havana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Indiana/Marengo",
+    "label": "Eastern Daylight Time - Indiana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Indiana/Petersburg",
+    "label": "Eastern Daylight Time - Indiana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Indiana/Vevay",
+    "label": "Eastern Daylight Time - Indiana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Indiana/Vincennes",
+    "label": "Eastern Daylight Time - Indiana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Indiana/Winamac",
+    "label": "Eastern Daylight Time - Indiana",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Indianapolis",
+    "label": "Eastern Daylight Time - Indianapolis",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Iqaluit",
+    "label": "Eastern Daylight Time - Iqaluit",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Kentucky/Monticello",
+    "label": "Eastern Daylight Time - Kentucky",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Kralendijk",
+    "label": "Atlantic Standard Time - Kralendijk",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/La_Paz",
+    "label": "Bolivia Time - La Paz",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Louisville",
+    "label": "Eastern Daylight Time - Louisville",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Lower_Princes",
+    "label": "Atlantic Standard Time - Lower Princes",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Manaus",
+    "label": "Amazon Standard Time - Manaus",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Marigot",
+    "label": "Atlantic Standard Time - Marigot",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Martinique",
+    "label": "Atlantic Standard Time - Martinique",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Montserrat",
+    "label": "Atlantic Standard Time - Montserrat",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Nassau",
+    "label": "Eastern Daylight Time - Nassau",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/New_York",
+    "label": "Eastern Daylight Time - New York",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Port-au-Prince",
+    "label": "Eastern Daylight Time - Port-au-Prince",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Port_of_Spain",
+    "label": "Atlantic Standard Time - Port of Spain",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Porto_Velho",
+    "label": "Amazon Standard Time - Porto Velho",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Puerto_Rico",
+    "label": "Atlantic Standard Time - Puerto Rico",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Santiago",
+    "label": "Chile Standard Time - Santiago",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Santo_Domingo",
+    "label": "Atlantic Standard Time - Santo Domingo",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/St_Barthelemy",
+    "label": "Atlantic Standard Time - St Barthelemy",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/St_Kitts",
+    "label": "Atlantic Standard Time - St Kitts",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/St_Lucia",
+    "label": "Atlantic Standard Time - St Lucia",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/St_Thomas",
+    "label": "Atlantic Standard Time - St Thomas",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/St_Vincent",
+    "label": "Atlantic Standard Time - St Vincent",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Toronto",
+    "label": "Eastern Daylight Time - Toronto",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/Tortola",
+    "label": "Atlantic Standard Time - Tortola",
+    "offset": "-04:00"
+  },
+  {
+    "value": "America/St_Johns",
+    "label": "Newfoundland Daylight Time - St Johns",
+    "offset": "-03:30"
+  },
+  {
+    "value": "America/Araguaina",
+    "label": "Brasilia Standard Time - Araguaina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/La_Rioja",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/Rio_Gallegos",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/Salta",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/San_Juan",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/San_Luis",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/Tucuman",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Argentina/Ushuaia",
+    "label": "Argentina Standard Time - Argentina",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Asuncion",
+    "label": "Paraguay Standard Time - Asuncion",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Bahia",
+    "label": "Brasilia Standard Time - Bahia",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Belem",
+    "label": "Brasilia Standard Time - Belem",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Buenos_Aires",
+    "label": "Argentina Standard Time - Buenos Aires",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Catamarca",
+    "label": "Argentina Standard Time - Catamarca",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Cayenne",
+    "label": "French Guiana Time - Cayenne",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Cordoba",
+    "label": "Argentina Standard Time - Cordoba",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Coyhaique",
+    "label": "GMT-03:00 - Coyhaique",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Fortaleza",
+    "label": "Brasilia Standard Time - Fortaleza",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Glace_Bay",
+    "label": "Atlantic Daylight Time - Glace Bay",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Goose_Bay",
+    "label": "Atlantic Daylight Time - Goose Bay",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Halifax",
+    "label": "Atlantic Daylight Time - Halifax",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Jujuy",
+    "label": "Argentina Standard Time - Jujuy",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Maceio",
+    "label": "Brasilia Standard Time - Maceio",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Mendoza",
+    "label": "Argentina Standard Time - Mendoza",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Moncton",
+    "label": "Atlantic Daylight Time - Moncton",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Montevideo",
+    "label": "Uruguay Standard Time - Montevideo",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Paramaribo",
+    "label": "Suriname Time - Paramaribo",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Punta_Arenas",
+    "label": "GMT-03:00 - Punta Arenas",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Recife",
+    "label": "Brasilia Standard Time - Recife",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Santarem",
+    "label": "Brasilia Standard Time - Santarem",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Sao_Paulo",
+    "label": "Brasilia Standard Time - Sao Paulo",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Thule",
+    "label": "Atlantic Daylight Time - Thule",
+    "offset": "-03:00"
+  },
+  {
+    "value": "Antarctica/Palmer",
+    "label": "GMT-03:00 - Palmer",
+    "offset": "-03:00"
+  },
+  {
+    "value": "Antarctica/Rothera",
+    "label": "Rothera Time - Rothera",
+    "offset": "-03:00"
+  },
+  {
+    "value": "Atlantic/Bermuda",
+    "label": "Atlantic Daylight Time - Bermuda",
+    "offset": "-03:00"
+  },
+  {
+    "value": "Atlantic/Stanley",
+    "label": "Falkland Islands Standard Time - Stanley",
+    "offset": "-03:00"
+  },
+  {
+    "value": "America/Miquelon",
+    "label": "St. Pierre & Miquelon Daylight Time - Miquelon",
+    "offset": "-02:00"
+  },
+  {
+    "value": "America/Noronha",
+    "label": "Fernando de Noronha Standard Time - Noronha",
+    "offset": "-02:00"
+  },
+  {
+    "value": "Atlantic/South_Georgia",
+    "label": "South Georgia Time - South Georgia",
+    "offset": "-02:00"
+  },
+  {
+    "value": "America/Godthab",
+    "label": "GMT-01:00 - Godthab",
+    "offset": "-01:00"
+  },
+  {
+    "value": "America/Scoresbysund",
+    "label": "GMT-01:00 - Scoresbysund",
+    "offset": "-01:00"
+  },
+  {
+    "value": "Atlantic/Cape_Verde",
+    "label": "Cape Verde Standard Time - Cape Verde",
+    "offset": "-01:00"
+  },
+  {
+    "value": "Africa/Abidjan",
+    "label": "Greenwich Mean Time - Abidjan",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Accra",
+    "label": "Greenwich Mean Time - Accra",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Bamako",
+    "label": "Greenwich Mean Time - Bamako",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Banjul",
+    "label": "Greenwich Mean Time - Banjul",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Bissau",
+    "label": "Greenwich Mean Time - Bissau",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Conakry",
+    "label": "Greenwich Mean Time - Conakry",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Dakar",
+    "label": "Greenwich Mean Time - Dakar",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Freetown",
+    "label": "Greenwich Mean Time - Freetown",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Lome",
+    "label": "Greenwich Mean Time - Lome",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Monrovia",
+    "label": "Greenwich Mean Time - Monrovia",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Nouakchott",
+    "label": "Greenwich Mean Time - Nouakchott",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Ouagadougou",
+    "label": "Greenwich Mean Time - Ouagadougou",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Sao_Tome",
+    "label": "Greenwich Mean Time - Sao Tome",
+    "offset": "-00:00"
+  },
+  {
+    "value": "America/Danmarkshavn",
+    "label": "Greenwich Mean Time - Danmarkshavn",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Atlantic/Azores",
+    "label": "Azores Summer Time - Azores",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Atlantic/Reykjavik",
+    "label": "Greenwich Mean Time - Reykjavik",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Atlantic/St_Helena",
+    "label": "Greenwich Mean Time - St Helena",
+    "offset": "-00:00"
+  },
+  {
+    "value": "Africa/Algiers",
+    "label": "Central European Standard Time - Algiers",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Bangui",
+    "label": "West Africa Standard Time - Bangui",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Brazzaville",
+    "label": "West Africa Standard Time - Brazzaville",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Casablanca",
+    "label": "GMT+01:00 - Casablanca",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Douala",
+    "label": "West Africa Standard Time - Douala",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/El_Aaiun",
+    "label": "GMT+01:00 - El Aaiun",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Kinshasa",
+    "label": "West Africa Standard Time - Kinshasa",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Lagos",
+    "label": "West Africa Standard Time - Lagos",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Libreville",
+    "label": "West Africa Standard Time - Libreville",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Luanda",
+    "label": "West Africa Standard Time - Luanda",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Malabo",
+    "label": "West Africa Standard Time - Malabo",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Ndjamena",
+    "label": "West Africa Standard Time - Ndjamena",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Niamey",
+    "label": "West Africa Standard Time - Niamey",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Porto-Novo",
+    "label": "West Africa Standard Time - Porto-Novo",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Tunis",
+    "label": "Central European Standard Time - Tunis",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Atlantic/Canary",
+    "label": "Western European Summer Time - Canary",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Atlantic/Faeroe",
+    "label": "Western European Summer Time - Faeroe",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Atlantic/Madeira",
+    "label": "Western European Summer Time - Madeira",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Europe/Dublin",
+    "label": "Irish Standard Time - Dublin",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Europe/Guernsey",
+    "label": "GMT+01:00 - Guernsey",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Europe/Isle_of_Man",
+    "label": "GMT+01:00 - Isle of Man",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Europe/Jersey",
+    "label": "GMT+01:00 - Jersey",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Europe/Lisbon",
+    "label": "Western European Summer Time - Lisbon",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Europe/London",
+    "label": "British Summer Time - London",
+    "offset": "+01:00"
+  },
+  {
+    "value": "Africa/Blantyre",
+    "label": "Central Africa Time - Blantyre",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Bujumbura",
+    "label": "Central Africa Time - Bujumbura",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Ceuta",
+    "label": "Central European Summer Time - Ceuta",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Gaborone",
+    "label": "Central Africa Time - Gaborone",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Harare",
+    "label": "Central Africa Time - Harare",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Johannesburg",
+    "label": "South Africa Standard Time - Johannesburg",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Juba",
+    "label": "Central Africa Time - Juba",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Khartoum",
+    "label": "Central Africa Time - Khartoum",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Kigali",
+    "label": "Central Africa Time - Kigali",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Lubumbashi",
+    "label": "Central Africa Time - Lubumbashi",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Lusaka",
+    "label": "Central Africa Time - Lusaka",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Maputo",
+    "label": "Central Africa Time - Maputo",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Maseru",
+    "label": "South Africa Standard Time - Maseru",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Mbabane",
+    "label": "South Africa Standard Time - Mbabane",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Tripoli",
+    "label": "Eastern European Standard Time - Tripoli",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Windhoek",
+    "label": "Central Africa Time - Windhoek",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Antarctica/Troll",
+    "label": "GMT+02:00 - Troll",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Arctic/Longyearbyen",
+    "label": "Central European Summer Time - Longyearbyen",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Amsterdam",
+    "label": "Central European Summer Time - Amsterdam",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Andorra",
+    "label": "Central European Summer Time - Andorra",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Belgrade",
+    "label": "Central European Summer Time - Belgrade",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Berlin",
+    "label": "Central European Summer Time - Berlin",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Bratislava",
+    "label": "Central European Summer Time - Bratislava",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Brussels",
+    "label": "Central European Summer Time - Brussels",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Budapest",
+    "label": "Central European Summer Time - Budapest",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Busingen",
+    "label": "Central European Summer Time - Busingen",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Copenhagen",
+    "label": "Central European Summer Time - Copenhagen",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Gibraltar",
+    "label": "Central European Summer Time - Gibraltar",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Kaliningrad",
+    "label": "Eastern European Standard Time - Kaliningrad",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Ljubljana",
+    "label": "Central European Summer Time - Ljubljana",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Luxembourg",
+    "label": "Central European Summer Time - Luxembourg",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Madrid",
+    "label": "Central European Summer Time - Madrid",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Malta",
+    "label": "Central European Summer Time - Malta",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Monaco",
+    "label": "Central European Summer Time - Monaco",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Oslo",
+    "label": "Central European Summer Time - Oslo",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Paris",
+    "label": "Central European Summer Time - Paris",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Podgorica",
+    "label": "Central European Summer Time - Podgorica",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Prague",
+    "label": "Central European Summer Time - Prague",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Rome",
+    "label": "Central European Summer Time - Rome",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/San_Marino",
+    "label": "Central European Summer Time - San Marino",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Sarajevo",
+    "label": "Central European Summer Time - Sarajevo",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Skopje",
+    "label": "Central European Summer Time - Skopje",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Stockholm",
+    "label": "Central European Summer Time - Stockholm",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Tirane",
+    "label": "Central European Summer Time - Tirane",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Vaduz",
+    "label": "Central European Summer Time - Vaduz",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Vatican",
+    "label": "Central European Summer Time - Vatican",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Vienna",
+    "label": "Central European Summer Time - Vienna",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Warsaw",
+    "label": "Central European Summer Time - Warsaw",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Zagreb",
+    "label": "Central European Summer Time - Zagreb",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Europe/Zurich",
+    "label": "Central European Summer Time - Zurich",
+    "offset": "+02:00"
+  },
+  {
+    "value": "Africa/Addis_Ababa",
+    "label": "East Africa Time - Addis Ababa",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Asmera",
+    "label": "East Africa Time - Asmera",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Cairo",
+    "label": "Eastern European Summer Time - Cairo",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Dar_es_Salaam",
+    "label": "East Africa Time - Dar es Salaam",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Djibouti",
+    "label": "East Africa Time - Djibouti",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Kampala",
+    "label": "East Africa Time - Kampala",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Mogadishu",
+    "label": "East Africa Time - Mogadishu",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Africa/Nairobi",
+    "label": "East Africa Time - Nairobi",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Antarctica/Syowa",
+    "label": "Syowa Time - Syowa",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Aden",
+    "label": "Arabian Standard Time - Aden",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Amman",
+    "label": "GMT+03:00 - Amman",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Baghdad",
+    "label": "Arabian Standard Time - Baghdad",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Bahrain",
+    "label": "Arabian Standard Time - Bahrain",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Beirut",
+    "label": "Eastern European Summer Time - Beirut",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Damascus",
+    "label": "GMT+03:00 - Damascus",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Famagusta",
+    "label": "GMT+03:00 - Famagusta",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Gaza",
+    "label": "Eastern European Summer Time - Gaza",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Hebron",
+    "label": "Eastern European Summer Time - Hebron",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Jerusalem",
+    "label": "Israel Daylight Time - Jerusalem",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Kuwait",
+    "label": "Arabian Standard Time - Kuwait",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Nicosia",
+    "label": "Eastern European Summer Time - Nicosia",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Qatar",
+    "label": "Arabian Standard Time - Qatar",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Riyadh",
+    "label": "Arabian Standard Time - Riyadh",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Athens",
+    "label": "Eastern European Summer Time - Athens",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Bucharest",
+    "label": "Eastern European Summer Time - Bucharest",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Chisinau",
+    "label": "Eastern European Summer Time - Chisinau",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Helsinki",
+    "label": "Eastern European Summer Time - Helsinki",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Istanbul",
+    "label": "GMT+03:00 - Istanbul",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Kiev",
+    "label": "Eastern European Summer Time - Kyiv",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Kirov",
+    "label": "GMT+03:00 - Kirov",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Mariehamn",
+    "label": "Eastern European Summer Time - Mariehamn",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Minsk",
+    "label": "Moscow Standard Time - Minsk",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Moscow",
+    "label": "Moscow Standard Time - Moscow",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Riga",
+    "label": "Eastern European Summer Time - Riga",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Simferopol",
+    "label": "Eastern European Summer Time - Simferopol",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Sofia",
+    "label": "Eastern European Summer Time - Sofia",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Tallinn",
+    "label": "Eastern European Summer Time - Tallinn",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Vilnius",
+    "label": "Eastern European Summer Time - Vilnius",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Europe/Volgograd",
+    "label": "Volgograd Standard Time - Volgograd",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Indian/Antananarivo",
+    "label": "East Africa Time - Antananarivo",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Indian/Comoro",
+    "label": "East Africa Time - Comoro",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Indian/Mayotte",
+    "label": "East Africa Time - Mayotte",
+    "offset": "+03:00"
+  },
+  {
+    "value": "Asia/Tehran",
+    "label": "Iran Standard Time - Tehran",
+    "offset": "+03:30"
+  },
+  {
+    "value": "Asia/Baku",
+    "label": "Azerbaijan Standard Time - Baku",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Asia/Dubai",
+    "label": "Gulf Standard Time - Dubai",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Asia/Muscat",
+    "label": "Gulf Standard Time - Muscat",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Asia/Tbilisi",
+    "label": "Georgia Standard Time - Tbilisi",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Asia/Yerevan",
+    "label": "Armenia Standard Time - Yerevan",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Europe/Astrakhan",
+    "label": "GMT+04:00 - Astrakhan",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Europe/Samara",
+    "label": "Samara Standard Time - Samara",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Europe/Saratov",
+    "label": "GMT+04:00 - Saratov",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Europe/Ulyanovsk",
+    "label": "GMT+04:00 - Ulyanovsk",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Indian/Mahe",
+    "label": "Seychelles Time - Mahe",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Indian/Mauritius",
+    "label": "Mauritius Standard Time - Mauritius",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Indian/Reunion",
+    "label": "Réunion Time - Reunion",
+    "offset": "+04:00"
+  },
+  {
+    "value": "Asia/Kabul",
+    "label": "Afghanistan Time - Kabul",
+    "offset": "+04:30"
+  },
+  {
+    "value": "Antarctica/Mawson",
+    "label": "Mawson Time - Mawson",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Antarctica/Vostok",
+    "label": "Vostok Time - Vostok",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Almaty",
+    "label": "GMT+05:00 - Almaty",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Aqtau",
+    "label": "GMT+05:00 - Aqtau",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Aqtobe",
+    "label": "GMT+05:00 - Aqtobe",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Ashgabat",
+    "label": "Turkmenistan Standard Time - Ashgabat",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Atyrau",
+    "label": "GMT+05:00 - Atyrau",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Dushanbe",
+    "label": "Tajikistan Time - Dushanbe",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Karachi",
+    "label": "Pakistan Standard Time - Karachi",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Oral",
+    "label": "GMT+05:00 - Oral",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Qostanay",
+    "label": "GMT+05:00 - Qostanay",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Qyzylorda",
+    "label": "GMT+05:00 - Qyzylorda",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Samarkand",
+    "label": "Uzbekistan Standard Time - Samarkand",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Tashkent",
+    "label": "Uzbekistan Standard Time - Tashkent",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Yekaterinburg",
+    "label": "Yekaterinburg Standard Time - Yekaterinburg",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Indian/Kerguelen",
+    "label": "French Southern & Antarctic Time - Kerguelen",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Indian/Maldives",
+    "label": "Maldives Time - Maldives",
+    "offset": "+05:00"
+  },
+  {
+    "value": "Asia/Calcutta",
+    "label": "India Standard Time - Calcutta",
+    "offset": "+05:30"
+  },
+  {
+    "value": "Asia/Colombo",
+    "label": "India Standard Time - Colombo",
+    "offset": "+05:30"
+  },
+  {
+    "value": "Asia/Katmandu",
+    "label": "Nepal Time - Katmandu",
+    "offset": "+05:45"
+  },
+  {
+    "value": "Asia/Bishkek",
+    "label": "Kyrgyzstan Time - Bishkek",
+    "offset": "+06:00"
+  },
+  {
+    "value": "Asia/Dhaka",
+    "label": "Bangladesh Standard Time - Dhaka",
+    "offset": "+06:00"
+  },
+  {
+    "value": "Asia/Omsk",
+    "label": "Omsk Standard Time - Omsk",
+    "offset": "+06:00"
+  },
+  {
+    "value": "Asia/Thimphu",
+    "label": "Bhutan Time - Thimphu",
+    "offset": "+06:00"
+  },
+  {
+    "value": "Asia/Urumqi",
+    "label": "GMT+06:00 - Urumqi",
+    "offset": "+06:00"
+  },
+  {
+    "value": "Indian/Chagos",
+    "label": "Indian Ocean Time - Chagos",
+    "offset": "+06:00"
+  },
+  {
+    "value": "Asia/Rangoon",
+    "label": "Myanmar Time - Rangoon",
+    "offset": "+06:30"
+  },
+  {
+    "value": "Indian/Cocos",
+    "label": "Cocos Islands Time - Cocos",
+    "offset": "+06:30"
+  },
+  {
+    "value": "Antarctica/Davis",
+    "label": "Davis Time - Davis",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Bangkok",
+    "label": "Indochina Time - Bangkok",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Barnaul",
+    "label": "GMT+07:00 - Barnaul",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Hovd",
+    "label": "Hovd Standard Time - Hovd",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Jakarta",
+    "label": "Western Indonesia Time - Jakarta",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Krasnoyarsk",
+    "label": "Krasnoyarsk Standard Time - Krasnoyarsk",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Novokuznetsk",
+    "label": "Krasnoyarsk Standard Time - Novokuznetsk",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Novosibirsk",
+    "label": "Novosibirsk Standard Time - Novosibirsk",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Phnom_Penh",
+    "label": "Indochina Time - Phnom Penh",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Pontianak",
+    "label": "Western Indonesia Time - Pontianak",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Saigon",
+    "label": "Indochina Time - Saigon",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Tomsk",
+    "label": "GMT+07:00 - Tomsk",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Asia/Vientiane",
+    "label": "Indochina Time - Vientiane",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Indian/Christmas",
+    "label": "Christmas Island Time - Christmas",
+    "offset": "+07:00"
+  },
+  {
+    "value": "Antarctica/Casey",
+    "label": "Australian Western Standard Time - Casey",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Brunei",
+    "label": "Brunei Darussalam Time - Brunei",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Hong_Kong",
+    "label": "Hong Kong Standard Time - Hong Kong",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Irkutsk",
+    "label": "Irkutsk Standard Time - Irkutsk",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Kuala_Lumpur",
+    "label": "Malaysia Time - Kuala Lumpur",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Kuching",
+    "label": "Malaysia Time - Kuching",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Macau",
+    "label": "China Standard Time - Macau",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Makassar",
+    "label": "Central Indonesia Time - Makassar",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Manila",
+    "label": "Philippine Standard Time - Manila",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Shanghai",
+    "label": "China Standard Time - Shanghai",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Singapore",
+    "label": "Singapore Standard Time - Singapore",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Taipei",
+    "label": "Taipei Standard Time - Taipei",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Asia/Ulaanbaatar",
+    "label": "Ulaanbaatar Standard Time - Ulaanbaatar",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Australia/Perth",
+    "label": "Australian Western Standard Time - Perth",
+    "offset": "+08:00"
+  },
+  {
+    "value": "Australia/Eucla",
+    "label": "Australian Central Western Standard Time - Eucla",
+    "offset": "+08:45"
+  },
+  {
+    "value": "Asia/Chita",
+    "label": "Yakutsk Standard Time - Chita",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Dili",
+    "label": "East Timor Time - Dili",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Jayapura",
+    "label": "Eastern Indonesia Time - Jayapura",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Khandyga",
+    "label": "Yakutsk Standard Time - Khandyga",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Pyongyang",
+    "label": "Korean Standard Time - Pyongyang",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Seoul",
+    "label": "Korean Standard Time - Seoul",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Tokyo",
+    "label": "Japan Standard Time - Tokyo",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Asia/Yakutsk",
+    "label": "Yakutsk Standard Time - Yakutsk",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Pacific/Palau",
+    "label": "Palau Time - Palau",
+    "offset": "+09:00"
+  },
+  {
+    "value": "Australia/Adelaide",
+    "label": "Australian Central Standard Time - Adelaide",
+    "offset": "+09:30"
+  },
+  {
+    "value": "Australia/Broken_Hill",
+    "label": "Australian Central Standard Time - Broken Hill",
+    "offset": "+09:30"
+  },
+  {
+    "value": "Australia/Darwin",
+    "label": "Australian Central Standard Time - Darwin",
+    "offset": "+09:30"
+  },
+  {
+    "value": "Antarctica/DumontDUrville",
+    "label": "Dumont-d’Urville Time - DumontDUrville",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Antarctica/Macquarie",
+    "label": "Australian Eastern Standard Time - Macquarie",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Asia/Ust-Nera",
+    "label": "Vladivostok Standard Time - Ust-Nera",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Asia/Vladivostok",
+    "label": "Vladivostok Standard Time - Vladivostok",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Australia/Brisbane",
+    "label": "Australian Eastern Standard Time - Brisbane",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Australia/Hobart",
+    "label": "Australian Eastern Standard Time - Hobart",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Australia/Lindeman",
+    "label": "Australian Eastern Standard Time - Lindeman",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Australia/Melbourne",
+    "label": "Australian Eastern Standard Time - Melbourne",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Australia/Sydney",
+    "label": "Australian Eastern Standard Time - Sydney",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Pacific/Guam",
+    "label": "Chamorro Standard Time - Guam",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Pacific/Port_Moresby",
+    "label": "Papua New Guinea Time - Port Moresby",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Pacific/Saipan",
+    "label": "Chamorro Standard Time - Saipan",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Pacific/Truk",
+    "label": "Chuuk Time - Truk",
+    "offset": "+10:00"
+  },
+  {
+    "value": "Australia/Lord_Howe",
+    "label": "Lord Howe Standard Time - Lord Howe",
+    "offset": "+10:30"
+  },
+  {
+    "value": "Asia/Magadan",
+    "label": "Magadan Standard Time - Magadan",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Asia/Sakhalin",
+    "label": "Sakhalin Standard Time - Sakhalin",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Asia/Srednekolymsk",
+    "label": "GMT+11:00 - Srednekolymsk",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Bougainville",
+    "label": "GMT+11:00 - Bougainville",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Efate",
+    "label": "Vanuatu Standard Time - Efate",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Guadalcanal",
+    "label": "Solomon Islands Time - Guadalcanal",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Kosrae",
+    "label": "Kosrae Time - Kosrae",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Norfolk",
+    "label": "Norfolk Island Standard Time - Norfolk",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Noumea",
+    "label": "New Caledonia Standard Time - Noumea",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Pacific/Ponape",
+    "label": "Ponape Time - Ponape",
+    "offset": "+11:00"
+  },
+  {
+    "value": "Antarctica/McMurdo",
+    "label": "New Zealand Standard Time - McMurdo",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Asia/Anadyr",
+    "label": "Anadyr Standard Time - Anadyr",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Asia/Kamchatka",
+    "label": "Petropavlovsk-Kamchatski Standard Time - Kamchatka",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Auckland",
+    "label": "New Zealand Standard Time - Auckland",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Fiji",
+    "label": "Fiji Standard Time - Fiji",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Funafuti",
+    "label": "Tuvalu Time - Funafuti",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Kwajalein",
+    "label": "Marshall Islands Time - Kwajalein",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Majuro",
+    "label": "Marshall Islands Time - Majuro",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Nauru",
+    "label": "Nauru Time - Nauru",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Tarawa",
+    "label": "Gilbert Islands Time - Tarawa",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Wake",
+    "label": "Wake Island Time - Wake",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Wallis",
+    "label": "Wallis & Futuna Time - Wallis",
+    "offset": "+12:00"
+  },
+  {
+    "value": "Pacific/Chatham",
+    "label": "Chatham Standard Time - Chatham",
+    "offset": "+12:45"
+  },
+  {
+    "value": "Pacific/Apia",
+    "label": "Apia Standard Time - Apia",
+    "offset": "+13:00"
+  },
+  {
+    "value": "Pacific/Enderbury",
+    "label": "Phoenix Islands Time - Enderbury",
+    "offset": "+13:00"
+  },
+  {
+    "value": "Pacific/Fakaofo",
+    "label": "Tokelau Time - Fakaofo",
+    "offset": "+13:00"
+  },
+  {
+    "value": "Pacific/Tongatapu",
+    "label": "Tonga Standard Time - Tongatapu",
+    "offset": "+13:00"
+  },
+  {
+    "value": "Pacific/Kiritimati",
+    "label": "Line Islands Time - Kiritimati",
+    "offset": "+14:00"
+  }
+]
