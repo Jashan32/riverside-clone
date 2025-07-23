@@ -1,4 +1,4 @@
-import CreateProjectHeader from "./components/createProjectHeader";
+import CreateProjectHeader from "./components/headers/createProjectHeader";
 import createProjectImg from "./assets/CreateProjectImg.png";
 import FeatureCard from "./components/cards/featureCard";
 

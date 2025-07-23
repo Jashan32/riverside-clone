@@ -1,8 +1,8 @@
 import { List, LayoutGrid, ArrowDownWideNarrow, Search } from 'lucide-react';
-import GenericDropdown from './dropdownMenu/generic';
-import AddButton from './buttons/addButton';
+import GenericDropdown from '../dropdownMenu/generic';
+import AddButton from '../buttons/addButton';
 import { useEffect, useRef, useState } from 'react';
-import SortDropdown from './dropdownMenu/sortDropdown';
+import SortDropdown from '../dropdownMenu/sortDropdown';
 
 export default function ProjectHeader({ setListView, listView, setSortState, sortState }: { setListView: (state: boolean) => void, listView: boolean, setSortState: (state: string) => void, sortState: string }) {
     const [searchInputStatus, setSearchInputStatus] = useState(false);
@@ -66,7 +66,7 @@ export default function ProjectHeader({ setListView, listView, setSortState, sor
                     {listView ? <LayoutGrid className='size-[20px]' /> : <List className='size-[20px]' />}
                     <GenericDropdown title={listView ? "Grid view" : "List view"} />
                 </div>
-                <AddButton text={"New"} type='small' />
+                <AddButton text={"New"} type='small' onClickFunction={() => { }} />
             </div>
         </div>
     )

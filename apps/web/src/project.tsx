@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProjectCardGrid from './components/cards/projectCardGrid.tsx';
 import ProjectCardList from './components/cards/projectCardList.tsx';
-import ProjectHeader from './components/projectHeader.tsx';
+import ProjectHeader from './components/headers/projectHeader.tsx';
 import projectPageImg from './assets/projectsPage.png';
 import AddButton from './components/buttons/addButton.tsx';
 import RemoveCard from './components/cards/removeCard.tsx';
@@ -80,12 +80,12 @@ export default function Project() {
                         }
                     </div>}
                 </div > :
-                    <div className='px-[60px] pt-[45px] pt-[96px]'>
+                    <div className='px-[60px] pt-[96px]'>
                         <div className='flex flex-col items-center'>
                             <img src={projectPageImg} className='h-[120px] mb-[24px]' />
                             <div className='text-[20px] font-extrabold mb-[16px]'>Your masterpiece from A to Z</div>
                             <div className='text-[12px] font-medium text-[#888888] mb-[16px]'>Stay organized and keep all your episode assets in one spot for easy access.</div>
-                            <AddButton text={"New project"} type='medium' />
+                            <AddButton text={"New project"} type='medium' onClickFunction={() => { }} />
                         </div>
                     </div>
             }

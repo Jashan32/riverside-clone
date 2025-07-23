@@ -9,6 +9,7 @@ import Project from './project.tsx'
 import CreateProject from './createProject.tsx'
 import Schedule from './schedule.tsx'
 import CreateSchedule from './createSchedule.tsx'
+import ViewProject from './viewProject.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="home" element={<Home />} />
         <Route path="project" element={<Project />} />
         <Route path="project/create/:projectId" element={<CreateProject />} />
+        <Route path="project/view/:projectId/:projectName" element={<ViewProject />} />
         <Route path="schedule" element={<Schedule />} />
         <Route path="schedule/create" element={<CreateSchedule />} />
       </Route>
