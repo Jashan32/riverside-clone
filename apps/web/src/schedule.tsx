@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CurrentDateCard from "./components/cards/currentDateCard";
 import AddButton from "./components/buttons/addButton";
 import { useNavigate } from "react-router-dom";
 import { ArrowDownWideNarrow } from "lucide-react";
 import SessionCard from "./components/cards/sessionCard";
+import SessionSort from "./components/dropdownMenu/sessionSort";
 
 
 export default function Schedule() {
@@ -16,6 +17,18 @@ export default function Schedule() {
         title: "Weekly Team Sync",
         invited: []
     }]);
+    const [previousSessions, setPreviousSessions] = useState([{
+        date: "2023-10-01",
+        timeFrom: "10:00 AM",
+        timeTo: "11:00 AM",
+        timeOffset: "+05:30",
+        title: "Monthly Review Meeting",
+        invited: []
+    }]);
+    const [isSessionSortOpen, setIsSessionSortOpen] = useState(false);
+    const [isUpcomingSortOpen, setIsUpcomingSortOpen] = useState(false);
+    const SessionSortRef = useRef<HTMLDivElement>(null);
+
     return (
         <div className="px-[60px] pt-[60px] h-full">
             {
@@ -32,9 +45,15 @@ export default function Schedule() {
                     <div className="h-[36px] flex items-center justify-between mb-[32px]">
                         <div className="text-[24px] font-extrabold">Scheduled sessions</div>
                         <div className="flex items-center gap-[12px]">
-                            <div className="flex items-center gap-[8px] py-[8px] px-[12px] hover:bg-[#222222] rounded-[10px] cursor-pointer">
-                                <div><ArrowDownWideNarrow className="size-[20px]" /></div>
-                                <div className="text-[14px] font-semibold">Upcoming</div>
+                            <div className="relative">
+                                <div className={`${isSessionSortOpen ? "pointer-events-none" : ""} flex items-center gap-[8px] py-[8px] px-[12px] hover:bg-[#222222] rounded-[10px] cursor-pointer`}
+                                    onClick={() => setIsSessionSortOpen(!isSessionSortOpen)}>
+                                    <div><ArrowDownWideNarrow className="size-[20px]" /></div>
+                                    <div className="text-[14px] font-semibold">Upcoming</div>
+                                </div>
+                                <div ref={SessionSortRef} className={`absolute right-0 top-full z-1 mt-2 ${isSessionSortOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
+                                    <SessionSort setIsSessionSortOpen={setIsSessionSortOpen} setIsUpcomingSortOpen={setIsUpcomingSortOpen} isUpcomingSortOpen={isUpcomingSortOpen} />
+                                </div>
                             </div>
                             <div> <AddButton text="New" type="small" onClickFunction={() => { }} /> </div>
                         </div>
