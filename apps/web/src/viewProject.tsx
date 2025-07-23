@@ -4,12 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import SessionCard from "./components/cards/sessionCard";
 import ProjectTabs from "./components/headers/projectTabs";
 import Recordings from "./components/subPages/projectContent/recordings";
+import ProjectContent from "./components/subPages/projectContent/projectContent";
 
 export default function ViewProject() {
     const [tabSelected, setTabSelected] = useState("Recordings");
     const navigate = useNavigate();
     const { projectId, projectName } = useParams();
-    const [linkedRecordings, setLinkedRecordings] = useState<any[]>([]);
+    // const [linkedRecordings, setLinkedRecordings] = useState<any[]>([]);
     const [linedSession, setLinedSession] = useState([{
         date: "2023-10-15",
         timeFrom: "10:00 AM",
@@ -41,10 +42,7 @@ export default function ViewProject() {
             </div>
             {/* conatins Recordings, Made for you, Edits, Exports */}
             <div>
-                <div className="mb-[48px]">
-                    <ProjectTabs tabSelected={tabSelected} setTabSelected={setTabSelected} />
-                </div>
-                <Recordings linkedRecordings={linkedRecordings} setLinkedRecordings={setLinkedRecordings} />
+                <ProjectContent tabSelected={tabSelected} setTabSelected={setTabSelected} />
             </div>
         </div>
     )
