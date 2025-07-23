@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="project/create/:projectId" element={<CreateProject />} />
         <Route path="project/view/:projectId/:projectName" element={<ViewProject />} />
         <Route path="schedule" element={<Schedule />} />
-        <Route path="schedule/create" element={<CreateSchedule />} />
+        <Route path="schedule/create/:sessionId" element={<CreateSchedule />} />
       </Route>
     </Routes>
   </BrowserRouter>

@@ -2,15 +2,12 @@ import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SessionCard from "./components/cards/sessionCard";
-import ProjectTabs from "./components/headers/projectTabs";
-import Recordings from "./components/subPages/projectContent/recordings";
 import ProjectContent from "./components/subPages/projectContent/projectContent";
 
 export default function ViewProject() {
     const [tabSelected, setTabSelected] = useState("Recordings");
     const navigate = useNavigate();
     const { projectId, projectName } = useParams();
-    // const [linkedRecordings, setLinkedRecordings] = useState<any[]>([]);
     const [linedSession, setLinedSession] = useState([{
         date: "2023-10-15",
         timeFrom: "10:00 AM",

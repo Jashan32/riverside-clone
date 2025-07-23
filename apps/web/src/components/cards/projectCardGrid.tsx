@@ -1,8 +1,10 @@
 import { FolderOpen, Ellipsis } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ProjectsDropdown from '../dropdownMenu/projects';
+import { useNavigate } from 'react-router-dom';
 
-export default function ProjectCard({ title, timeCreated, setRemoveCardState }: { title: string, timeCreated: string, setRemoveCardState: (state: boolean) => void }) {
+export default function ProjectCard({ projectName, timeCreated, setRemoveCardState, projectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string }) {
+    const navigate = useNavigate();
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -17,12 +19,13 @@ export default function ProjectCard({ title, timeCreated, setRemoveCardState }: 
     }, [dropDownState]);
     return (
         <div className="w-full aspect-[4/3] flex flex-col group">
-            <div className="rounded-[8px] w-full bg-[#1d1d1d] hover:bg-[#383838] cursor-pointer flex-1 bg-gradient-to-b from-transparent to-black/50 flex items-center justify-center">
+            <div className="rounded-[8px] w-full bg-[#1d1d1d] hover:bg-[#383838] cursor-pointer flex-1 bg-gradient-to-b from-transparent to-black/50 flex items-center justify-center"
+            onClick={()=>{navigate(`/dashboard/project/view/${projectId}/${projectName}`)}}>
                 <FolderOpen className='size-[28px] text-[#555555]' />
             </div>
             <div className="h-[42px] mt-[12px] w-full flex justify-between">
                 <div>
-                    <div className="text-[14px] font-bold">{title}</div>
+                    <div className="text-[14px] font-bold">{projectName}</div>
                     <div className="text-[12px] text-[#888888] font-medium">{timeCreated} ago</div>
                 </div>
                 <div className="relative flex items-center">

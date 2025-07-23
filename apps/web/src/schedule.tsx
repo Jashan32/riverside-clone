@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowDownWideNarrow } from "lucide-react";
 import SessionCard from "./components/cards/sessionCard";
 import SessionSort from "./components/dropdownMenu/sessionSort";
-
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Schedule() {
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function Schedule() {
                     <div className="text-[14px] text-[#888888] mt-[12px]">Plan your sessions in advance. Choose a date and time,</div>
                     <div className="text-[14px] text-[#888888]">then invite others to join or watch your event.</div>
                     <div className="mt-[20px]">
-                        <AddButton text={"New session"} type="medium" onClickFunction={() => { navigate("/dashboard/schedule/create") }} />
+                        <AddButton text={"New session"} type="medium" onClickFunction={() => { navigate(`/dashboard/schedule/create/${uuidv4()}`) }} />
                     </div>
 
                 </div> : <div>
@@ -55,7 +55,7 @@ export default function Schedule() {
                                     <SessionSort setIsSessionSortOpen={setIsSessionSortOpen} setIsUpcomingSortOpen={setIsUpcomingSortOpen} isUpcomingSortOpen={isUpcomingSortOpen} />
                                 </div>
                             </div>
-                            <div> <AddButton text="New" type="small" onClickFunction={() => { }} /> </div>
+                            <div> <AddButton text="New" type="small" onClickFunction={() => { navigate(`/dashboard/schedule/create/${uuidv4()}`) }} /> </div>
                         </div>
                     </div>
                     {

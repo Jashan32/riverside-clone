@@ -7,18 +7,19 @@ import AddButton from './components/buttons/addButton.tsx';
 import RemoveCard from './components/cards/removeCard.tsx';
 
 type ProjectType = {
-    title: string;
+    projectName: string;
+    projectId: string
     timeCreated: string;
 };
 
 const data: ProjectType[] = [
-    { title: "Project 1", timeCreated: "1" },
-    { title: "Project 2", timeCreated: "5" },
-    { title: "Project 3", timeCreated: "10" },
-    { title: "Project 4", timeCreated: "20" },
-    { title: "Project 5", timeCreated: "1" },
-    { title: "Project 6", timeCreated: "2" },
-    { title: "Project 7", timeCreated: "3" },
+    { projectName: "Project 1", projectId: "1", timeCreated: "1" },
+    { projectName: "Project 2", projectId: "2", timeCreated: "5" },
+    { projectName: "Project 3", projectId: "3", timeCreated: "10" },
+    { projectName: "Project 4", projectId: "4", timeCreated: "20" },
+    { projectName: "Project 5", projectId: "5", timeCreated: "1" },
+    { projectName: "Project 6", projectId: "6", timeCreated: "2" },
+    { projectName: "Project 7", projectId: "7", timeCreated: "3" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
@@ -35,10 +36,10 @@ export default function Project() {
     useEffect(() => {
         const getSortedData = () => {
             if (sortState === "a-z") {
-                return [...projectsData].sort((a, b) => a.title.localeCompare(b.title));
+                return [...projectsData].sort((a, b) => a.projectName.localeCompare(b.projectName));
             }
             if (sortState === "z-a") {
-                return [...projectsData].sort((a, b) => b.title.localeCompare(a.title));
+                return [...projectsData].sort((a, b) => b.projectName.localeCompare(a.projectName));
             }
             if (sortState === "newest") {
                 // Assuming higher number means newer
@@ -69,13 +70,13 @@ export default function Project() {
                     {listView ? <div className='flex flex-col gap-[8px]'>
                         {
                             projectsData.map((project, index) => (
-                                <ProjectCardList setRemoveCardState={setRemoveCardState} key={index} title={project.title} timeCreated={project.timeCreated} />
+                                <ProjectCardList setRemoveCardState={setRemoveCardState} key={index} projectId={project.projectId} projectName={project.projectName} timeCreated={project.timeCreated} />
                             ))
                         }
                     </div> : <div className='grid relative 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[24px]'>
                         {
                             projectsData.map((project, index) => (
-                                <ProjectCardGrid setRemoveCardState={setRemoveCardState} key={index} title={project.title} timeCreated={project.timeCreated} />
+                                <ProjectCardGrid setRemoveCardState={setRemoveCardState} key={index} projectId={project.projectId} projectName={project.projectName} timeCreated={project.timeCreated} />
                             ))
                         }
                     </div>}
