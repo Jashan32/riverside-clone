@@ -68,13 +68,13 @@ export default function SearchCard({ searchCardVisible, setSearchCardVisible }: 
                             onClick={() => setSelected("Projects")}
                         >Projects</div>
                     </div>
-                {
-                    searchContent(selected)
-                }
+                    {
+                        searchContent(selected)
+                    }
                 </div>
                 <div className="flex items-center justify-between py-[12px]">
-                        <div></div>
-                        <div className="cursor-pointer text-[#b196ff] text-[12px]">Give feedback</div>
+                    <div></div>
+                    <div className="cursor-pointer text-[#b196ff] text-[12px]">Give feedback</div>
                 </div>
             </div>
         </div>}
