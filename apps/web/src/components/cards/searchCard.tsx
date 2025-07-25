@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import Recordings from "../subPages/searchContent/recordings";
+import Edits from "../subPages/searchContent/edits";
+import MagicClips from "../../assets/magicClips";
+import MagicEpisodes from "../../assets/magicEpisodes";
+import Exports from "../subPages/searchContent/exports";
+import Projects from "../subPages/searchContent/projects";
 
 export default function SearchCard({ searchCardVisible, setSearchCardVisible }: { searchCardVisible: boolean, setSearchCardVisible: (visible: boolean) => void }) {
     const [selected, setSelected] = useState("Recordings");
@@ -15,6 +21,26 @@ export default function SearchCard({ searchCardVisible, setSearchCardVisible }: 
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [setSearchCardVisible]);
+
+    const searchContent = (selected: string) => {
+        switch (selected) {
+            case "Recordings":
+                return <Recordings />;
+            case "Edits":
+                return <Edits />;
+            case "Magic Clips":
+                return <MagicClips />;
+            case "Magic Episodes":
+                return <MagicEpisodes />;
+            case "Exports":
+                return <Exports />;
+            case "Projects":
+                return <Projects />;
+            default:
+                return null;
+        }
+    };
+
     return (<>
         {searchCardVisible && <div className="absolute w-[100vw] h-full z-2 bg-black/40 backdrop-blur-[10px] flex justify-center">
             <div ref={searchCardRef} className="absolute top-[100px] h-[610px] max-h-[610px] w-[580px] bg-[#151515] rounded-[12px] border-[1px] border-white/10 px-[20px] flex flex-col justify-between">
@@ -42,6 +68,9 @@ export default function SearchCard({ searchCardVisible, setSearchCardVisible }: 
                             onClick={() => setSelected("Projects")}
                         >Projects</div>
                     </div>
+                {
+                    searchContent(selected)
+                }
                 </div>
                 <div className="flex items-center justify-between py-[12px]">
                         <div></div>
