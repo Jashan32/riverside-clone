@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Recordings from "../subPages/searchContent/recordings";
 import Edits from "../subPages/searchContent/edits";
-import MagicClips from "../../assets/magicClips";
+import MagicClips from "../../components/subPages/searchContent/magicClips";
 import MagicEpisodes from "../../components/subPages/searchContent/magicEpisodes";
 import Exports from "../subPages/searchContent/exports";
 import Projects from "../subPages/searchContent/projects";
