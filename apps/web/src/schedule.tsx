@@ -58,8 +58,13 @@ export default function Schedule() {
                             <div> <AddButton text="New" type="small" onClickFunction={() => { navigate(`/dashboard/schedule/create/${uuidv4()}`) }} /> </div>
                         </div>
                     </div>
-                    {
-                        upcomingSessions.map((session, index) => {
+                    {isUpcomingSortOpen ?
+                        upcomingSessions.map((session) => {
+                            return (
+                                <SessionCard session={session} />
+                            )
+                        }) :
+                        previousSessions.map((session) => {
                             return (
                                 <SessionCard session={session} />
                             )

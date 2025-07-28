@@ -1,7 +1,11 @@
 import { ArrowDownToLine, Check, Ellipsis, FolderDown, Scissors, Upload, Users } from "lucide-react";
+import { useState } from "react";
+import RecordingOptions from "../../dropdownMenu/recordingOptions";
 
-export default function RecordingBlock({ recording, index }: { recording: any, index: number }) {
-    console.log(recording.Participants.length)
+export default function RecordingBlock({ recording }: { recording: any }) {
+    const [isRecordingOptionsOpen, setIsRecordingOptionsOpen] = useState(false);
+    const [openOptionsIndex, setOpenOptionsIndex] = useState<number | null>(null);
+
     function formatMonthNameDate(isoDate: string) {
         const date = new Date(isoDate);
         return date.toLocaleString("en-US", {
@@ -65,7 +69,12 @@ export default function RecordingBlock({ recording, index }: { recording: any, i
                             <ArrowDownToLine className="size-[20px]" />
                             <div className="text-[13px]">Cloud</div>
                         </div>
-                        <div className="w-[40px] h-[40px] p-[10px] cursor-pointer rounded-[10px] hover:bg-[#383838]"><Ellipsis className="size-[20px]" /></div>
+                        <div onClick={() => setIsRecordingOptionsOpen(!isRecordingOptionsOpen)} className="relative">
+                            <div className="w-[40px] h-[40px] p-[10px] cursor-pointer rounded-[10px] hover:bg-[#383838]"><Ellipsis className="size-[20px]" /></div>
+                            <div className={`absolute right-0 top-full z-1 mt-2 ${isRecordingOptionsOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
+                                <RecordingOptions setIsRecordingOptionsOpen={setIsRecordingOptionsOpen} />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {
@@ -93,7 +102,14 @@ export default function RecordingBlock({ recording, index }: { recording: any, i
                                     <ArrowDownToLine className="size-[20px]" />
                                     <div className="text-[13px]">Cloud</div>
                                 </div>
-                                <div className="w-[40px] h-[40px] p-[10px] cursor-pointer rounded-[10px] hover:bg-[#383838]"><Ellipsis className="size-[20px]" /></div>
+                                <div onClick={() => setOpenOptionsIndex(openOptionsIndex === idx ? null : idx)} className="relative">
+                                    <div className="w-[40px] h-[40px] p-[10px] cursor-pointer rounded-[10px] hover:bg-[#383838]">
+                                        <Ellipsis className="size-[20px]" />
+                                    </div>
+                                    <div className={`absolute right-0 top-full z-1 mt-2 ${openOptionsIndex === idx ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
+                                        <RecordingOptions setIsRecordingOptionsOpen={() => setOpenOptionsIndex(null)} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))

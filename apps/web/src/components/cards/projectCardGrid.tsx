@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import ProjectsDropdown from '../dropdownMenu/projects';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProjectCard({ projectName, timeCreated, setRemoveCardState, projectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string }) {
+export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCardState, projectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string }) {
     const navigate = useNavigate();
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
