@@ -19,13 +19,13 @@ export default function ViewProject() {
 
     return (
         <div className="px-[16px]">
-            <div className="h-[60px] pl-[28px] flex items-center ">
+            <div className="px-[46px] h-[60px] pl-[28px] flex items-center ">
                 <div className="text-[22px] text-[#888888] hover:text-white font-extrabold cursor-pointer "
                     onClick={() => { navigate('/dashboard/project') }}>Projects</div>
                 <div className="w-[16px] h-[16px] mx-[12px] flex items-center"><ChevronRight className="size-[16px] text-[#888888] " /></div>
                 <div className="text-[22px] font-extrabold ">{projectName}</div>
             </div>
-            <div className="flex flex-col gap-[44px]">
+            <div className="flex flex-col gap-[44px] px-[46px]">
                 <div className="text-[20px] font-extrabold">Session({linedSession.length})</div>
                 <div>
                     {
@@ -38,7 +38,7 @@ export default function ViewProject() {
                 </div>
             </div>
             {/* conatins Recordings, Made for you, Edits, Exports */}
-            <div>
+            <div className="px-[46px]">
                 <ProjectContent tabSelected={tabSelected} setTabSelected={setTabSelected} />
             </div>
         </div>

@@ -1,10 +1,12 @@
 import { Upload, Video } from "lucide-react";
+import RecordingBlock from "./recordingBlock";
 
 export default function Recordings({ linkedRecordings, setLinkedRecordings }: { linkedRecordings: any[], setLinkedRecordings: (recordings: any[]) => void }) {
     return (
         <div className="h-full w-full">
             {linkedRecordings.length > 0 ? <div>
-
+                {linkedRecordings.map((recording, index) => (
+                    <RecordingBlock recording={recording} index={index}/>))}
             </div> : <div className="flex flex-col items-center h-full">
                 <div className="text-[16px] font-medium">No recordings yet</div>
                 <div className="text-[16px] text-[#9e9e9e] mt-[24px]">All your edits will show up here.</div>

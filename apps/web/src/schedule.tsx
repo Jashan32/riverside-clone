@@ -49,7 +49,7 @@ export default function Schedule() {
                                 <div className={`${isSessionSortOpen ? "pointer-events-none" : ""} flex items-center gap-[8px] py-[8px] px-[12px] hover:bg-[#222222] rounded-[10px] cursor-pointer`}
                                     onClick={() => setIsSessionSortOpen(!isSessionSortOpen)}>
                                     <div><ArrowDownWideNarrow className="size-[20px]" /></div>
-                                    <div className="text-[14px] font-semibold">Upcoming</div>
+                                    <div className="text-[14px] font-semibold">{isUpcomingSortOpen ? "Upcoming" : "Past"}</div>
                                 </div>
                                 <div ref={SessionSortRef} className={`absolute right-0 top-full z-1 mt-2 ${isSessionSortOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
                                     <SessionSort setIsSessionSortOpen={setIsSessionSortOpen} setIsUpcomingSortOpen={setIsUpcomingSortOpen} isUpcomingSortOpen={isUpcomingSortOpen} />
