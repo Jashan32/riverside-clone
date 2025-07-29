@@ -11,16 +11,21 @@ export default function ProjectContent({ tabSelected, setTabSelected }: { tabSel
     const [linkedMadeForYou, setLinkedMadeForYou] = useState<any[]>([]);
     const [linkedExports, setLinkedExports] = useState<any[]>([]);
     useEffect(() => {
-        const data = [{ id: 1, title: "Sample Recording 1",Participants: ["Jashan", "Jashan Alt"], duration: "2:30", createdDate: "2023-10-01" },
+        const data = [{ id: 1, title: "Sample Recording 1", Participants: ["Jashan", "Jashan Alt"], duration: "2:30", createdDate: "2023-10-01" },
         { id: 2, title: "Sample Recording 2", Participants: ["Jashan", "Jashan Alt"], duration: "3:15", createdDate: "2023-10-02" },
         { id: 3, title: "Sample Recording 3", duration: "1:45", Participants: ["Jashan", "Jashan Alt"], createdDate: "2023-10-03" },
         { id: 4, title: "Sample Recording 4", duration: "4:00", Participants: ["Jashan", "Jashan Alt"], createdDate: "2023-10-04" }];
-        const exportData = [{ id: 1, title: "Sample Export 1",Participants: ["Jashan", "Jashan Alt"], duration: "2:30", createdDate: "2023-10-01" },
+        const exportData = [{ id: 1, title: "Sample Export 1", Participants: ["Jashan", "Jashan Alt"], duration: "2:30", createdDate: "2023-10-01" },
         { id: 2, title: "Sample Export 2", Participants: ["Jashan", "Jashan Alt"], duration: "3:15", createdDate: "2023-10-02" },
         { id: 3, title: "Sample Export 3", duration: "1:45", Participants: ["Jashan", "Jashan Alt"], createdDate: "2023-10-03" },
         { id: 4, title: "Sample Export 4", duration: "4:00", Participants: ["Jashan", "Jashan Alt"], createdDate: "2023-10-04" }];
+        const editData = [{ id: 1, title: "Sample Edit 1", Participants: ["Jashan", "Jashan Alt"], duration: "2:30", createdDate: "2023-10-01" },
+        { id: 2, title: "Sample Edit 2", Participants: ["Jashan", "Jashan Alt"], duration: "3:15", createdDate: "2023-10-02" },
+        { id: 3, title: "Sample Edit 3", duration: "1:45", Participants: ["Jashan", "Jashan Alt"], createdDate: "2023-10-03" },
+        { id: 4, title: "Sample Edit 4", duration: "4:00", Participants: ["Jashan", "Jashan Alt"], createdDate: "2023-10-04" }];
         setLinkedRecordings(data);
         setLinkedExports(exportData);
+        setLinkedEdits(editData);
     }, [])
     return (
         <div className="">
