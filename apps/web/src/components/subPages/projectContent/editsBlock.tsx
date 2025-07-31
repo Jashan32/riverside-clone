@@ -1,6 +1,5 @@
 import { Ellipsis, Scissors, Upload } from "lucide-react";
 import { useState } from "react";
-import ExportOptions from "../../dropdownMenu/exportOptions";
 import EditOptions from "../../dropdownMenu/editOptions";
 
 function formatMonthDateYear(isoDate: string) {

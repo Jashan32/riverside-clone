@@ -1,10 +1,13 @@
 import { FolderOpen, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Projects = {
     id: number;
     title: string;
     date: string;
+    projectId: string;
+    projectName: string;
 };
 
 function formatDate(isoDate: string) {
@@ -16,21 +19,22 @@ function formatDate(isoDate: string) {
     }).replace(",", ",");
 }
 
-export default function Projects({ searchedItem }: { searchedItem?: string }) {
+export default function Projects({ searchedItem, setSearchCardVisible }: { searchedItem?: string, setSearchCardVisible: (visible: boolean) => void }) {
+    const navigate = useNavigate();
     const [projects, setProjects] = useState<Projects[]>([]);
     const [displayProjects, setDisplayProjects] = useState<Projects[]>([]);
 
     // temporary data for testing
     useEffect(() => {
         const data = [
-            { id: 1, title: "project 1", date: "2023-10-01" },
-            { id: 2, title: "project 2", date: "2023-10-01" },
-            { id: 3, title: "project 3", date: "2023-10-01" },
-            { id: 4, title: "project 4", date: "2023-10-01" },
-            { id: 5, title: "project 5", date: "2023-10-01" },
-            { id: 6, title: "project 6", date: "2023-10-01" },
-            { id: 7, title: "project 7", date: "2023-10-01" },
-            { id: 8, title: "project 8", date: "2023-10-01" },
+            { id: 1, projectId: "id1", projectName: "untitled", title: "project 1", date: "2023-10-01" },
+            { id: 2, projectId: "id2", projectName: "untitled", title: "project 2", date: "2023-10-01" },
+            { id: 3, projectId: "id3", projectName: "untitled", title: "project 3", date: "2023-10-01" },
+            { id: 4, projectId: "id4", projectName: "untitled", title: "project 4", date: "2023-10-01" },
+            { id: 5, projectId: "id5", projectName: "untitled", title: "project 5", date: "2023-10-01" },
+            { id: 6, projectId: "id6", projectName: "untitled", title: "project 6", date: "2023-10-01" },
+            { id: 7, projectId: "id7", projectName: "untitled", title: "project 7", date: "2023-10-01" },
+            { id: 8, projectId: "id8", projectName: "untitled", title: "project 8", date: "2023-10-01" },
         ];
         setProjects(data);
         setDisplayProjects(data);
@@ -54,7 +58,13 @@ export default function Projects({ searchedItem }: { searchedItem?: string }) {
                 {
                     displayProjects.map((project) => {
                         return (
-                            <div key={project.id} className="flex gap-[16px] w-full h-[80px] p-[12px] hover:bg-[#383838] cursor-pointer rounded-[10px]">
+                            <div key={project.id} className="flex gap-[16px] w-full h-[80px] p-[12px] hover:bg-[#383838] cursor-pointer rounded-[10px]"
+                                onClick={() => {
+                                    navigate(`/dashboard/project/view/${project.projectId}/${project.projectName}`, {
+                                        state: { tab: "Recordings" },
+                                    });
+                                    setSearchCardVisible?.(false);
+                                }}>
                                 <div className="w-[100px] h-[56px] bg-[#1d1d1d] rounded-[10px] flex items-center justify-center"><FolderOpen className="text-white size-[20px]" /></div>
                                 <div className="flex flex-col gap-[5px] flex-1 min-w-0">
                                     <div className="flex items-center gap-[10px] min-w-0">

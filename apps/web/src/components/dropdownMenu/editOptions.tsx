@@ -1,4 +1,4 @@
-import { ArrowDownToLine, Copy, File, FolderPlus, Forward, Link, Pencil, Scissors, Share2, Trash, Upload } from "lucide-react";
+import { Copy, File, FolderPlus, Link, Pencil, Scissors, Trash, Upload } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 export default function EditOptions({ setIsEditOptionsOpen }: { setIsEditOptionsOpen: (state: boolean) => void }) {

@@ -13,13 +13,13 @@ type ProjectType = {
 };
 
 const data: ProjectType[] = [
-    { projectName: "Project 1", projectId: "1", timeCreated: "1" },
-    { projectName: "Project 2", projectId: "2", timeCreated: "5" },
-    { projectName: "Project 3", projectId: "3", timeCreated: "10" },
-    { projectName: "Project 4", projectId: "4", timeCreated: "20" },
-    { projectName: "Project 5", projectId: "5", timeCreated: "1" },
-    { projectName: "Project 6", projectId: "6", timeCreated: "2" },
-    { projectName: "Project 7", projectId: "7", timeCreated: "3" },
+    {projectId:"id1", projectName: "Project 1", timeCreated: "1" },
+    {projectId:"id2", projectName: "Project 2", timeCreated: "5" },
+    {projectId:"id3", projectName: "Project 3", timeCreated: "10" },
+    {projectId:"id4", projectName: "Project 4", timeCreated: "20" },
+    {projectId:"id5", projectName: "Project 5", timeCreated: "1" },
+    {projectId:"id6", projectName: "Project 6", timeCreated: "2" },
+    {projectId:"id7", projectName: "Project 7", timeCreated: "3" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },
     // { title: "Project 8", timeCreated: "4 hours" },

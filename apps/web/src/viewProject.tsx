@@ -1,10 +1,11 @@
 import { ChevronRight } from "lucide-react";
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SessionCard from "./components/cards/sessionCard";
 import ProjectContent from "./components/subPages/projectContent/projectContent";
 
 export default function ViewProject() {
+    const location = useLocation();
     const [tabSelected, setTabSelected] = useState("Recordings");
     const navigate = useNavigate();
     const { projectId, projectName } = useParams();
@@ -16,6 +17,11 @@ export default function ViewProject() {
         title: "Weekly Team Sync",
         invited: []
     }]);
+    useEffect(() => {
+        if (location.state?.tab) {
+            setTabSelected(location.state.tab);
+        }
+    }, [location.state]);
 
     return (
         <div className="px-[16px]">
@@ -37,7 +43,6 @@ export default function ViewProject() {
                     }
                 </div>
             </div>
-            {/* conatins Recordings, Made for you, Edits, Exports */}
             <div className="px-[46px]">
                 <ProjectContent tabSelected={tabSelected} setTabSelected={setTabSelected} />
             </div>

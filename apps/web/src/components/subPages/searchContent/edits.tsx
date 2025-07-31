@@ -1,12 +1,15 @@
 import { Search, Users } from "lucide-react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
-type Episode = {
+type Edits = {
     id: number;
     title: string;
     date: string;
     members: string[];
+    projectId: string;
+    projectName: string;
 };
 
 function formatDate(isoDate: string) {
@@ -18,21 +21,22 @@ function formatDate(isoDate: string) {
     }).replace(",", ",");
 }
 
-export default function Edits({ searchedItem }: { searchedItem?: string }) {
-    const [allEdits, setAllEdits] = useState<Episode[]>([]);
-    const [displayEdits, setDisplayEdits] = useState<Episode[]>([]);
+export default function Edits({ searchedItem, setSearchCardVisible }: { searchedItem?: string, setSearchCardVisible?: (visible: boolean) => void }) {
+    const navigate = useNavigate();
+    const [allEdits, setAllEdits] = useState<Edits[]>([]);
+    const [displayEdits, setDisplayEdits] = useState<Edits[]>([]);
 
     // temporary data for testing
     useEffect(() => {
         const data = [
-            { id: 1, title: "Untitled Magic edit", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 2, title: "Untitled Magic edit 2", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 3, title: "Untitled Magic edit 3", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 4, title: "Untitled Magic edit 4", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 5, title: "Untitled Magic edit 5", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 6, title: "Untitled Magic edit 6", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 7, title: "Untitled Magic edit 7", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 8, title: "Untitled Magic edit 8", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 1, projectId: "id1", projectName: "untitled", title: "Untitled Magic edit", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 2, projectId: "id2", projectName: "untitled", title: "Untitled Magic edit 2", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 3, projectId: "id3", projectName: "untitled", title: "Untitled Magic edit 3", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 4, projectId: "id4", projectName: "untitled", title: "Untitled Magic edit 4", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 5, projectId: "id5", projectName: "untitled", title: "Untitled Magic edit 5", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 6, projectId: "id6", projectName: "untitled", title: "Untitled Magic edit 6", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 7, projectId: "id7", projectName: "untitled", title: "Untitled Magic edit 7", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 8, projectId: "id8", projectName: "untitled", title: "Untitled Magic edit 8", date: "2023-10-01", members: ["Member 1", "Member 2"] },
         ];
         setAllEdits(data);
         setDisplayEdits(data);
@@ -56,7 +60,13 @@ export default function Edits({ searchedItem }: { searchedItem?: string }) {
                 {
                     displayEdits.map((edit) => {
                         return (
-                            <div key={edit.id} className="flex gap-[16px] w-full h-[80px] p-[12px] hover:bg-[#383838] cursor-pointer rounded-[10px]">
+                            <div key={edit.id} className="flex gap-[16px] w-full h-[80px] p-[12px] hover:bg-[#383838] cursor-pointer rounded-[10px]"
+                                onClick={() => {
+                                    navigate(`/dashboard/project/view/${edit.projectId}/${edit.projectName}`, {
+                                        state: { tab: "Edits" },
+                                    });
+                                    setSearchCardVisible?.(false);
+                                }}>
                                 <div className="w-[100px] h-[56px] bg-gray-500 rounded-[10px]"></div>
                                 <div className="flex flex-col gap-[5px] flex-1 min-w-0">
                                     <div className="flex items-center gap-[10px] min-w-0">

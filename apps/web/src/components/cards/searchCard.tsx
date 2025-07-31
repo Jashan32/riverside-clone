@@ -26,17 +26,17 @@ export default function SearchCard({ searchCardVisible, setSearchCardVisible }: 
     const searchContent = (selected: string) => {
         switch (selected) {
             case "Recordings":
-                return <Recordings searchedItem={searchedItem}/>;
+                return <Recordings searchedItem={searchedItem} setSearchCardVisible={setSearchCardVisible} />;
             case "Edits":
-                return <Edits />;
+                return <Edits searchedItem={searchedItem} setSearchCardVisible={setSearchCardVisible} />;
             case "Magic Clips":
-                return <MagicClips />;
+                return <MagicClips searchedItem={searchedItem} setSearchCardVisible={setSearchCardVisible} />;
             case "Magic Episodes":
-                return <MagicEpisodes />;
+                return <MagicEpisodes searchedItem={searchedItem} setSearchCardVisible={setSearchCardVisible} />;
             case "Exports":
-                return <Exports />;
+                return <Exports searchedItem={searchedItem} setSearchCardVisible={setSearchCardVisible} />;
             case "Projects":
-                return <Projects searchedItem={searchedItem}/>;
+                return <Projects searchedItem={searchedItem} setSearchCardVisible={setSearchCardVisible} />;
             default:
                 return null;
         }

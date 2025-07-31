@@ -1,11 +1,14 @@
 import { Search, Users } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Episode = {
     id: number;
     title: string;
     date: string;
     members: string[];
+    projectId: string;
+    projectName: string
 };
 
 function formatDate(isoDate: string) {
@@ -17,21 +20,22 @@ function formatDate(isoDate: string) {
     }).replace(",", ",");
 }
 
-export default function MagicEpisodes({ searchedItem }: { searchedItem?: string }) {
+export default function MagicEpisodes({ searchedItem, setSearchCardVisible }: { searchedItem?: string, setSearchCardVisible?: (visible: boolean) => void }) {
+    const navigate = useNavigate();
     const [allMagicEpisodes, setAllMagicEpisodes] = useState<Episode[]>([]);
     const [displayMagicEpisodes, setDisplayMagicEpisodes] = useState<Episode[]>([]);
 
     // temporary data for testing
     useEffect(() => {
         const data = [
-            { id: 1, title: "Untitled Magic Episode", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 2, title: "Untitled Magic Episode 2", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 3, title: "Untitled Magic Episode 3", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 4, title: "Untitled Magic Episode 4", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 5, title: "Untitled Magic Episode 5", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 6, title: "Untitled Magic Episode 6", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 7, title: "Untitled Magic Episode 7", date: "2023-10-01", members: ["Member 1", "Member 2"] },
-            { id: 8, title: "Untitled Magic Episode 8", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 1, projectId: "id1", projectName: "untitled", title: "Untitled Magic Episode", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 2, projectId: "id2", projectName: "untitled", title: "Untitled Magic Episode 2", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 3, projectId: "id3", projectName: "untitled", title: "Untitled Magic Episode 3", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 4, projectId: "id4", projectName: "untitled", title: "Untitled Magic Episode 4", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 5, projectId: "id5", projectName: "untitled", title: "Untitled Magic Episode 5", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 6, projectId: "id6", projectName: "untitled", title: "Untitled Magic Episode 6", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 7, projectId: "id7", projectName: "untitled", title: "Untitled Magic Episode 7", date: "2023-10-01", members: ["Member 1", "Member 2"] },
+            { id: 8, projectId: "id8", projectName: "untitled", title: "Untitled Magic Episode 8", date: "2023-10-01", members: ["Member 1", "Member 2"] },
         ];
         setAllMagicEpisodes(data);
         setDisplayMagicEpisodes(data);
@@ -55,7 +59,13 @@ export default function MagicEpisodes({ searchedItem }: { searchedItem?: string 
                 {
                     displayMagicEpisodes.map((episode) => {
                         return (
-                            <div key={episode.id} className="flex gap-[16px] w-full h-[80px] p-[12px] hover:bg-[#383838] cursor-pointer rounded-[10px]">
+                            <div key={episode.id} className="flex gap-[16px] w-full h-[80px] p-[12px] hover:bg-[#383838] cursor-pointer rounded-[10px]"
+                                onClick={() => {
+                                    navigate(`/dashboard/project/view/${episode.projectId}/${episode.projectName}`, {
+                                        state: { tab: "Made for You" },
+                                    });
+                                    setSearchCardVisible?.(false);
+                                }}>
                                 <div className="w-[100px] h-[56px] bg-gray-500 rounded-[10px]"></div>
                                 <div className="flex flex-col gap-[5px] flex-1 min-w-0">
                                     <div className="flex items-center gap-[10px] min-w-0">
