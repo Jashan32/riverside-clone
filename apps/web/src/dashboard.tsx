@@ -2,10 +2,16 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./sidebar";
 import Navbar from "./navbar";
 import SearchCard from "./components/cards/searchCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DashboardLayout() {
   const [searchCardVisible, setSearchCardVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") === "false") {
+      
+    }
+  }, []);
 
   return (
     <div className="relative bg-[#0d0d0d] flex h-[100vh] overflow-hidden p-2 pl-0 pt-0 w-full">

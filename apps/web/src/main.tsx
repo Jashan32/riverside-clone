@@ -10,6 +10,7 @@ import CreateProject from './createProject.tsx'
 import Schedule from './schedule.tsx'
 import CreateSchedule from './createSchedule.tsx'
 import ViewProject from './viewProject.tsx'
+import Auth from './auth.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="schedule" element={<Schedule />} />
         <Route path="schedule/create/:sessionId" element={<CreateSchedule />} />
       </Route>
+      <Route path='auth' element={<Auth />}/>
     </Routes>
   </BrowserRouter>
 )
