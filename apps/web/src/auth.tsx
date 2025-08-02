@@ -5,8 +5,7 @@ import signUpSideImage from "./assets/signUpSideImage.png";
 import googleWhiteLogo from "./assets/googleWhiteLogo.svg";
 import spotifyWhiteLogo from "./assets/spotifyWhiteLogo.svg";
 import githubWhiteSvg from "./assets/githubWhiteSvg.svg";
-import { useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://localhost:3003";
 
@@ -14,10 +13,60 @@ export default function Auth() {
     const [isLoginSelected, setIsLoginSelected] = useState(false);
     const navigate = useNavigate();
 
-    const responseGoogle = async (response: any) => {
+    // Custom OAuth hook function
+    const createOAuthLogin = (provider: 'google' | 'github') => {
+        const configs = {
+            google: {
+                authorizeUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+                clientId: import.meta.env.VITE_CLIENT_ID,
+                scope: 'openid email profile',
+                responseType: 'code'
+            },
+            github: {
+                authorizeUrl: 'https://github.com/login/oauth/authorize',
+                clientId: import.meta.env.VITE_GITHUB_CLIENT_ID,
+                scope: 'user:email',
+                responseType: 'code'
+            }
+        };
+
+        return () => {
+            const config = configs[provider];
+            const redirectUri = 'http://localhost:5173/auth';
+            
+            const params = new URLSearchParams({
+                client_id: config.clientId,
+                redirect_uri: redirectUri,
+                scope: config.scope,
+                response_type: config.responseType,
+                state: provider, // Add state to identify the provider
+                ...(provider === 'google' && { access_type: 'offline' })
+            });
+
+            const authUrl = `${config.authorizeUrl}?${params.toString()}`;
+            window.location.href = authUrl;
+        };
+    };
+
+    const googleLogin = createOAuthLogin('google');
+    const githubLogin = createOAuthLogin('github');
+
+    // Handle OAuth callback
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state'); // Get the provider from state parameter
+        
+        if (code) {
+            // Use the state parameter to determine the provider
+            const provider = (state === 'github' || state === 'google') ? state : 'google';
+            handleOAuthCallback(code, provider);
+        }
+    }, []);
+
+    const handleOAuthCallback = async (code: string, provider: 'google' | 'github') => {
         try {
-            const code = response.code;
-            const res = await fetch(`${backendUrl}/auth/login/google`, {
+            const res = await fetch(`${backendUrl}/auth/login/${provider}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -25,25 +74,19 @@ export default function Auth() {
                 body: JSON.stringify({ code })
             });
             const data = await res.json();
-            localStorage.setItem('authToken', data.data.token);
-            localStorage.setItem('email', data.data.user.email);
-            localStorage.setItem('username', data.data.user.username);
-            localStorage.setItem('name', data.data.user.name || "");
-            localStorage.setItem('profilePic', data.data.user.prifilePic || "");
-            localStorage.setItem('isLoggedId', 'true');
-            navigate('/dashboard/home');
-
-        }
-        catch (error) {
-            console.error("Error during Google login:", error);
+            if (data.data && data.data.token) {
+                localStorage.setItem('authToken', data.data.token);
+                localStorage.setItem('email', data.data.user.email);
+                localStorage.setItem('username', data.data.user.username);
+                localStorage.setItem('name', data.data.user.name || "");
+                localStorage.setItem('profilePic', data.data.user.profilePic || "");
+                localStorage.setItem('isLoggedId', 'true');
+                navigate('/dashboard/home');
+            }
+        } catch (error) {
+            console.error(`Error during ${provider} login:`, error);
         }
     };
-    const googleLoggin = useGoogleLogin({
-        onSuccess: responseGoogle,
-        onError: responseGoogle,
-        flow: "auth-code",
-        redirect_uri: "http://localhost:5173"
-    });
 
     return (
         <div className="w-[100vw] h-[100vh] flex relative">
@@ -61,11 +104,12 @@ export default function Auth() {
                             <div className="text-[14px] mb-[20px] font-medium text-[#888888]">Sign up to join Riverside it's free</div>
                             <div className="flex flex-col gap-[12px]">
                                 <div className="relative cursor-pointer hover:bg-[#383838] w-[308px] h-[44px] flex items-center rounded-[10px] bg-[#222222] py-[10px] px-[16px]"
-                                    onClick={() => { googleLoggin() }}>
+                                    onClick={() => { googleLogin() }}>
                                     <img src={googleSvg} className="h-[20px]" />
                                     <div className="absolute inset-0 flex w-full items-center font-medium justify-center text-[14px] text-white">Continue with Google</div>
                                 </div>
-                                <div className="relative cursor-pointer hover:bg-[#383838] w-[308px] h-[44px] flex items-center rounded-[10px] bg-[#222222] py-[10px] px-[16px]">
+                                <div className="relative cursor-pointer hover:bg-[#383838] w-[308px] h-[44px] flex items-center rounded-[10px] bg-[#222222] py-[10px] px-[16px]"
+                                    onClick={() => { githubLogin() }}>
                                     <img src={githubWhiteSvg} className="h-[20px]" />
                                     <div className="absolute inset-0 flex w-full items-center font-medium justify-center text-[14px] text-white">Continue with Github</div>
                                 </div>
@@ -101,10 +145,12 @@ export default function Auth() {
                                 >Sign up</div>
                             </div>
                             <div className="flex gap-[8px] justify-center">
-                                <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]">
+                                <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]"
+                                    onClick={() => { googleLogin() }}>
                                     <img src={googleWhiteLogo} className="h-[20px]" />
                                 </div>
-                                <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]">
+                                <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]"
+                                    onClick={() => { githubLogin() }}>
                                     <img src={githubWhiteSvg} className="h-[20px]" />
                                 </div>
                                 <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]">

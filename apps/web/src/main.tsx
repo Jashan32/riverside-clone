@@ -11,11 +11,8 @@ import Schedule from './schedule.tsx'
 import CreateSchedule from './createSchedule.tsx'
 import ViewProject from './viewProject.tsx'
 import Auth from './auth.tsx'
-import AuthProviders from './authProvider.tsx'
-
 
 createRoot(document.getElementById('root')!).render(
-  <AuthProviders>
     <BrowserRouter>
       <Routes>
         <Route path="/app" element={<App />} />
@@ -32,5 +29,4 @@ createRoot(document.getElementById('root')!).render(
         <Route path='auth' element={<Auth />} />
       </Routes>
     </BrowserRouter>
-  </AuthProviders>
 )

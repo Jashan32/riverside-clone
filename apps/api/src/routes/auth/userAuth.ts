@@ -100,7 +100,7 @@ loginRouter.post("/google", async (req, res) => {
         const oauth2Client = new google.auth.OAuth2(
             process.env.CLIENT_ID,
             process.env.CLIENT_SECRET,
-            "http://localhost:5173"
+            "http://localhost:5173/auth" // Match frontend redirect URI
         );
 
         // Exchange code for tokens
@@ -121,7 +121,7 @@ loginRouter.post("/google", async (req, res) => {
                     email,
                     username: name || email.split('@')[0], // Use name or part of email as username
                     password: "", // No password for OAuth users
-                    prifilePic: picture || ""
+                    profilePic: picture || ""
                 }
             });
         }
@@ -136,7 +136,98 @@ loginRouter.post("/google", async (req, res) => {
                     email: user.email,
                     username: user.username,
                     name: user.name,
-                    prifilePic: user.prifilePic,
+                    profilePic: user.profilePic,
+                }
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// GitHub OAuth login
+loginRouter.post("/github", async (req, res) => {
+    const { code } = req.body;
+    
+    if (!code) {
+        return res.status(400).json({ error: "Code is required" });
+    }
+
+    try {
+        // Exchange code for access token
+        const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                client_id: process.env.GITHUB_CLIENT_ID || '',
+                client_secret: process.env.GITHUB_CLIENT_SECRET || '',
+                code: code,
+            }),
+        });
+
+        const tokenData = await tokenResponse.json();
+
+        if (tokenData.error) {
+            return res.status(400).json({ error: tokenData.error_description });
+        }
+
+        // Get user info from GitHub
+        const userResponse = await fetch('https://api.github.com/user', {
+            headers: {
+                'Authorization': `Bearer ${tokenData.access_token}`,
+                'User-Agent': 'riverside-clone',
+            },
+        });
+
+        const userData = await userResponse.json();
+        // Get user email (might be private)
+        const emailResponse = await fetch('https://api.github.com/user/emails', {
+            headers: {
+                'Authorization': `Bearer ${tokenData.access_token}`,
+                'User-Agent': 'riverside-clone',
+            },
+        });
+
+        const emailData = await emailResponse.json();
+        const primaryEmail = emailData.find((email: any) => email.primary)?.email || userData.email;
+
+        if (!primaryEmail) {
+            return res.status(400).json({ error: "Could not retrieve email from GitHub" });
+        }
+
+        // Create or find user in your database
+        let user = await prisma.user.findUnique({
+            where: { email: primaryEmail }
+        });
+
+        if (!user) {
+            user = await prisma.user.create({
+                data: {
+                    email: primaryEmail,
+                    username: userData.login || userData.name || primaryEmail.split('@')[0],
+                    password: "", // No password for OAuth users
+                    profilePic: userData.avatar_url || ""
+                }
+            });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ id: user.id }, JWT_SECRET as string);
+
+        res.json({
+            message: "GitHub login successful",
+            data: {
+                token,
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                    name: user.name || userData.name,
+                    profilePic: user.profilePic,
                 }
             }
         });
