@@ -36,9 +36,9 @@ getSessionRouter.get("/invites", async (req, res) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET) as any;
         const userId = decoded.id;
-        const sessions = await prisma.SessionInvite.findMany({
+        const sessions = await prisma.sessionInvite.findMany({
             where: {
-                userId: userId
+                invitedUserId: userId
             },
             include: {
                 session: true

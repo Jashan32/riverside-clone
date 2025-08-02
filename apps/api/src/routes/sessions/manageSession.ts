@@ -105,7 +105,7 @@ sessionRouter.post("/accept", async (req, res) => {
         const userId = decoded.id;
 
         // Check if the invite exists
-        const invite = await prisma.SessionInvite.findFirst({
+        const invite = await prisma.sessionInvite.findFirst({
             where: {
                 invitedUserId: userId,
                 sessionId: sessionId
@@ -117,7 +117,7 @@ sessionRouter.post("/accept", async (req, res) => {
         }
 
         // update the invite status to accepted
-        await prisma.SessionInvite.update({
+        await prisma.sessionInvite.update({
             where: {
                 id: invite.id
             },
