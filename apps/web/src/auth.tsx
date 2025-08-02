@@ -1,11 +1,10 @@
 import googleSvg from "./assets/google.svg";
-import appleLogo from "./assets/appleLogo.svg";
 import spotifyLogo from "./assets/spotifyLogo.svg";
 import { Mail } from "lucide-react";
 import signUpSideImage from "./assets/signUpSideImage.png";
 import googleWhiteLogo from "./assets/googleWhiteLogo.svg";
-import appleWhiteLogo from "./assets/appleWhiteLogo.svg";
 import spotifyWhiteLogo from "./assets/spotifyWhiteLogo.svg";
+import githubWhiteSvg from "./assets/githubWhiteSvg.svg";
 import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
@@ -67,8 +66,8 @@ export default function Auth() {
                                     <div className="absolute inset-0 flex w-full items-center font-medium justify-center text-[14px] text-white">Continue with Google</div>
                                 </div>
                                 <div className="relative cursor-pointer hover:bg-[#383838] w-[308px] h-[44px] flex items-center rounded-[10px] bg-[#222222] py-[10px] px-[16px]">
-                                    <img src={appleLogo} className="h-[20px]" />
-                                    <div className="absolute inset-0 flex w-full items-center font-medium justify-center text-[14px] text-white">Continue with Apple</div>
+                                    <img src={githubWhiteSvg} className="h-[20px]" />
+                                    <div className="absolute inset-0 flex w-full items-center font-medium justify-center text-[14px] text-white">Continue with Github</div>
                                 </div>
                                 <div className="relative cursor-pointer hover:bg-[#383838] w-[308px] h-[44px] flex items-center rounded-[10px] bg-[#222222] py-[10px] px-[16px]">
                                     <img src={spotifyLogo} className="h-[20px]" />
@@ -106,7 +105,7 @@ export default function Auth() {
                                     <img src={googleWhiteLogo} className="h-[20px]" />
                                 </div>
                                 <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]">
-                                    <img src={appleWhiteLogo} className="h-[20px]" />
+                                    <img src={githubWhiteSvg} className="h-[20px]" />
                                 </div>
                                 <div className="bg-[#383838] h-[44px] w-[44px] p-[12px] rounded-[10px] cursor-pointer hover:bg-[#444444]">
                                     <img src={spotifyWhiteLogo} className="h-[20px]" />
