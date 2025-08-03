@@ -64,9 +64,7 @@ export default function Settings() {
                 </div>
                 <div className="w-full max-w-[800px]">
                     <div className="w-full text-[28px] mb-[28px] font-bold">Settings</div>
-                    <div className="w-[800px] rounded-[12px] bg-[#1d1d1d] p-[24px]">
-                        {sectionComponents[selected]}
-                    </div>
+                    {sectionComponents[selected]}
                 </div>
             </div>
         </div>
