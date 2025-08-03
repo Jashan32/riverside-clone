@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="project/view/:projectId/:projectName" element={<ViewProject />} />
           <Route path="schedule" element={<Schedule />} />
           <Route path="schedule/create/:sessionId" element={<CreateSchedule />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings/:section" element={<Settings />} />
         </Route>
         <Route path='auth' element={<Auth />} />
       </Routes>

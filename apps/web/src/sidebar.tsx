@@ -58,7 +58,7 @@ export default function Sidebar() {
                     </div>
                 </div>
                 <div className="py-[8px] px-[16px] hover:bg-[#1d1d1d] rounded-[8px]"
-                    onClick={() => navigate("/dashboard/settings")}>
+                    onClick={() => navigate("/dashboard/settings/profile")}>
                     <div className="flex gap-[8px] cursor-pointer items-center">
                         <div>
                             <Settings className="size-[24px] text-white" />
