@@ -1,79 +1,25 @@
-import { useState } from "react";
-import ToggleSwitch from "../buttons/toggleSwitch";
-import { MessagesSquare, Trash } from "lucide-react";
+import { useState, type JSX } from "react";
+import General from "./studioSection/general";
+import Recording from "./studioSection/recording";
+import LiveStream from "./studioSection/liveStream";
+
+type SectionKey = "general" | "recording" | "liveStream";
+const sectionComponents: Record<SectionKey, JSX.Element> = {
+    general: <General />,
+    recording: <Recording />,
+    liveStream: <LiveStream />,
+};
 
 export default function StudioSettings() {
-    const [tabSelected, setTabSelected] = useState("General");
-    const [isWaitingRoomEnabled, setIsWaitingEnabled] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState("en");
+    const [tabSelected, setTabSelected] = useState<SectionKey>("general");
     return (
         <div className="flex flex-col">
             <div className="h-[49px] flex items-center w-full border-b-[2px] border-[#222222]">
-                <div className={`w-[140px] flex justify-center ${tabSelected == "General" ? "border-b-[2px] border-[#b196ff] text-[#b196ff]" : " border-[#222222] text-[#acacac]"} py-[12px] px-[10px] text-[14px] cursor-pointer`} onClick={() => { setTabSelected("General") }} >General</div>
-                <div className={`w-[140px] flex justify-center ${tabSelected == "Recording" ? "border-b-[2px] border-[#b196ff] text-[#b196ff]" : " border-[#222222] text-[#acacac]"} py-[12px] px-[10px] text-[14px] cursor-pointer`} onClick={() => { setTabSelected("Recording") }} >Recording</div>
-                <div className={`w-[140px] flex justify-center ${tabSelected == "Live stream" ? "border-b-[2px] border-[#b196ff] text-[#b196ff]" : " border-[#222222] text-[#acacac]"} py-[12px] px-[10px] text-[14px] cursor-pointer`} onClick={() => { setTabSelected("Live stream") }} >Live stream</div>
+                <div className={`w-[140px] flex justify-center ${tabSelected == "general" ? "border-b-[2px] border-[#b196ff] text-[#b196ff]" : " border-[#222222] text-[#acacac]"} py-[12px] px-[10px] text-[14px] cursor-pointer`} onClick={() => { setTabSelected("general") }} >General</div>
+                <div className={`w-[140px] flex justify-center ${tabSelected == "recording" ? "border-b-[2px] border-[#b196ff] text-[#b196ff]" : " border-[#222222] text-[#acacac]"} py-[12px] px-[10px] text-[14px] cursor-pointer`} onClick={() => { setTabSelected("recording") }} >Recording</div>
+                <div className={`w-[140px] flex justify-center ${tabSelected == "liveStream" ? "border-b-[2px] border-[#b196ff] text-[#b196ff]" : " border-[#222222] text-[#acacac]"} py-[12px] px-[10px] text-[14px] cursor-pointer`} onClick={() => { setTabSelected("liveStream") }} >Live stream</div>
             </div>
-            <div className="flex gap-[5px] items-center">
-                <div className="text-[#888888] text-[12px] my-[12px]">Manage general settings related to the recording studio.</div>
-                <div className="text-[12px] text-[#b196ff] cursor-pointer">Learn more</div>
-            </div>
-            <div className="flex flex-col gap-[24px]">
-                <div className="p-[25px] w-full rounded-[12px] bg-[#1d1d1d] flex flex-col gap-[24px]">
-                    <div className="text-[20px] font-bold">Studio info</div>
-                    <div className="flex items-center justify-between">
-                        <div className="flex flex-col">
-                            <div className="text-[14px] ">Name</div>
-                            <div className="text-[12px] text-[#888888] whitespace-nowrap">The name for your studio</div>
-                        </div>
-                        <input type="text" className="text-[14px] max-w-[304px] w-full bg-[#2b2b2b] rounded-[10px] h-[39px] py-[8px] px-[12px] hover:bg-[#383838] focus:outline-[1px] focus:outline-[#bb86fc]" placeholder={`${localStorage.getItem("name") || "Enter your name"}`} defaultValue={localStorage.getItem("studioName") || localStorage.getItem("name") + "'s Studio" || ""}
-                            onChange={(e) => { localStorage.setItem("studioName", `${e.target.value}`) }} />
-
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <div className="flex flex-col">
-                            <div className="text-[14px] ">Enable lobby waiting room</div>
-                            <div className="text-[12px] text-[#888888] whitespace-nowrap">People will have to be let into the studio by a host or producer.</div>
-                        </div>
-                        <ToggleSwitch enabled={isWaitingRoomEnabled} onChange={setIsWaitingEnabled} />
-
-                    </div>
-                </div>
-                <div className="p-[25px] w-full rounded-[12px] bg-[#1d1d1d] flex flex-col gap-[24px]">
-                    <div className="flex items-center gap-[8px]">
-                        <div><MessagesSquare className="size-[24px]" /></div>
-                        <div className="text-[20px] font-bold">Language</div>
-                    </div>
-                    <div className="text-[14px] ">Choose a language for your transcript and captions.</div>
-                    <div className="flex items-center justify-between">
-                        <div className="flex flex-col">
-                            <div className="text-[14px] ">Transcript & captions language</div>
-                        </div>
-                        <div className="pr-[12px] bg-[#2b2b2b] rounded-[10px] max-w-[304px] w-full">
-                            <select
-                                value={selectedLanguage}
-                                onChange={(e) => setSelectedLanguage(e.target.value)}
-                                className="text-[14px] max-w-[304px] px-[12px] w-full bg-[#2b2b2b] rounded-[10px] h-[39px] hover:bg-[#383838] outline-none ">
-                                <option value="en">English</option>
-                                <option value="es">Spanish</option>
-                                <option value="fr">French</option>
-                                <option value="de">German</option>
-                                <option value="ja">Japanese</option>
-                                <option value="zh">Chinese</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div className="p-[25px] w-full rounded-[12px] bg-[#1d1d1d] flex flex-col gap-[24px]">
-                    <div className="flex items-center gap-[8px]">
-                        <div><Trash className="size-[24px] fill-" /></div>
-                        <div className="text-[20px] font-bold">Remove Studio</div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <div className="text-[14px] ">This will remove your studio and all recordings. This action cannot be undone.</div>
-                        <div className="px-[16px] py-[10px] bg-[#e04040] rounded-[10px] w-fit h-fit cursor-pointer hover:bg-[#b93d37]">Remove studio</div>
-                    </div>
-                </div>
-            </div>
+            {sectionComponents[tabSelected]}
         </div>
     )
 }
