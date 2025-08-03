@@ -9,7 +9,6 @@ export default function DashboardLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "false") {
-      
     }
   }, []);
 

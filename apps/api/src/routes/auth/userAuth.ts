@@ -210,14 +210,13 @@ loginRouter.post("/github", async (req, res) => {
                     email: primaryEmail,
                     username: userData.login || userData.name || primaryEmail.split('@')[0],
                     password: "", // No password for OAuth users
-                    profilePic: userData.avatar_url || ""
+                    profilePic: userData.avatar_url
                 }
             });
         }
 
         // Generate JWT token
         const token = jwt.sign({ id: user.id }, JWT_SECRET as string);
-
         res.json({
             message: "GitHub login successful",
             data: {
