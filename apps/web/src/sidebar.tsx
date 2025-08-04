@@ -68,7 +68,7 @@ export default function Sidebar() {
                 </div>
                 <div className=" h-[64px] py-[16px] ml-[11px]">
                     <div className="w-[42px] h-[42px] hover:bg-[#383838] flex items-center justify-center rounded-full cursor-pointer">
-                        <img src={`${profilePicUrl}`} className="h-[32px] w-[32px] rounded-full cursor-pointer" />
+                        <img src={`${profilePicUrl}`} referrerPolicy="no-referrer" className="h-[32px] w-[32px] rounded-full cursor-pointer" />
                     </div>
 
                 </div>
