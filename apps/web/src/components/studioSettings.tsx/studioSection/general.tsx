@@ -7,9 +7,9 @@ export default function General() {
     const [isWaitingRoomEnabled, setIsWaitingEnabled] = useState(false);
     return (
         <>
-            <div className="flex gap-[5px] items-center my-[12px]">
-                <div className="text-[#888888] text-[12px]">Manage general settings related to the recording studio.</div>
-                <div className="text-[12px] text-[#b196ff] cursor-pointer">Learn more</div>
+            <div className="text-[#888888] text-[12px] items-center my-[12px]">
+                Manage general settings related to the recording studio.{' '}
+                <a className="text-[12px] text-[#b196ff] cursor-pointer">Learn more</a>
             </div>
             <div className="flex flex-col gap-[24px]">
                 <div className="p-[25px] w-full rounded-[12px] bg-[#1d1d1d] flex flex-col gap-[24px]">

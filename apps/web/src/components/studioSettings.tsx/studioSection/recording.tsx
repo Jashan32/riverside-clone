@@ -12,9 +12,9 @@ export default function Recording() {
     const [isPauseUploadsEnabled, setIsPauseUploadsEnabled] = useState(false);
     return (
         <>
-            <div className="flex gap-[5px] items-center my-[12px]">
-                <div className="text-[#888888] text-[12px]">Manage settings related to the recording session.</div>
-                <div className="text-[12px] text-[#b196ff] cursor-pointer">Learn more</div>
+            <div className="text-[#888888] text-[12px] items-center my-[12px]">
+                Manage settings related to the recording session.{' '}
+                <a className="text-[12px] text-[#b196ff] cursor-pointer">Learn more</a>
             </div>
             <div className="flex flex-col gap-[24px]">
                 <div className="flex flex-col gap-[24px]">
@@ -91,14 +91,14 @@ export default function Recording() {
                         <div className="flex items-center gap-[24px] justify-between">
                             <div className="flex flex-col">
                                 <div className="text-[14px]">Frame rate</div>
-                                <div className="flex gap-[5px]">
-                                    <div className="text-[12px] text-[#888888]">Set the video frame rate.</div>
+                                <div className="text-[12px] text-[#888888]">
+                                    Set the video frame rate.{' '}
                                     <a className="text-[12px] text-[#9671ff]">Learn more</a>
                                 </div>
                             </div>
                             <div className="flex flex-col">
                                 <div className=" p-[4px] flex items-center justify-center rounded-[12px] h-[40px] max-h-[40px] bg-[#383838]">
-                                    <div className={`whitespace-nowrap h-fit max-h-[32px] py-[6px] px-[14px] text-[14px] font-medium rounded-[8px] cursor-pointer ${isHighAudioRateSelected ? "" : "bg-[#555555]"}`}>24 FPS</div>
+                                    <div className="whitespace-nowrap h-fit max-h-[32px] py-[6px] px-[14px] text-[14px] font-medium rounded-[8px] cursor-pointer bg-[#555555]">24 FPS</div>
                                 </div>
                                 <div className="text-[12px] text-[#888888]">Recommended</div>
                             </div>
