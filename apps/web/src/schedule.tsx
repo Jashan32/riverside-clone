@@ -14,6 +14,7 @@ export default function Schedule() {
         timeFrom: "10:00 AM",
         timeTo: "11:00 AM",
         timeOffset: "+05:30",
+        timeZoneName:"Indian Standard Time - Calcutta",
         title: "Weekly Team Sync",
         invited: []
     }]);
@@ -22,6 +23,7 @@ export default function Schedule() {
         timeFrom: "10:00 AM",
         timeTo: "11:00 AM",
         timeOffset: "+05:30",
+        timeZoneName:"Indian Standard Time - Calcutta",
         title: "Monthly Review Meeting",
         invited: []
     }]);

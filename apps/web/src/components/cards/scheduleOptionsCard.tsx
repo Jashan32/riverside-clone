@@ -1,7 +1,7 @@
 import { Trash, Pencil, GalleryHorizontalEnd, CalendarPlus } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-export default function ScheduleOptionsCard({ setDropDownState }: { setDropDownState: (state: boolean) => void }) {
+export default function ScheduleOptionsCard({ setDropDownState, setIsEditOpen }: { setDropDownState: (state: boolean) => void, setIsEditOpen: (state: boolean) => void }) {
     const dropdownref = useRef<HTMLDivElement>(null);
     useEffect(() => {
         if (!setDropDownState) return;
@@ -15,7 +15,8 @@ export default function ScheduleOptionsCard({ setDropDownState }: { setDropDownS
     }, [setDropDownState]);
     return (
         <div ref={dropdownref} className="absolute right-[10px] select-none flex flex-col gap-[4px] w-[270px] h-[188px] p-[8px] bg-[#2b2b2b] rounded-[12px]">
-            <div className="flex gap-[12px] w-full h-[44px] py-[10px] px-[16px] hover:bg-[#383838] cursor-pointer rounded-[8px]">
+            <div className="flex gap-[12px] w-full h-[44px] py-[10px] px-[16px] hover:bg-[#383838] cursor-pointer rounded-[8px]"
+            onClick={() => {setIsEditOpen(true)}}>
                 <Pencil className="size-[20px]" />
                 <div className="text-[14px]">Edit session</div>
             </div>

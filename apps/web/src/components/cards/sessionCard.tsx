@@ -2,6 +2,7 @@ import { Clock, Ellipsis, Users } from "lucide-react";
 import GenericButton from "../buttons/genericButton";
 import { useRef, useState } from "react";
 import ScheduleOptionsCard from "./scheduleOptionsCard";
+import EditCard from "./editCard";
 
 export default function SessionCard({ session }: { session: any }) {
     const dayName = new Date(session.date).toLocaleDateString('en-US', { weekday: 'long' });
@@ -9,6 +10,7 @@ export default function SessionCard({ session }: { session: any }) {
     const month = new Date(session.date).toLocaleString('en-US', { month: 'short' });
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [isEditOpen, setIsEditOpen] = useState(false);
     return (
         <div className="h-[136px] p-[24px] bg-[#1d1d1d] rounded-[16px] mb-[16px] flex items-center justify-between">
             <div className="flex gap-[8px]">
@@ -39,7 +41,14 @@ export default function SessionCard({ session }: { session: any }) {
                         onClick={() => setIsOptionsOpen(!isOptionsOpen)}><Ellipsis className="size-[20px]" />
                     </div>
                     <div ref={dropdownRef} className={`absolute right-0 top-full z-1 mt-2 ${isOptionsOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
-                        <ScheduleOptionsCard setDropDownState={setIsOptionsOpen} />
+                        <ScheduleOptionsCard setDropDownState={setIsOptionsOpen} setIsEditOpen={setIsEditOpen} />
+                    </div>
+                    <div className={`fixed top-0 left-0 w-screen h-screen z-50 transition-opacity duration-300 ${isEditOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                        <div className="flex flex-col items-end justify-start h-screen bg-black/70 p-[10px]">
+                            <div className={`h-screen transform transition-transform duration-500 ease-in-out ${isEditOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                                <EditCard session={session} setIsEditOpen={setIsEditOpen}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -78,7 +78,7 @@ export default function Auth() {
                 localStorage.setItem('authToken', data.data.token);
                 localStorage.setItem('email', data.data.user.email);
                 localStorage.setItem('username', data.data.user.username);
-                localStorage.setItem('name', data.data.user.name || "");
+                localStorage.setItem('name', data.data.user.name || data.data.user.username ||"");
                 localStorage.setItem('profilePic', data.data.user.profilePic || "");
                 localStorage.setItem('isLoggedId', 'true');
                 navigate('/dashboard/home');
