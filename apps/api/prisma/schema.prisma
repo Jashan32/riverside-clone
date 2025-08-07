@@ -60,7 +60,7 @@ model Recordings {
 model Project {
   id             Int       @id @default(autoincrement())
   title          String    @default("Untitled")
-  createdAt      DateTime
+  createdAt      DateTime  @default(now())
   linkedSessions Session[] @relation("ProjectSessions")
   creatorId      Int
   creator        User      @relation("UserProjects", fields: [creatorId], references: [id])

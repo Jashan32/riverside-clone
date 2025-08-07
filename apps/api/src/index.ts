@@ -5,6 +5,7 @@ import cors from 'cors';
 import {loginRouter, registerRouter} from './routes/auth/userAuth';
 import { sessionRouter } from './routes/sessions/manageSession';
 import { getSessionRouter } from './routes/sessions/sessionFetch';
+import projectsRouter from './routes/projects/projects';
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use("/auth/login", loginRouter)
 app.use("/auth/register", registerRouter)
 app.use("/sessions", sessionRouter)
 app.use("/getsession", getSessionRouter);
+app.use("/project", projectsRouter);
 
 // HTTPS server wraps the express app
 const httpsServer = https.createServer(
