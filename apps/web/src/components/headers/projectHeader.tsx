@@ -4,7 +4,6 @@ import AddButton from '../buttons/addButton';
 import { useEffect, useRef, useState } from 'react';
 import SortDropdown from '../dropdownMenu/sortDropdown';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function ProjectHeader({ setListView, listView, setSortState, sortState }: { setListView: (state: boolean) => void, listView: boolean, setSortState: (state: string) => void, sortState: string }) {
     const [searchInputStatus, setSearchInputStatus] = useState(false);
@@ -69,7 +68,7 @@ export default function ProjectHeader({ setListView, listView, setSortState, sor
                     {listView ? <LayoutGrid className='size-[20px]' /> : <List className='size-[20px]' />}
                     <GenericDropdown title={listView ? "Grid view" : "List view"} />
                 </div>
-                <AddButton text={"New"} type='small' onClickFunction={() => {navigate(`/dashboard/project/create/${uuidv4()}`)}} />
+                <AddButton text={"New"} type='small' onClickFunction={() => {navigate(`/dashboard/project/create`)}} />
             </div>
         </div>
     )

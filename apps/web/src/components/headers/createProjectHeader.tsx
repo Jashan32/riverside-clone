@@ -2,12 +2,33 @@ import { ChevronRight, Link } from "lucide-react";
 import { useRef, useState } from "react";
 import AddButton from "../buttons/addButton";
 import ShareLinkDropDown from "../dropdownMenu/shareLink";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateProjectHeader() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [focused, setFocused] = useState(false);
     const [inputValue, setInputValue] = useState("Untitled");
     const [shareLinkDropDownState, setShareLinkDropDownState] = useState(false);
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const navigate = useNavigate();
+
+    const createProject = async () => {
+        const title = inputValue.trim() || "Untitled";
+        const res = await fetch(`${backendUrl}/project/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title, token: localStorage.getItem("authToken") }),
+        });
+        const data = await res.json();
+        if (data.error) {
+            console.error("Error creating project:", data.error);
+            return;
+        }
+        navigate(`/dashboard/project/view/${data.data.projectId}/${data.data.title}`);
+        
+    }
 
     return (
         <div className="h-[60px] pl-[28px] flex items-center justify-between max-w-[100%]">
@@ -37,7 +58,7 @@ export default function CreateProjectHeader() {
                     </div>
                     <ShareLinkDropDown setShareLinkDropDownState={setShareLinkDropDownState} shareLinkDropDownState={shareLinkDropDownState} />
                 </div>
-                <AddButton type="small" text={"Create"} onClickFunction={() => { }} />
+                <AddButton type="small" text={"Create"} onClickFunction={createProject} />
             </div>
         </div>
     )
