@@ -54,7 +54,7 @@ model SessionInvite {
 model Recordings {
   id        Int      @id @default(autoincrement())
   sessionId Int
-  url       String
+  tracks    Json
   createdAt DateTime @default(now())
   projectId Int?
   project   Project? @relation("ProjectRecordings", fields: [projectId], references: [id])
