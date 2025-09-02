@@ -2,6 +2,7 @@ import { FolderOpen, Ellipsis } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ProjectsDropdown from '../dropdownMenu/projects';
 import { useNavigate } from 'react-router-dom';
+import { timeAgo } from '../../functions/timeAgo';
 
 export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCardState, projectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string }) {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCar
             <div className="h-[42px] mt-[12px] w-full flex justify-between">
                 <div>
                     <div className="text-[14px] font-bold">{projectName}</div>
-                    <div className="text-[12px] text-[#888888] font-medium">{timeCreated} ago</div>
+                    <div className="text-[12px] text-[#888888] font-medium">{timeAgo(timeCreated)} ago</div>
                 </div>
                 <div className="relative flex items-center">
                     <div

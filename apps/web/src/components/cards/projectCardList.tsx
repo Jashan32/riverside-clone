@@ -2,6 +2,7 @@ import { FolderOpen, Ellipsis } from "lucide-react";
 import ProjectsDropdown from "../dropdownMenu/projects";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { timeAgo } from "../../functions/timeAgo";
 
 export default function ProjectCardList({ projectName, timeCreated, setRemoveCardState, projectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string }) {
     const navigate = useNavigate();
@@ -24,8 +25,9 @@ export default function ProjectCardList({ projectName, timeCreated, setRemoveCar
                 <div className="h-[52px] w-[52px] bg-[#2b2b2b] rounded-[8px] flex items-center justify-center">
                     <FolderOpen className="size-[20px] text-[#555555]" />
                 </div>
-                <div className="flex flex-1 items-center text-[14px] select-text">
-                    {projectName}
+                <div className="flex flex-1 flex-col justify-center text-[14px] select-text">
+                    <div className="text-[14px] font-bold">{projectName}</div>
+                    <div className="text-[12px] text-[#888888] font-medium">{timeAgo(timeCreated)} ago</div>
                 </div>
             </div>
             <div className="relative">

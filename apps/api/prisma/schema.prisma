@@ -20,6 +20,9 @@ model User {
   invites         SessionInvite[]
   projects        Project[]       @relation("UserProjects")
   recordings      Recordings[]    @relation("UserRecordings")
+  madeForYou      MadeForYou[]    @relation("UserMadeForYou")
+  edits           Edits[]         @relation("UserEdits")
+  exports         Exports[]       @relation("UserExports")
 }
 
 model Session {
@@ -32,6 +35,9 @@ model Session {
   invites        SessionInvite[]
   linkedProjects Project[]       @relation("ProjectSessions")
   recordings     Recordings[]    @relation("SessionRecordings")
+  madeForYou     MadeForYou[]    @relation("SessionMadeForYou")
+  edits          Edits[]         @relation("SessionEdits")
+  exports        Exports[]       @relation("SessionExports")
 }
 
 model SessionInvite {
@@ -46,23 +52,62 @@ model SessionInvite {
 }
 
 model Recordings {
-  id          Int      @id @default(autoincrement())
-  sessionId   Int
-  url         String
-  createdAt   DateTime @default(now())
-  projectId  Int?
-  project     Project? @relation("ProjectRecordings", fields: [projectId], references: [id])
-  session     Session  @relation("SessionRecordings", fields: [sessionId], references: [id])
-  creatorId   Int
-  creator     User     @relation("UserRecordings", fields: [creatorId], references: [id])
+  id        Int      @id @default(autoincrement())
+  sessionId Int
+  url       String
+  createdAt DateTime @default(now())
+  projectId Int?
+  project   Project? @relation("ProjectRecordings", fields: [projectId], references: [id])
+  session   Session  @relation("SessionRecordings", fields: [sessionId], references: [id])
+  creatorId Int
+  creator   User     @relation("UserRecordings", fields: [creatorId], references: [id])
+}
+
+model MadeForYou {
+  id        Int      @id @default(autoincrement())
+  sessionId Int
+  url       String
+  createdAt DateTime @default(now())
+  projectId Int?
+  project   Project? @relation("ProjectMadeForYou", fields: [projectId], references: [id])
+  session   Session  @relation("SessionMadeForYou", fields: [sessionId], references: [id])
+  creatorId Int
+  creator   User     @relation("UserMadeForYou", fields: [creatorId], references: [id])
+}
+
+model Edits {
+  id        Int      @id @default(autoincrement())
+  sessionId Int
+  url       String
+  createdAt DateTime @default(now())
+  projectId Int?
+  project   Project? @relation("ProjectEdits", fields: [projectId], references: [id])
+  session   Session  @relation("SessionEdits", fields: [sessionId], references: [id])
+  creatorId Int
+  creator   User     @relation("UserEdits", fields: [creatorId], references: [id])
+}
+
+model Exports {
+  id        Int      @id @default(autoincrement())
+  sessionId Int
+  url       String
+  createdAt DateTime @default(now())
+  projectId Int?
+  project   Project? @relation("ProjectExports", fields: [projectId], references: [id])
+  session   Session  @relation("SessionExports", fields: [sessionId], references: [id])
+  creatorId Int
+  creator   User     @relation("UserExports", fields: [creatorId], references: [id])
 }
 
 model Project {
-  id             Int       @id @default(autoincrement())
-  title          String    @default("Untitled")
-  createdAt      DateTime  @default(now())
-  linkedSessions Session[] @relation("ProjectSessions")
+  id             Int          @id @default(autoincrement())
+  title          String       @default("Untitled")
+  createdAt      DateTime     @default(now())
+  linkedSessions Session[]    @relation("ProjectSessions")
   creatorId      Int
-  creator        User      @relation("UserProjects", fields: [creatorId], references: [id])
+  creator        User         @relation("UserProjects", fields: [creatorId], references: [id])
   recordings     Recordings[] @relation("ProjectRecordings")
+  madeForYou     MadeForYou[] @relation("ProjectMadeForYou")
+  edits          Edits[]      @relation("ProjectEdits")
+  exports        Exports[]    @relation("ProjectExports")
 }
