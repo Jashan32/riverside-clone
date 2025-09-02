@@ -5,13 +5,20 @@ import { useEffect, useRef, useState } from 'react';
 import SortDropdown from '../dropdownMenu/sortDropdown';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProjectHeader({ setListView, listView, setSortState, sortState }: { setListView: (state: boolean) => void, listView: boolean, setSortState: (state: string) => void, sortState: string }) {
+type ProjectType = {
+    title: string;
+    id: string
+    createdAt: string;
+};
+
+export default function ProjectHeader({ setProjectsData, setProjectsDataAll, projectsDataAll, setListView, listView, setSortState, sortState }: { setProjectsData: (state: any) => void, setProjectsDataAll: (state: any) => void, projectsDataAll: ProjectType[], setListView: (state: boolean) => void, listView: boolean, setSortState: (state: string) => void, sortState: string }) {
     const [searchInputStatus, setSearchInputStatus] = useState(false);
     const searchBarRef = useRef<HTMLDivElement | null>(null);
     const sortDropdownRef = useRef<HTMLDivElement>(null);
     const [sortDropDownState, setSortDropDownState] = useState(false);
     const sortButtonRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -28,6 +35,9 @@ export default function ProjectHeader({ setListView, listView, setSortState, sor
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    function handleSearchedItem() {
+        setProjectsData(projectsDataAll.filter((projectData) => projectData.title.includes(searchInputRef.current!.value)))
+    }
     const toggleListView = () => {
         setListView(!listView);
         localStorage.setItem('listView', (!listView).toString());
@@ -51,6 +61,8 @@ export default function ProjectHeader({ setListView, listView, setSortState, sor
                         style={{ pointerEvents: searchInputStatus ? 'auto' : 'none' }}
                         onBlur={() => setSearchInputStatus(false)}
                         tabIndex={searchInputStatus ? 0 : -1}
+                        ref={searchInputRef}
+                        onChange={handleSearchedItem}
                     />
                     <GenericDropdown title={"Search projects"} />
                 </div>
@@ -68,7 +80,7 @@ export default function ProjectHeader({ setListView, listView, setSortState, sor
                     {listView ? <LayoutGrid className='size-[20px]' /> : <List className='size-[20px]' />}
                     <GenericDropdown title={listView ? "Grid view" : "List view"} />
                 </div>
-                <AddButton text={"New"} type='small' onClickFunction={() => {navigate(`/dashboard/project/create`)}} />
+                <AddButton text={"New"} type='small' onClickFunction={() => { navigate(`/dashboard/project/create`) }} />
             </div>
         </div>
     )

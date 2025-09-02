@@ -16,7 +16,7 @@ app.use(cors({
   ],
   credentials: true,  // Allow cookies/credentials
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'token']
 }));
 
 app.use("/auth/login", loginRouter)

@@ -7,7 +7,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const JWT_SECRET: string = process.env.JWT_SECRET || "JWT_SECRET"
-
 export const projectsRouter = Router()
 
 projectsRouter.post("/create", async (req, res) => {
@@ -36,14 +35,14 @@ projectsRouter.post("/create", async (req, res) => {
 })
 
 projectsRouter.get("/all", async (req, res) => {
-    const { token } = req.body;
+    const token = req.headers.token as string;
     if (!token) {
         return res.status(401).json({ error: "Unauthorized" });
     }
 
     let decoded;
     try {
-        decoded = jwt.verify(token, JWT_SECRET as string) as { id: number };
+        decoded = jwt.verify(token, JWT_SECRET) as any;
     } catch (error) {
         return res.status(401).json({ error: "Invalid token" });
     }
