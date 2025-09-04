@@ -18,7 +18,7 @@ export default function EditsBlock({ linkedEdit }: { linkedEdit: any }) {
             <div className="w-full aspect-[1.77778/1] bg-gray-700 rounded-[12px]"></div>
             <div className="flex gap-[8px] items-center justify-between">
                 <div className="flex flex-col">
-                    <div className="mb-[4px] text-[14px] font-semibold">{linkedEdit.title} | {formatMonthDateYear(linkedEdit.createdDate)}</div>
+                    <div className="mb-[4px] text-[14px] font-semibold">{linkedEdit.title} | {formatMonthDateYear(linkedEdit.createdAt)}</div>
                     <div className="flex items-center gap-[4px]">
                         <div className="text-[12px] text-[#888888]">Edited x hour ago</div>
                         <div onClick={() => setIsEditOptionsOpen(!isEditOptionsOpen)} className="relative">

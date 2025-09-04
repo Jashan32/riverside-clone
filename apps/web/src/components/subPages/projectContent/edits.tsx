@@ -1,7 +1,27 @@
 import { Scissors } from "lucide-react";
 import EditsBlock from "./editsBlock";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function Edits({ linkedEdits, setLinkedEdits }: { linkedEdits: any[], setLinkedEdits: (recordings: any[]) => void }) {
+export default function Edits() {
+    const [linkedEdits, setLinkedEdits] = useState<any[]>([]);
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const { projectId } = useParams();
+
+    useEffect(() => {
+        async function fetcher() {
+            const res = await fetch(`${backendUrl}/edit/all/${projectId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': localStorage.getItem('authToken') || ""
+                }
+            });
+            const data = await res.json();
+            setLinkedEdits(data.data);
+        }
+        fetcher();
+    }, []);
+
     return (
         <div className="h-full w-full">
             {linkedEdits.length > 0 ? <div>
