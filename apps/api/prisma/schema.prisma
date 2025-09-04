@@ -77,8 +77,9 @@ model MadeForYou {
 
 model Edits {
   id        Int      @id @default(autoincrement())
+  title     String
   sessionId Int
-  url       String
+  url       String?
   createdAt DateTime @default(now())
   projectId Int?
   project   Project? @relation("ProjectEdits", fields: [projectId], references: [id])

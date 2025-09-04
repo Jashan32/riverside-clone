@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Edits" ALTER COLUMN "url" DROP NOT NULL;
