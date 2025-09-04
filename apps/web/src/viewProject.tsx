@@ -12,14 +12,13 @@ export default function ViewProject() {
     const { projectId, projectName } = useParams();
     const [project, setProject] = useState<any>()
 
-    useEffect(()=>{
-        async function fetcher(){
-        const res = await fetch(`${backendUrl}/project/${projectId}`)
-        const data = await res.json()
-        console.log(data)
-        console.log("sdhfk")
-    }
-    fetcher()
+    useEffect(() => {
+        async function fetcher() {
+            const res = await fetch(`${backendUrl}/project/${projectId}`)
+            const data = await res.json()
+            console.log(data)
+        }
+        fetcher()
     })
     const [linedSession, setLinedSession] = useState([{
         date: "2023-10-15",

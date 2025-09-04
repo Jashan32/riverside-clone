@@ -71,10 +71,6 @@ projectsRouter.get("/:id", async (req, res) => {
     try {
         const project = await prisma.project.findUnique({
             where: { id: parseInt(id) },
-            include: {
-                creator: true,
-                recordings: true,
-            }
         });
         if (!project) {
             return res.status(404).json({ error: "Project not found" });

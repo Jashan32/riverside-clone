@@ -20,9 +20,9 @@ export default function RecordingBlock({ recording }: { recording: any }) {
                 </div>
                 <div className="flex justify-between gap-[12px] mb-[4px] ">
                     <div className="mb-[4px] flex flex-col gap-[7px]">
-                        {recording.Participants.length == 1 ? `${recording.Participants}` : recording.Participants.length == 2 ? `${recording.Participants[0]} & ${recording.Participants[1]}` : `${recording.Participants.map((participant: any) => participant).join(', ')}`}
+                        {recording.tracks.length == 1 ? `${recording.tracks[0].user}` : recording.tracks.length == 2 ? `${recording.tracks[0].user} & ${recording.tracks[1].user}` : `${recording.tracks.map((participant: any) => participant.user).join(', ')}`}
                         <div className="flex gap-[15px] items-center">
-                            <div className="text-[12px] text-[#888888] flex items-center">Created {formatMonthNameDate(recording.createdDate)}</div>
+                            <div className="text-[12px] text-[#888888] flex items-center">Created {formatMonthNameDate(recording.createdAt)}</div>
                             <div className="w-[30px] h-[30px] rounded-[10px] hover:bg-[#383838] flex items-center justify-center cursor-pointer"><Ellipsis className="size-[20px]" /></div>
                         </div>
                     </div>
@@ -78,12 +78,12 @@ export default function RecordingBlock({ recording }: { recording: any }) {
                     </div>
                 </div>
                 {
-                    recording.Participants.map((participant: any, idx: number) => (
+                    recording.tracks.map((participant: any, idx: number) => (
                         <div className="h-[74px] p-[12px] bg-[#1d1d1d] rounded-[12px] w-full flex items-center justify-between">
                             <div className="flex items-center gap-[12px]">
-                                <div className="w-[73px] h-[50px] bg-[#2b2b2b] rounded-[8px] flex items-center justify-center">{participant[0]}</div>
+                                <div className="w-[73px] h-[50px] bg-[#2b2b2b] rounded-[8px] flex items-center justify-center">{participant.user[0]}</div>
                                 <div className="flex flex-col gap-[5px]">
-                                    <div className="text-[12px] font-bold">{participant}</div>
+                                    <div className="text-[12px] font-bold">{participant.user}</div>
                                     {true ? <div className="flex items-center gap-[5px]">
                                         <Check className="size-[16px] text-[#888888]" />
                                         <div className="text-[12px] text-[#888888]">Ready</div>

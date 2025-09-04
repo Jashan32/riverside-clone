@@ -6,6 +6,7 @@ import {loginRouter, registerRouter} from './routes/auth/userAuth';
 import { sessionRouter } from './routes/sessions/manageSession';
 import { getSessionRouter } from './routes/sessions/sessionFetch';
 import projectsRouter from './routes/projects/projects';
+import recordingsRouter from './routes/recordings/recording';
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use("/auth/register", registerRouter)
 app.use("/sessions", sessionRouter)
 app.use("/getsession", getSessionRouter);
 app.use("/project", projectsRouter);
+app.use("/recording", recordingsRouter);
 
 // HTTPS server wraps the express app
 const httpsServer = https.createServer(
