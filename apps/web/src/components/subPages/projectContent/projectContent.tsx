@@ -40,7 +40,7 @@ export default function ProjectContent({ tabSelected, setTabSelected }: { tabSel
                 <ProjectTabs tabSelected={tabSelected} setTabSelected={setTabSelected} />
             </div>
             {tabSelected === "Recordings" && <Recordings linkedRecordings={linkedRecordings} setLinkedRecordings={setLinkedRecordings} />}
-            {tabSelected === "Made for You" && <MadeForYou linkedMadeForYou={linkedMadeForYou} setLinkedMadeForYou={setLinkedMadeForYou} />}
+            {tabSelected === "Made for You" && <MadeForYou />}
             {tabSelected === "Edits" && <Edits />}
             {tabSelected === "Exports" && <Exports linkedExports={linkedExports} setLinkedExports={setLinkedExports} />}
         </div>

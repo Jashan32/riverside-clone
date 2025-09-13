@@ -5,21 +5,11 @@ import SessionCard from "./components/cards/sessionCard";
 import ProjectContent from "./components/subPages/projectContent/projectContent";
 
 export default function ViewProject() {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const location = useLocation();
     const [tabSelected, setTabSelected] = useState("Recordings");
     const navigate = useNavigate();
-    const { projectId, projectName } = useParams();
-    const [project, setProject] = useState<any>()
+    const { projectName } = useParams();
 
-    useEffect(() => {
-        async function fetcher() {
-            const res = await fetch(`${backendUrl}/project/${projectId}`)
-            const data = await res.json()
-            console.log(data)
-        }
-        fetcher()
-    })
     const [linedSession, setLinedSession] = useState([{
         date: "2023-10-15",
         timeFrom: "10:00 AM",
