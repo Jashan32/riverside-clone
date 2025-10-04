@@ -5,9 +5,10 @@ import ScheduleOptionsCard from "./scheduleOptionsCard";
 import EditCard from "./editCard";
 
 export default function SessionCard({ session }: { session: any }) {
-    const dayName = new Date(session.date).toLocaleDateString('en-US', { weekday: 'long' });
-    const date = new Date(session.date).getDate();
-    const month = new Date(session.date).toLocaleString('en-US', { month: 'short' });
+    console.log(" Session", session)
+    const dayName = new Date(session.scheduled).toLocaleDateString('en-US', { weekday: 'long' });
+    const date = new Date(session.scheduled).getDate();
+    const month = new Date(session.scheduled).toLocaleString('en-US', { month: 'short' });
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [isEditOpen, setIsEditOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function SessionCard({ session }: { session: any }) {
                     <div className="text-[28px] font-bold leading-[28px]">{month}</div>
                 </div>
                 <div className="flex flex-col">
-                    <div className="text-[16px] leading-[24px] font-semibold mb-[8px]">{session.title}</div>
+                    <div className="text-[16px] leading-[24px] font-semibold mb-[8px]">{session.sessionName}</div>
                     <div className="flex items-center gap-[8px] mb-[12px]">
                         <div><Clock className="size-[20px] text-[#888888]" /></div>
                         <div className="text-[14px] leading-[24px] font-light"> {session.timeFrom + " "}-{" " + session.timeTo} </div>
@@ -28,7 +29,7 @@ export default function SessionCard({ session }: { session: any }) {
                     </div>
                     <div className="flex items-center gap-[8px]">
                         <div><Users className="size-[20px] text-[#888888]" /></div>
-                        {session.invited.length > 0 ? <div></div> : <div className="text-[#888888] text-[12px]">No-one invited</div>}
+                        {session?.invited?.length > 0 ? <div></div> : <div className="text-[#888888] text-[12px]">No-one invited</div>}
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ export default function ProjectCardList({ projectName, timeCreated, setRemoveCar
     return (
         <div className="select-none h-[68px] w-[full] hover:bg-[#1d1d1d] cursor-pointer rounded-[10px] flex items-center justify-between p-[24px]">
             <div className="flex gap-[12px] w-[100%]"
-                onClick={() => { navigate(`/dashboard/project/view/${projectId}/${projectName}`) }}>
+                onClick={() => { navigate(`/dashboard/project/view/${projectId}`) }}>
                 <div className="h-[52px] w-[52px] bg-[#2b2b2b] rounded-[8px] flex items-center justify-center">
                     <FolderOpen className="size-[20px] text-[#555555]" />
                 </div>

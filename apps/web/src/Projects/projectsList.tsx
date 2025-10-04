@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import ProjectCardGrid from './components/cards/projectCardGrid.tsx';
-import ProjectCardList from './components/cards/projectCardList.tsx';
-import ProjectHeader from './components/headers/projectHeader.tsx';
-import projectPageImg from './assets/projectsPage.png';
-import AddButton from './components/buttons/addButton.tsx';
-import RemoveCard from './components/cards/removeCard.tsx';
+import ProjectCardGrid from '../components/cards/projectCardGrid.tsx';
+import ProjectCardList from '../components/cards/projectCardList.tsx';
+import ProjectHeader from '../components/headers/projectHeader.tsx';
+import projectPageImg from '../assets/projectsPage.png';
+import AddButton from '../components/buttons/addButton.tsx';
+import RemoveCard from '../components/cards/removeCard.tsx';
+import { useNavigate } from 'react-router-dom';
 
 type ProjectType = {
     title: string;
@@ -12,8 +13,9 @@ type ProjectType = {
     createdAt: string;
 };
 
-export default function Project() {
+export default function ProjectsList() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL
+    const navigate = useNavigate();
     const [projectsData, setProjectsData] = useState<ProjectType[]>([]);
     const [projectsDataAll, setProjectsDataAll] = useState<ProjectType[]>([]);
     const [removeCardState, setRemoveCardState] = useState(false);
@@ -86,7 +88,7 @@ export default function Project() {
                             <img src={projectPageImg} className='h-[120px] mb-[24px]' />
                             <div className='text-[20px] font-extrabold mb-[16px]'>Your masterpiece from A to Z</div>
                             <div className='text-[12px] font-medium text-[#888888] mb-[16px]'>Stay organized and keep all your episode assets in one spot for easy access.</div>
-                            <AddButton text={"New project"} type='medium' onClickFunction={() => { }} />
+                            <AddButton text={"New project"} type='medium' onClickFunction={() => { navigate("/dashboard/project/create") }} />
                         </div>
                     </div>
             }

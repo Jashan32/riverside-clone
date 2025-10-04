@@ -34,8 +34,21 @@ function getRoundedTime(offset = 0) {
 
     return `${displayHours <= 9 ? "0" + displayHours : displayHours}:${displayMinutes} ${period}`;
 }
-function formatDateToDDMMYYYY(dateString: string): string {
-    const [year, month, day] = dateString.split('-');
+function formatISOToDateString(isoString: string): string {
+    if (!isoString) {
+        // Return today's date if no date is provided
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+    
+    const date = new Date(isoString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    
     return `${day}/${month}/${year}`;
 }
 
@@ -51,7 +64,7 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
     const [audienceEnabled, setAudienceEnabled] = useState(false);
     const [liveStreamEnabled, setLiveStreamEnabled] = useState(false);
     const titleRef = useRef<HTMLInputElement | null>(null);
-    const [filledTitle, setFilledTitle] = useState(session.title.length > 0);
+    const [filledTitle, setFilledTitle] = useState(session.sessionName?.length > 0);
     const [isTimezoneCardOpen, setIsTimezoneCardOpen] = useState(false);
     const [selectedTimeZone, setSelectedTimeZone] = useState<TimeZone>({ label: "", offset: "", value: "", currentTime: "" });
     const displayTimeZoneRef = useRef<HTMLDivElement>(null);
@@ -61,9 +74,8 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
     const [selectedFromTime, setSelectedFromTime] = useState(session.timeFrom || getRoundedTime(0));
     const [selectedToTime, setSelectedToTime] = useState(session.timeTo || getRoundedTime(1));
     const [isCalandarCardOpen, setIsCalendarCardOpen] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(formatDateToDDMMYYYY(session.date) || today.toISOString().split("T")[0]);
+    const [selectedDate, setSelectedDate] = useState(formatISOToDateString(session?.createdAt) || today.toISOString().split("T")[0]);
     const editMenuRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         if (!editMenuRef.current) return;
         function handleClickOutside(event: MouseEvent) {

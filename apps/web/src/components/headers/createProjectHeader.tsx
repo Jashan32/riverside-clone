@@ -4,10 +4,10 @@ import AddButton from "../buttons/addButton";
 import ShareLinkDropDown from "../dropdownMenu/shareLink";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateProjectHeader() {
+export default function CreateProjectHeader({ isAlredyCreated, id, name }: { isAlredyCreated?: boolean, id?: string, name?: string }) {
     const inputRef = useRef<HTMLInputElement>(null);
     const [focused, setFocused] = useState(false);
-    const [inputValue, setInputValue] = useState("Untitled");
+    const [inputValue, setInputValue] = useState(name || "Untitled");
     const [shareLinkDropDownState, setShareLinkDropDownState] = useState(false);
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function CreateProjectHeader() {
             return;
         }
         navigate(`/dashboard/project/view/${data.data.projectId}/${data.data.title}`);
-        
+
     }
 
     return (
@@ -58,7 +58,8 @@ export default function CreateProjectHeader() {
                     </div>
                     <ShareLinkDropDown setShareLinkDropDownState={setShareLinkDropDownState} shareLinkDropDownState={shareLinkDropDownState} />
                 </div>
-                <AddButton type="small" text={"Create"} onClickFunction={createProject} />
+                {isAlredyCreated ? <AddButton type="small" text={"Save"} onClickFunction={()=>{}} /> :
+                    <AddButton type="small" text={"Create"} onClickFunction={createProject} />}
             </div>
         </div>
     )

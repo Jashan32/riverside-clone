@@ -1,28 +1,34 @@
 import { Calendar, ChevronDown, Clock, Podcast, Text, UserPlus, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import facebookSvg from "./assets/facebook.svg";
-import youtubeSvg from "./assets/youtube.svg";
-import linkdenSvg from "./assets/linkden.svg";
-import twitchSvg from "./assets/twitch.svg";
-import xSvg from "./assets/x.svg";
-import TimezoneCard from "./components/cards/timezoneCard";
-import TimePickerCard from "./components/cards/timePickerCard";
-import CalendarCard from "./components/cards/calendar";
+import facebookSvg from "../assets/facebook.svg";
+import youtubeSvg from "../assets/youtube.svg";
+import linkdenSvg from "../assets/linkden.svg";
+import twitchSvg from "../assets/twitch.svg";
+import xSvg from "../assets/x.svg";
+import TimezoneCard from "../components/cards/timezoneCard";
+import TimePickerCard from "../components/cards/timePickerCard";
+import CalendarCard from "../components/cards/calendar";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Mock toggle switch component
 const ToggleSwitch = ({ enabled, onChange }: { enabled: any, onChange: any }) => (
-    <div
-        onClick={onChange}
-        className={`w-12 h-6 rounded-full cursor-pointer transition-colors duration-200 ${enabled ? 'bg-purple-500' : 'bg-gray-600'
-            }`}
-    >
-        <div
-            className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 mt-0.5 ${enabled ? 'translate-x-6 ml-1' : 'translate-x-0 ml-0.5'
-                }`}
-        />
+    <div onClick={onChange}
+        className={`w-12 h-6 rounded-full cursor-pointer transition-colors duration-200 ${enabled ? 'bg-purple-500' : 'bg-gray-600'}`}>
+        <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 mt-0.5 ${enabled ? 'translate-x-6 ml-1' : 'translate-x-0 ml-0.5'}`} />
     </div>
 );
-
+function parseEnGBDateTime(dateStr: string, timeStr: string) {
+    // dateStr: "DD/MM/YYYY", timeStr: "hh:mm AM/PM"
+    const [day, month, year] = dateStr.split("/").map(Number);
+    const m = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (!m) throw new Error("Invalid time format");
+    let hours = Number(m[1]);
+    const minutes = Number(m[2]);
+    const period = m[3].toUpperCase();
+    if (period === "PM" && hours !== 12) hours += 12;
+    if (period === "AM" && hours === 12) hours = 0;
+    return new Date(year, month - 1, day, hours, minutes, 0, 0);
+}
 
 function getRoundedTime(offset = 0) {
     const now = new Date();
@@ -71,7 +77,9 @@ export default function CreateSchedule() {
     const [selectedToTime, setSelectedToTime] = useState(getRoundedTime(1));
     const [isCalandarCardOpen, setIsCalendarCardOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(today.toLocaleDateString("en-GB"));
-
+    const { sessionId, projectId } = useParams<{ sessionId: string, projectId: string }>();
+    const navigate = useNavigate();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     useEffect(() => {
         if (displayTimeZoneRef.current) {
             displayTimeZoneRef.current.innerHTML = `(GMT${selectedTimeZone.offset}) ${selectedTimeZone.label}`;
@@ -114,6 +122,42 @@ export default function CreateSchedule() {
         };
         fetchTimeZones();
     }, []);
+
+    const handleCreateSession = async () => {
+        if (projectId != "new") {
+            const res = await fetch(`${backendUrl}/sessions/create/existingproject`, {
+                method: "POST",
+                body: JSON.stringify({
+                    token: localStorage.getItem("authToken"),
+                    sessionId: sessionId,
+                    projectId: projectId,
+                    sessionName: titleRef.current?.value,
+                    scheduled: parseEnGBDateTime(selectedDate, selectedFromTime),
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }).then(res => res.json());
+            console.log(res)
+            navigate(`/dashboard/project/view/${projectId}`, { state: { tab: "Recordings" } });
+
+        }
+        else {
+            const res = await fetch(`${backendUrl}/sessions/create/new`, {
+                method: "POST",
+                body: JSON.stringify({
+                    token: localStorage.getItem("authToken"),
+                    sessionId: sessionId,
+                    sessionName: titleRef.current?.value,
+                    scheduled: parseEnGBDateTime(selectedDate, selectedFromTime),
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }).then(res => res.json());
+            console.log(res)
+        }
+    }
 
     return (
         <div className="h-full flex flex-col text-white relative">
@@ -251,7 +295,9 @@ export default function CreateSchedule() {
             <div className="w-full max-w-[100%] flex items-center justify-center absolute bottom-0 h-[100px] py-[24px] px-[48px] bg-[linear-gradient(rgba(14,14,14,0)_0%,rgb(14,14,14)_49.5%)]">
                 <div className="h-[44px] mt-[8px] w-full max-w-[536px]  flex items-center justify-end gap-[16px]">
                     <div className="w-[93px] h-[44px] cursor-pointer bg-[#222222] py-[12px] px-[18px] flex items-center justify-center rounded-[10px] text-[14px]">Cancel</div>
-                    <div className={`${filledTitle ? "test-white bg-[#7848FF] cursor-pointer" : "bg-[#2b2b2b] text-[#6b6b6b] cursor-default"} w-[133px] h-[44px]  py-[10px] px-[16px] flex items-center justify-center rounded-[10px] text-[14px]`}>Create session</div>
+                    <div className={`${filledTitle ? "test-white bg-[#7848FF] cursor-pointer" : "bg-[#2b2b2b] text-[#6b6b6b] cursor-default"} w-[133px] h-[44px]  py-[10px] px-[16px] flex items-center justify-center rounded-[10px] text-[14px]`}
+                        onClick={handleCreateSession}
+                    >Create session</div>
                 </div>
             </div>
         </div>

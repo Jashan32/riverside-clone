@@ -10,7 +10,7 @@ const JWT_SECRET: string = process.env.JWT_SECRET || "JWT_SECRET"
 
 export const sessionRouter = Router()
 
-sessionRouter.post("/create", async (req, res) => {
+sessionRouter.post("/create/new", async (req, res) => {
     try {
         const { token, scheduled, sessionName } = req.body
         const decoded = jwt.verify(token, JWT_SECRET as string) as { id: number }
@@ -22,12 +22,66 @@ sessionRouter.post("/create", async (req, res) => {
                 sessionName: sessionName,
             }
         })
+        const project = await prisma.project.create({
+            data: {
+                title: "Untitled",
+                creatorId: id,
+                linkedSessions: {
+                    connect: { id: session.id }
+                },
+                containsData: true
+            }
+        })
         res.json({
             message: "Session created successfully",
             data: {
                 sessionId: session.id,
                 creatorId: session.creatorId,
-                scheduled: session.scheduled
+                scheduled: session.scheduled,
+                projectId: project.id,
+                containsData: true
+            }
+        });
+    } catch (error) {
+        console.error("Error creating session:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+
+})
+
+sessionRouter.post("/create/existingproject", async (req, res) => {
+    try {
+        console.log(req.body)
+        const { token, scheduled, sessionName, projectId } = req.body
+        console.log(token)
+        const decoded = jwt.verify(token, JWT_SECRET as string) as { id: number }
+        const id = decoded.id
+        const session = await prisma.session.create({
+            data: {
+                creatorId: id,
+                scheduled: scheduled,
+                sessionName: sessionName,
+            }
+        }).then(async (session) => {
+            await prisma.project.update({
+                where: { id: Number(projectId) },
+                data: {
+                    linkedSessions: {
+                        connect: { id: session.id }
+                    },
+                    containsData: true
+                }
+            });
+            return session;
+        });
+        res.json({
+            message: "Session created successfully",
+            data: {
+                sessionId: session.id,
+                creatorId: session.creatorId,
+                scheduled: session.scheduled,
+                projectId: projectId,
+                containsData: true
             }
         });
     } catch (error) {

@@ -50,3 +50,22 @@ getSessionRouter.get("/invites", async (req, res) => {
     }
 });
 
+getSessionRouter.get("/linked/:projectId", async (req, res) => {
+    const token = req.headers.token as string;
+    const { projectId } = req.params;
+    if (!token) {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+    try {
+        const sessions = await prisma.session.findMany({
+            where: {
+                linkedProjects:{
+                    some:{ id: Number(projectId) }
+                }
+            }
+        });
+        return res.status(200).json(sessions);
+    } catch (error) {
+        return res.status(500).json({ error: error });
+    }
+});

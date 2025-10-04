@@ -21,7 +21,7 @@ export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCar
     return (
         <div className="w-full aspect-[4/3] flex flex-col group">
             <div className="rounded-[8px] w-full bg-[#1d1d1d] hover:bg-[#383838] cursor-pointer flex-1 bg-gradient-to-b from-transparent to-black/50 flex items-center justify-center"
-            onClick={()=>{navigate(`/dashboard/project/view/${projectId}/${projectName}`)}}>
+            onClick={()=>{navigate(`/dashboard/project/view/${projectId}`)}}>
                 <FolderOpen className='size-[28px] text-[#555555]' />
             </div>
             <div className="h-[42px] mt-[12px] w-full flex justify-between">

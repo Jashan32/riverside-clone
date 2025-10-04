@@ -111,4 +111,5 @@ model Project {
   madeForYou     MadeForYou[] @relation("ProjectMadeForYou")
   edits          Edits[]      @relation("ProjectEdits")
   exports        Exports[]    @relation("ProjectExports")
+  containsData   Boolean      @default(false)
 }
