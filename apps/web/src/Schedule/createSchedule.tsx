@@ -10,6 +10,10 @@ import TimePickerCard from "../components/cards/timePickerCard";
 import CalendarCard from "../components/cards/calendar";
 import { useNavigate, useParams } from "react-router-dom";
 import InvitationType from "../components/dropdownMenu/invitationType";
+import { z } from "zod";
+import InvitationType2 from "../components/dropdownMenu/invitationType2";
+
+const emailSchema = z.string().email();
 
 // Mock toggle switch component
 const ToggleSwitch = ({ enabled, onChange }: { enabled: any, onChange: any }) => (
@@ -55,6 +59,11 @@ function getRoundedTime(offset = 0) {
     return `${displayHours <= 9 ? "0" + displayHours : displayHours}:${displayMinutes} ${period}`;
 }
 
+interface invitedEmail {
+    email: string,
+    invitationType: 'guest' | 'audience'
+}
+
 export default function CreateSchedule() {
     interface TimeZone {
         label: string;
@@ -83,6 +92,10 @@ export default function CreateSchedule() {
     const { sessionId, projectId } = useParams<{ sessionId: string, projectId: string }>();
     const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
     const [invitationType, setInvitationType] = useState<"guest" | "audience">("guest");
+    const [isAddEmailEnabled, setIsAddEmailEnabled] = useState<Boolean>(false)
+    const invitedEmailRef = useRef<HTMLInputElement | null>(null)
+    const [invitedEmailList, setInvitedEmailList] = useState<invitedEmail[]>([])
+
     useEffect(() => {
         if (displayTimeZoneRef.current) {
             displayTimeZoneRef.current.innerHTML = `(GMT${selectedTimeZone.offset}) ${selectedTimeZone.label}`;
@@ -162,6 +175,23 @@ export default function CreateSchedule() {
         }
     }
 
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const email = e.target.value;
+        const result = emailSchema.safeParse(email);
+        if (result.success) {
+            setIsAddEmailEnabled(true)
+        }
+    };
+
+    const addEmailHandler = () => {
+        setInvitedEmailList([...invitedEmailList, { email: invitedEmailRef?.current?.value || "", invitationType: invitationType }])
+        setIsAddEmailEnabled(false)
+        if (invitedEmailRef.current) {
+            invitedEmailRef.current.value = "";
+        }
+        setInvitationType('guest')
+    }
+
     return (
         <div className="h-full flex flex-col text-white relative">
             <div className="flex-1 overflow-y-auto">
@@ -223,18 +253,46 @@ export default function CreateSchedule() {
                                 <div className="w-[28px] h-[44px] flex items-center justify-center flex-shrink-0">
                                     <UserPlus className="size-[20px] text-[#717171] group-focus-within:text-white" />
                                 </div>
-                                <div className="flex-1 h-[44px] bg-[#222222] rounded-[8px] flex items-center justify-between">
-                                    <input className="flex-1 bg-transparent outline-none placeholder-[#717171] text-[14px] pl-[12px] min-w-0" placeholder="Invite people via email" />
-                                    <div className="relative">
-                                        <div className={`${isCardOpen ? "pointer-events-none" : ""} flex items-center gap-[15px] pr-[12px] cursor-pointer flex-shrink-0`}
-                                            onClick={() => { setIsCardOpen(!isCardOpen) }}>
-                                            <div className="text-[14px]">{invitationType === "guest" ? "Guest" : "Audience"}</div>
-                                            <ChevronDown className="size-[20px]" />
+                                <div className="w-full">
+                                    <div className="flex-1 h-[44px] bg-[#222222] rounded-t-[8px] flex items-center justify-between">
+                                        <input ref={invitedEmailRef} className="flex-1 bg-transparent outline-none placeholder-[#717171] text-[14px] pl-[12px] min-w-0" placeholder="Invite people via email" onChange={handleEmailChange} />
+                                        <div className={`${isAddEmailEnabled ? "" : "pointer-events-none text-[#888888]"} hover:bg-[#383838] flex justify-center items-center gap-[15px] py-[5px] px-[10px] m-[5px] rounded-[8px] cursor-pointer flex-shrink-0`}
+                                            onClick={addEmailHandler}>
+                                            <div className="text-[14px]">Add</div>
                                         </div>
-                                        <div className={`absolute right-0 top-full z-1 mt-2 ${isCardOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
-                                            <InvitationType setIsCardOpen={setIsCardOpen} setInvitationType={setInvitationType} isCardOpen={isCardOpen} invitationType={invitationType} />
+                                        <div className="relative">
+                                            <div className={`${isCardOpen ? "pointer-events-none" : ""} flex items-center gap-[15px] pr-[12px] cursor-pointer flex-shrink-0`}
+                                                onClick={() => { setIsCardOpen(!isCardOpen) }}>
+                                                <div className="text-[14px]">{invitationType === "guest" ? "Guest" : "Audience"}</div>
+                                                <ChevronDown className="size-[20px]" />
+                                            </div>
+                                            <div className={`absolute right-0 top-full z-1 mt-2 ${isCardOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
+                                                <InvitationType setIsCardOpen={setIsCardOpen} setInvitationType={setInvitationType} isCardOpen={isCardOpen} invitationType={invitationType} />
+                                            </div>
                                         </div>
                                     </div>
+                                    {
+                                        invitedEmailList.length > 0 && <div className="p-[16px] pl-[24px] bg-[#1d1d1d] rounded-b-[8px]">
+                                            <div className="flex flex-col gap-[16px]">
+                                                <div className="text-[#888888] text-[14px] font-medium">An email with instructions on how to join will be sent to all invitees.</div>
+                                                <div className="flex flex-col gap-[8px]">
+                                                    {
+                                                        invitedEmailList.map((invited) => (
+                                                            <div className="flex flex-row justify-between items-center">
+                                                                <div className="flex items-center">
+                                                                    <div className="w-[24px] h-[24px] flex items-center justify-center rounded-full bg-amber-400">
+                                                                        <div className="text-[11px] font-bold text-[#222222]">{invited.email[0].toUpperCase()}</div>
+                                                                    </div>
+                                                                    <div className="ml-[8px] text-[14px] text-[#fafafa]">{invited.email}</div>
+                                                                </div>
+                                                                <InvitationType2 invitedEmail={invited.email} invitedEmailList={invitedEmailList} setInvitedEmailList={setInvitedEmailList}/>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             {/* Description section */}

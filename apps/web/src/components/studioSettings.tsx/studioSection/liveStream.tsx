@@ -9,6 +9,7 @@ import ToggleSwitch from "../../buttons/toggleSwitch";
 import { useState } from "react";
 export default function LiveStream() {
     const [hideWatermark, setHideWatermark] = useState(false);
+    const [isPublicChatEnabled, setIsPublicChatEnabled] = useState(false)
     const [isHighStreamingResolutionSelected, setIsHighStreamingResolutionSelected] = useState(false);
     const [isAudienceCountPublic, setIsAudienceCountPublic] = useState(false);
     return (
@@ -93,7 +94,7 @@ export default function LiveStream() {
                                     <a className="text-[#9671ff] whitespace-nowrap cursor-pointer">Learn more</a>
                                 </div>
                             </div>
-                            <ToggleSwitch enabled={hideWatermark} onChange={setHideWatermark} />
+                            <ToggleSwitch enabled={isPublicChatEnabled} onChange={setIsPublicChatEnabled} />
                         </div>
                     </div>
                     <div className="p-[25px] w-full rounded-[12px] bg-[#1d1d1d] flex flex-col gap-[24px]">
