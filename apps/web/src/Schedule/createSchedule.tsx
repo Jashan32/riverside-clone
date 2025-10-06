@@ -9,6 +9,7 @@ import TimezoneCard from "../components/cards/timezoneCard";
 import TimePickerCard from "../components/cards/timePickerCard";
 import CalendarCard from "../components/cards/calendar";
 import { useNavigate, useParams } from "react-router-dom";
+import InvitationType from "../components/dropdownMenu/invitationType";
 
 // Mock toggle switch component
 const ToggleSwitch = ({ enabled, onChange }: { enabled: any, onChange: any }) => (
@@ -62,6 +63,8 @@ export default function CreateSchedule() {
         currentTime: string;
     }
     const today = new Date();
+    const navigate = useNavigate();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     // const formattedDate = today.toLocaleDateString("en-GB");
     const [audienceEnabled, setAudienceEnabled] = useState(false);
     const [liveStreamEnabled, setLiveStreamEnabled] = useState(false);
@@ -78,8 +81,8 @@ export default function CreateSchedule() {
     const [isCalandarCardOpen, setIsCalendarCardOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(today.toLocaleDateString("en-GB"));
     const { sessionId, projectId } = useParams<{ sessionId: string, projectId: string }>();
-    const navigate = useNavigate();
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
+    const [invitationType, setInvitationType] = useState<"guest" | "audience">("guest");
     useEffect(() => {
         if (displayTimeZoneRef.current) {
             displayTimeZoneRef.current.innerHTML = `(GMT${selectedTimeZone.offset}) ${selectedTimeZone.label}`;
@@ -222,9 +225,15 @@ export default function CreateSchedule() {
                                 </div>
                                 <div className="flex-1 h-[44px] bg-[#222222] rounded-[8px] flex items-center justify-between">
                                     <input className="flex-1 bg-transparent outline-none placeholder-[#717171] text-[14px] pl-[12px] min-w-0" placeholder="Invite people via email" />
-                                    <div className="flex items-center gap-[15px] pr-[12px] cursor-pointer flex-shrink-0">
-                                        <div className="text-[14px]">Guest</div>
-                                        <ChevronDown className="size-[20px]" />
+                                    <div className="relative">
+                                        <div className={`${isCardOpen ? "pointer-events-none" : ""} flex items-center gap-[15px] pr-[12px] cursor-pointer flex-shrink-0`}
+                                            onClick={() => { setIsCardOpen(!isCardOpen) }}>
+                                            <div className="text-[14px]">{invitationType === "guest" ? "Guest" : "Audience"}</div>
+                                            <ChevronDown className="size-[20px]" />
+                                        </div>
+                                        <div className={`absolute right-0 top-full z-1 mt-2 ${isCardOpen ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
+                                            <InvitationType setIsCardOpen={setIsCardOpen} setInvitationType={setInvitationType} isCardOpen={isCardOpen} invitationType={invitationType} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

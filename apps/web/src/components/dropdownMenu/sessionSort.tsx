@@ -20,20 +20,20 @@ export default function SessionSort({ setIsSessionSortOpen, setIsUpcomingSortOpe
         <div className="h-[108px] w-[221px] p-[10px] bg-[#1d1d1d] rounded-[12px] flex flex-col items-center border-[1px] border-[#2b2b2b]"
             ref={cardRef}>
             <div className="h-[44px] w-full py-[10px] px-[16px] flex gap-[12px] items-center cursor-pointer hover:bg-[#383838] rounded-[10px]"
-            onClick={() => {setIsUpcomingSortOpen(true); setIsSessionSortOpen(false);}}>
+                onClick={() => { setIsUpcomingSortOpen(true); setIsSessionSortOpen(false); }}>
                 <div><Clock className="size-[20px] mr-[16px]" /></div>
                 <div className="w-full flex justify-between">
                     <div className="text-[14px] ">Upcoming</div>
-                    <div className={`${isUpcomingSortOpen? "":"hidden"}`}><Check className="size-[20px]" /></div>
+                    <div className={`${isUpcomingSortOpen ? "" : "hidden"}`}><Check className="size-[20px]" /></div>
                 </div>
 
             </div>
             <div className="h-[44px] w-full py-[10px] px-[16px] flex items-center gap-[12px] cursor-pointer hover:bg-[#383838] rounded-[10px]"
-            onClick={() => {setIsUpcomingSortOpen(false); setIsSessionSortOpen(false);}}>
+                onClick={() => { setIsUpcomingSortOpen(false); setIsSessionSortOpen(false); }}>
                 <div><ClockFading className="size-[20px] mr-[16px]" /></div>
                 <div className="w-full flex justify-between">
                     <div className="text-[14px] ">Past</div>
-                    <div className={`${isUpcomingSortOpen? "hidden":""}`} ><Check className="size-[20px]" /></div>
+                    <div className={`${isUpcomingSortOpen ? "hidden" : ""}`} ><Check className="size-[20px]" /></div>
                 </div>
 
             </div>
