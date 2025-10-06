@@ -43,6 +43,7 @@ model Session {
 model SessionInvite {
   id            Int      @id @default(autoincrement())
   email         String?
+  invitationType String   @default("guest") // 'guest' | 'audience'
   session       Session  @relation(fields: [sessionId], references: [id])
   sessionId     Int
   user          User?    @relation(fields: [invitedUserId], references: [id])

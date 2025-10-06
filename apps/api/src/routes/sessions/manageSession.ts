@@ -12,7 +12,7 @@ export const sessionRouter = Router()
 
 sessionRouter.post("/create/new", async (req, res) => {
     try {
-        const { token, scheduled, sessionName } = req.body
+        const { token, scheduled, sessionName, invites } = req.body
         const decoded = jwt.verify(token, JWT_SECRET as string) as { id: number }
         const id = decoded.id
         const session = await prisma.session.create({
@@ -20,6 +20,12 @@ sessionRouter.post("/create/new", async (req, res) => {
                 creatorId: id,
                 scheduled: scheduled,
                 sessionName: sessionName,
+                invites: {
+                    create: invites.map((invite: { email: string, invitationType: 'guest' | 'audience' }) => ({
+                        email: invite.email,
+                        invitationType: invite.invitationType,
+                    }))
+                }
             }
         })
         const project = await prisma.project.create({

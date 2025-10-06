@@ -149,6 +149,7 @@ export default function CreateSchedule() {
                     projectId: projectId,
                     sessionName: titleRef.current?.value,
                     scheduled: parseEnGBDateTime(selectedDate, selectedFromTime),
+                    invites: invitedEmailList // [{ email: string, invitationType: 'guest' | 'audience' }
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -166,6 +167,7 @@ export default function CreateSchedule() {
                     sessionId: sessionId,
                     sessionName: titleRef.current?.value,
                     scheduled: parseEnGBDateTime(selectedDate, selectedFromTime),
+                    invites: invitedEmailList // [{ email: string, invitationType: 'guest' | 'audience' }
                 }),
                 headers: {
                     "Content-Type": "application/json",
