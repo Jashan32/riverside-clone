@@ -45,19 +45,17 @@ export default function ProjectsList() {
                 return [...projectsData].sort((a, b) => b.title.localeCompare(a.title));
             }
             if (sortState === "newest") {
-                // Assuming higher number means newer
-                return [...projectsData].sort((a, b) => Number(a.createdAt) - Number(b.createdAt));
+                return [...projectsData].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
             }
             if (sortState === "oldest") {
-                // Lower number means older
-                return [...projectsData].sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
+                // Oldest first: ascending order
+                return [...projectsData].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
             }
             return projectsData;
         };
-
         const sortedProjects = getSortedData();
         setProjectsData(sortedProjects);
-    }, [sortState])
+    }, [sortState, projectsDataAll]);
 
     return (
         <div>
