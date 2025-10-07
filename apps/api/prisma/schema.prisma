@@ -31,7 +31,7 @@ model Session {
   createdAt      DateTime        @default(now())
   creatorId      Int
   scheduled      DateTime
-  creator        User            @relation("CreatedSessions", fields: [creatorId], references: [id])
+  creator        User            @relation("CreatedSessions", fields: [creatorId], references: [id], onDelete: Cascade)
   invites        SessionInvite[]
   linkedProjects Project[]       @relation("ProjectSessions")
   recordings     Recordings[]    @relation("SessionRecordings")
@@ -58,7 +58,7 @@ model Recordings {
   tracks    Json
   createdAt DateTime @default(now())
   projectId Int?
-  project   Project? @relation("ProjectRecordings", fields: [projectId], references: [id])
+  project   Project? @relation("ProjectRecordings", fields: [projectId], references: [id], onDelete: Cascade)
   session   Session  @relation("SessionRecordings", fields: [sessionId], references: [id])
   creatorId Int
   creator   User     @relation("UserRecordings", fields: [creatorId], references: [id])
@@ -70,7 +70,7 @@ model MadeForYou {
   url       String
   createdAt DateTime @default(now())
   projectId Int?
-  project   Project? @relation("ProjectMadeForYou", fields: [projectId], references: [id])
+  project   Project? @relation("ProjectMadeForYou", fields: [projectId], references: [id], onDelete: Cascade)
   session   Session  @relation("SessionMadeForYou", fields: [sessionId], references: [id])
   creatorId Int
   creator   User     @relation("UserMadeForYou", fields: [creatorId], references: [id])
@@ -83,7 +83,7 @@ model Edits {
   url       String?
   createdAt DateTime @default(now())
   projectId Int?
-  project   Project? @relation("ProjectEdits", fields: [projectId], references: [id])
+  project   Project? @relation("ProjectEdits", fields: [projectId], references: [id], onDelete: Cascade)
   session   Session  @relation("SessionEdits", fields: [sessionId], references: [id])
   creatorId Int
   creator   User     @relation("UserEdits", fields: [creatorId], references: [id])
@@ -95,7 +95,7 @@ model Exports {
   url       String
   createdAt DateTime @default(now())
   projectId Int?
-  project   Project? @relation("ProjectExports", fields: [projectId], references: [id])
+  project   Project? @relation("ProjectExports", fields: [projectId], references: [id], onDelete: Cascade)
   session   Session  @relation("SessionExports", fields: [sessionId], references: [id])
   creatorId Int
   creator   User     @relation("UserExports", fields: [creatorId], references: [id])
@@ -107,7 +107,7 @@ model Project {
   createdAt      DateTime     @default(now())
   linkedSessions Session[]    @relation("ProjectSessions")
   creatorId      Int
-  creator        User         @relation("UserProjects", fields: [creatorId], references: [id])
+  creator        User         @relation("UserProjects", fields: [creatorId], references: [id], onDelete: Cascade)
   recordings     Recordings[] @relation("ProjectRecordings")
   madeForYou     MadeForYou[] @relation("ProjectMadeForYou")
   edits          Edits[]      @relation("ProjectEdits")

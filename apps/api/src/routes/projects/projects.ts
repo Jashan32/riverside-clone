@@ -105,14 +105,15 @@ projectsRouter.put("/:id", async (req, res) => {
 })
 
 projectsRouter.delete("/:id", async (req, res) => {
-    const { id } = req.params;
+    const { projectId } = req.body;
 
     try {
-        await prisma.project.delete({
-            where: { id: parseInt(id) }
+        const deleted = await prisma.project.delete({
+            where: { id: parseInt(projectId) }
         });
         res.json({
-            message: "Project deleted successfully"
+            success: true,
+            data: deleted
         });
     } catch (error) {
         console.error("Error deleting project:", error);

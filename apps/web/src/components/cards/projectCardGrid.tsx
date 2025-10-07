@@ -4,7 +4,7 @@ import ProjectsDropdown from '../dropdownMenu/projects';
 import { useNavigate } from 'react-router-dom';
 import { timeAgo } from '../../functions/timeAgo';
 
-export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCardState, projectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string }) {
+export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCardState, projectId, setRemoveProjectId }: { projectName: string, timeCreated: string, setRemoveCardState: (state: boolean) => void, projectId: string, setRemoveProjectId: (id: string | null) => void }) {
     const navigate = useNavigate();
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ export default function ProjectCardGrid({ projectName, timeCreated, setRemoveCar
                         <Ellipsis className='cursor-pointer size-[20px]' />
                     </div>
                     <div ref={dropdownRef} className={`absolute right-0 top-full z-1 mt-2 ${dropDownState ? "opacity-100 translate-y-0 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-10 translate-x-5 scale-70 pointer-events-none"} transition-all duration-200 ease-in-out`}>
-                        <ProjectsDropdown setRemoveCardState={setRemoveCardState} setDropDownState={setDropDownState} />
+                        <ProjectsDropdown setRemoveProjectId={setRemoveProjectId} projectId={projectId} setRemoveCardState={setRemoveCardState} setDropDownState={setDropDownState} />
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import projectPageImg from '../assets/projectsPage.png';
 import AddButton from '../components/buttons/addButton.tsx';
 import RemoveCard from '../components/cards/removeCard.tsx';
 import { useNavigate } from 'react-router-dom';
+import RemoveAlert from '../components/cards/alerts/revomedAlert.tsx';
 
 type ProjectType = {
     title: string;
@@ -21,6 +22,9 @@ export default function ProjectsList() {
     const [removeCardState, setRemoveCardState] = useState(false);
     const [listView, setListView] = useState(localStorage.getItem('listView') === 'true');
     const [sortState, setSortState] = useState(localStorage.getItem('sortState') || 'newest');
+    const [removeProjectId, setRemoveProjectId] = useState<string | null>(null);
+    const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+    const [projectName, setProjectName] = useState("");
 
     useEffect(() => {
         async function fetchSessions() {
@@ -57,10 +61,39 @@ export default function ProjectsList() {
         setProjectsData(sortedProjects);
     }, [sortState, projectsDataAll]);
 
+    const removeProjectHandler = async () => {
+        if (!removeProjectId) return;
+        const result = await fetch(`${backEndUrl}/project/remove`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "token": `${localStorage.getItem("authToken")}`,
+            },
+            body: JSON.stringify({ projectId: removeProjectId }),
+        });
+        const parsed = await result.json();
+        if (parsed.success) {
+            setProjectsDataAll(projectsDataAll.filter(project => project.id !== removeProjectId));
+            setProjectsData(projectsData.filter(project => project.id !== removeProjectId));
+            setProjectName(projectsDataAll.find(project => project.id === removeProjectId)?.title||"");
+            setRemoveCardState(false);
+            setRemoveProjectId(null);
+            setShowDeleteAlert(true)
+
+            setTimeout(() => {
+                setShowDeleteAlert(false)
+            }, 3000)
+        }
+    }
+
     return (
         <div>
-            {removeCardState && <div className='fixed flex justify-center items-center inset-0 z-[10] bg-black/55'>
-                <RemoveCard title={"Project A"} setRemoveCardState={setRemoveCardState} />
+            {showDeleteAlert && <div className="fixed inset-0 flex justify-center z-[50] pointer-events-none">
+                <RemoveAlert ProjectName={projectName} />
+            </div>}
+            {removeCardState && <div className='fixed flex justify-center items-center inset-0 z-[10] bg-black/55'
+                onClick={removeProjectHandler}>
+                <RemoveCard title={projectName} setRemoveCardState={setRemoveCardState} />
             </div>}
             {
                 projectsData.length > 0 || projectsDataAll.length > 0 ? <div className="px-[60px] pt-[45px] flex flex-col gap-[40px] " >
@@ -70,13 +103,13 @@ export default function ProjectsList() {
                     {listView ? <div className='flex flex-col gap-[8px]'>
                         {
                             projectsData.map((project, index) => (
-                                <ProjectCardList setRemoveCardState={setRemoveCardState} key={index} projectId={project.id} projectName={project.title} timeCreated={project.createdAt} />
+                                <ProjectCardList setRemoveProjectId={setRemoveProjectId} setRemoveCardState={setRemoveCardState} key={index} projectId={project.id} projectName={project.title} timeCreated={project.createdAt} />
                             ))
                         }
                     </div> : <div className='grid relative 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[24px]'>
                         {
                             projectsData.map((project, index) => (
-                                <ProjectCardGrid setRemoveCardState={setRemoveCardState} key={index} projectId={project.id} projectName={project.title} timeCreated={project.createdAt} />
+                                <ProjectCardGrid setRemoveProjectId={setRemoveProjectId} setRemoveCardState={setRemoveCardState} key={index} projectId={project.id} projectName={project.title} timeCreated={project.createdAt} />
                             ))
                         }
                     </div>}
