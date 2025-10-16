@@ -149,13 +149,13 @@ export default function CreateSchedule() {
                     projectId: projectId,
                     sessionName: titleRef.current?.value,
                     scheduled: parseEnGBDateTime(selectedDate, selectedFromTime),
-                    invites: invitedEmailList // [{ email: string, invitationType: 'guest' | 'audience' }
+                    invites: invitedEmailList, // [{ email: string, invitationType: 'guest' | 'audience' }
+                    timeZone: selectedTimeZone.value
                 }),
                 headers: {
                     "Content-Type": "application/json",
                 }
             }).then(res => res.json());
-            console.log(res)
             navigate(`/dashboard/project/view/${projectId}`, { state: { tab: "Recordings" } });
 
         }
@@ -167,13 +167,16 @@ export default function CreateSchedule() {
                     sessionId: sessionId,
                     sessionName: titleRef.current?.value,
                     scheduled: parseEnGBDateTime(selectedDate, selectedFromTime),
-                    invites: invitedEmailList // [{ email: string, invitationType: 'guest' | 'audience' }
+                    invites: invitedEmailList, // [{ email: string, invitationType: 'guest' | 'audience' }
+                    timeZone: selectedTimeZone.value
                 }),
                 headers: {
                     "Content-Type": "application/json",
                 }
             }).then(res => res.json());
-            console.log(res)
+            if(res.message=="Session created successfully"){
+                navigate("/dashboard/schedule")
+            }
         }
     }
 
@@ -287,7 +290,7 @@ export default function CreateSchedule() {
                                                                     </div>
                                                                     <div className="ml-[8px] text-[14px] text-[#fafafa]">{invited.email}</div>
                                                                 </div>
-                                                                <InvitationType2 invitedEmail={invited.email} invitedEmailList={invitedEmailList} setInvitedEmailList={setInvitedEmailList}/>
+                                                                <InvitationType2 invitedEmail={invited.email} invitedEmailList={invitedEmailList} setInvitedEmailList={setInvitedEmailList} />
                                                             </div>
                                                         ))
                                                     }

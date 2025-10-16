@@ -38,18 +38,19 @@ model Session {
   madeForYou     MadeForYou[]    @relation("SessionMadeForYou")
   edits          Edits[]         @relation("SessionEdits")
   exports        Exports[]       @relation("SessionExports")
+  timeZone       String          @default("Asia/Calcutta")
 }
 
 model SessionInvite {
-  id            Int      @id @default(autoincrement())
-  email         String?
+  id             Int      @id @default(autoincrement())
+  email          String?
   invitationType String   @default("guest") // 'guest' | 'audience'
-  session       Session  @relation(fields: [sessionId], references: [id])
-  sessionId     Int
-  user          User?    @relation(fields: [invitedUserId], references: [id])
-  invitedUserId Int?
-  invitedAt     DateTime @default(now())
-  accepted      Boolean  @default(false)
+  session        Session  @relation(fields: [sessionId], references: [id])
+  sessionId      Int
+  user           User?    @relation(fields: [invitedUserId], references: [id])
+  invitedUserId  Int?
+  invitedAt      DateTime @default(now())
+  accepted       Boolean  @default(false)
 }
 
 model Recordings {

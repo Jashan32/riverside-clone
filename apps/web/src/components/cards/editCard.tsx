@@ -43,12 +43,12 @@ function formatISOToDateString(isoString: string): string {
         const year = today.getFullYear();
         return `${day}/${month}/${year}`;
     }
-    
+
     const date = new Date(isoString);
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    
+
     return `${day}/${month}/${year}`;
 }
 
@@ -76,6 +76,7 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
     const [isCalandarCardOpen, setIsCalendarCardOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(formatISOToDateString(session?.createdAt) || today.toISOString().split("T")[0]);
     const editMenuRef = useRef<HTMLDivElement>(null);
+    const [selectedTimezoneName, setSelectedTimezoneName] = useState<String>();
     useEffect(() => {
         if (!editMenuRef.current) return;
         function handleClickOutside(event: MouseEvent) {
@@ -109,9 +110,9 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
                 const tzDate = new Date(utc + offsetMinutes * 60000);
                 // Format as hh:mm AM/PM
                 const currentTime = tzDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
-
                 return { ...tz, currentTime };
             });
+            setSelectedTimezoneName(timeZones.find((tz: any) => tz.value === session.timeZone)?.label || session.timeZoneName)
             setTimeZones(timeZonesWithCurrentTime);
             const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
             const foundTz = timeZonesWithCurrentTime.find((tz: any) =>
@@ -124,9 +125,6 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
         fetchTimeZones();
     }, []);
 
-
-
-
     return (
         <div ref={editMenuRef} className="bg-[#151515] h-full p-[24px] flex flex-col justify-between gap-[30px] rounded-[16px] overflow-y-auto">
             <div>
@@ -137,7 +135,7 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
                 </div>
                 <input ref={titleRef}
                     onChange={(value) => { if (value.target.value.length > 0) setFilledTitle(true); else setFilledTitle(false) }}
-                    className="w-full max-w-[536px] h-[52px] px-[12px] py-[8px] outline-none text-[28px] font-extrabold placeholder-[#4e4e4e] border-b-[1px] border-[#383838] bg-transparent" placeholder="Session name*" defaultValue={session.title} />
+                    className="w-full max-w-[536px] h-[52px] px-[12px] py-[8px] outline-none text-[28px] font-extrabold placeholder-[#4e4e4e] border-b-[1px] border-[#383838] bg-transparent" placeholder="Session name*" defaultValue={session.sessionName} />
                 <div className="pt-[40px] w-full max-w-[536px]">
                     <div className="flex flex-col gap-[8px]">
                         {/* Date and time picker */}
@@ -178,11 +176,11 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
                             <div className="w-[28px] flex-shrink-0"></div>
                             <div className={`${isTimezoneCardOpen ? "pointer-events-none" : ""} flex-1 bg-[#222222] rounded-[8px] h-[48px] py-[14px] px-[12px] flex items-center justify-between cursor-pointer`}
                                 onClick={() => setIsTimezoneCardOpen(!isTimezoneCardOpen)}>
-                                <div ref={displayTimeZoneRef} className="text-[14px] truncate pr-[8px]">{session.timeZoneName}</div>
+                                <div ref={displayTimeZoneRef} className="text-[14px] truncate pr-[8px]">{selectedTimezoneName}</div>
                                 <div className="flex-shrink-0"><ChevronDown className="size-[20px]" /></div>
                             </div>
                             {
-                                isTimezoneCardOpen && <TimezoneCard isTimezoneCardOpen={isTimezoneCardOpen} setIsTimezoneCardOpen={setIsTimezoneCardOpen} selectedTimeZone={selectedTimeZone} setSelectedTimeZone={setSelectedTimeZone} timeZones={timeZones} />
+                                isTimezoneCardOpen && <TimezoneCard isTimezoneCardOpen={isTimezoneCardOpen} setIsTimezoneCardOpen={setIsTimezoneCardOpen} setSelectedTimezoneName={setSelectedTimezoneName} selectedTimeZone={selectedTimeZone} setSelectedTimeZone={setSelectedTimeZone} timeZones={timeZones} />
                             }
                         </div>
                     </div>
@@ -264,7 +262,7 @@ export default function EditCard({ session, setIsEditOpen }: { session: any, set
                 <div className="w-[93px] h-[44px] cursor-pointer bg-[#222222] py-[12px] px-[18px] flex items-center justify-center rounded-[10px] text-[14px]"
                     onClick={() => { setIsEditOpen(false) }}>Cancel</div>
                 <div className={`${filledTitle ? "test-white bg-[#7848FF] cursor-pointer" : "bg-[#2b2b2b] text-[#6b6b6b] cursor-default"} w-[133px] h-[44px]  py-[10px] px-[16px] flex items-center justify-center rounded-[10px] text-[14px]`}
-                    onClick={() => { setIsEditOpen(false) }}>Create session</div>
+                    onClick={() => { setIsEditOpen(false) }}>Save session</div>
             </div>
         </div>
     )

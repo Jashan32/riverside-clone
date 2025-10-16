@@ -23,7 +23,6 @@ export default function Schedule() {
                     "token": `${localStorage.getItem("authToken")}`
                 }
             }).then(res => res.json());
-            console.log(result)
             setUpcomingSessions(result);
         }
         fetchSessions()
@@ -44,7 +43,7 @@ export default function Schedule() {
                             <SessionSort setIsSessionSortOpen={setIsSessionSortOpen} setIsUpcomingSortOpen={setIsUpcomingSort} isUpcomingSortOpen={isUpcomingSort} />
                         </div>
                     </div>
-                    <div> <AddButton text="New" type="small" onClickFunction={() => { navigate(`/dashboard/schedule/create/${uuidv4()}/new`) }} /> </div>
+                    <div> <AddButton text="New" type="small" onClickFunction={() => { navigate(`/dashboard/schedule/create/new`) }} /> </div>
                 </div>
             </div>
             {
@@ -54,7 +53,7 @@ export default function Schedule() {
                     <div className="text-[14px] text-[#888888] mt-[12px]">Plan your sessions in advance. Choose a date and time,</div>
                     <div className="text-[14px] text-[#888888]">then invite others to join or watch your event.</div>
                     <div className="mt-[20px]">
-                        <AddButton text={"New session"} type="medium" onClickFunction={() => { navigate(`/dashboard/schedule/create/${uuidv4()}/new`) }} />
+                        <AddButton text={"New session"} type="medium" onClickFunction={() => { navigate(`/dashboard/schedule/create/new`) }} />
                     </div>
 
                 </div> : <div>

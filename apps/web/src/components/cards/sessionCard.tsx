@@ -5,7 +5,6 @@ import ScheduleOptionsCard from "./scheduleOptionsCard";
 import EditCard from "./editCard";
 
 export default function SessionCard({ session }: { session: any }) {
-    console.log(" Session", session)
     const dayName = new Date(session.scheduled).toLocaleDateString('en-US', { weekday: 'long' });
     const date = new Date(session.scheduled).getDate();
     const month = new Date(session.scheduled).toLocaleString('en-US', { month: 'short' });

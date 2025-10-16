@@ -26,7 +26,7 @@ export default function CreateProjectHeader({ isAlredyCreated, id, name }: { isA
             console.error("Error creating project:", data.error);
             return;
         }
-        navigate(`/dashboard/project/view/${data.data.projectId}/${data.data.title}`);
+        navigate(`/dashboard/project/view/${data.data.projectId}/`);
 
     }
 

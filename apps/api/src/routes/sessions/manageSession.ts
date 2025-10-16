@@ -12,7 +12,7 @@ export const sessionRouter = Router()
 
 sessionRouter.post("/create/new", async (req, res) => {
     try {
-        const { token, scheduled, sessionName, invites } = req.body
+        const { token, scheduled, sessionName, invites, timeZone } = req.body
         const decoded = jwt.verify(token, JWT_SECRET as string) as { id: number }
         const id = decoded.id
         const session = await prisma.session.create({
@@ -20,6 +20,7 @@ sessionRouter.post("/create/new", async (req, res) => {
                 creatorId: id,
                 scheduled: scheduled,
                 sessionName: sessionName,
+                timeZone: timeZone,
                 invites: {
                     create: invites.map((invite: { email: string, invitationType: 'guest' | 'audience' }) => ({
                         email: invite.email,
@@ -58,7 +59,7 @@ sessionRouter.post("/create/new", async (req, res) => {
 sessionRouter.post("/create/existingproject", async (req, res) => {
     try {
         console.log(req.body)
-        const { token, scheduled, sessionName, projectId } = req.body
+        const { token, scheduled, sessionName, projectId, timeZone } = req.body
         console.log(token)
         const decoded = jwt.verify(token, JWT_SECRET as string) as { id: number }
         const id = decoded.id
@@ -67,6 +68,7 @@ sessionRouter.post("/create/existingproject", async (req, res) => {
                 creatorId: id,
                 scheduled: scheduled,
                 sessionName: sessionName,
+                timeZone: timeZone
             }
         }).then(async (session) => {
             await prisma.project.update({

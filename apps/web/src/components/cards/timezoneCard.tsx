@@ -1,7 +1,7 @@
 import { Check, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen, selectedTimeZone, setSelectedTimeZone, timeZones }: { isTimezoneCardOpen: boolean, setIsTimezoneCardOpen: (isOpen: boolean) => void, selectedTimeZone: any, setSelectedTimeZone: (tz: any) => void, timeZones: any[] }) {
+export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen, selectedTimeZone, setSelectedTimeZone, timeZones, setSelectedTimezoneName }: { isTimezoneCardOpen: boolean, setIsTimezoneCardOpen: (isOpen: boolean) => void, selectedTimeZone: any, setSelectedTimeZone: (tz: any) => void, timeZones: any[], setSelectedTimezoneName?: (name: string) => void }) {
 
     const [displayTimeZones, setDisplayTimeZones] = useState(timeZones);
     // const [selectedTimeZone, setSelectedTimeZone] = useState({});
@@ -58,6 +58,7 @@ export default function TimezoneCard({ isTimezoneCardOpen, setIsTimezoneCardOpen
                                 ref={selectedTimeZone == tz ? selectedRef : null}
                                 onClick={() => {
                                     setSelectedTimeZone(tz);
+                                    setSelectedTimezoneName?.(tz.label)
                                     setIsTimezoneCardOpen(false);
                                 }}>
                                 <div><Check className={`size-[20px] ${selectedTimeZone != tz ? "text-transparent" : ""}`} /></div>
